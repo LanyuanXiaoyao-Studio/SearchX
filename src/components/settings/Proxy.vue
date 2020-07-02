@@ -26,7 +26,7 @@
 
 <script>
   import {mapGetters} from 'vuex'
-  import Squirrel from '../../utils/squirrel'
+  import Squirrel from '../../utils/squirrelWrapper'
 
   export default {
     name: 'SettingsProxy',
@@ -42,7 +42,6 @@
     },
     mounted() {
       this.fetchData()
-      console.log(this.settings)
       if (this.settings.proxy) {
         let hostname = this.settings.proxy.hostname
         let port = this.settings.proxy.port
@@ -54,7 +53,6 @@
     methods: {
       fetchData() {
         let settings = Squirrel.fetch()
-        console.log('settings', settings)
         this.$store.commit('updateSettings', settings)
       },
       change() {

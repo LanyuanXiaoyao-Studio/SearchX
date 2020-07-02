@@ -227,7 +227,7 @@
   import Detail from '../components/Detail'
   import isNil from 'licia/isNil'
   import isEmpty from 'licia/isEmpty'
-  import Squirrel from '../utils/squirrel'
+  import Squirrel from '../utils/squirrelWrapper'
 
   export default {
     name: 'Main',
@@ -301,7 +301,6 @@
         }
       },
       async fetch(code, url) {
-        console.log('code', code, 'url', url)
         if (isNil(code) || isEmpty(code) || isNil(url) || isEmpty(url)) {
           throw new Error('URL 或 CODE 不能为空')
         }
@@ -309,7 +308,6 @@
           code: code,
           url: url,
         })
-        console.log('data', data)
         if (isNil(data) || isNil(data.list) || isEmpty(data.list)) {
           this.finnishAndMessage(`没有更多内容`, ' warning')
           return
@@ -326,7 +324,6 @@
             code: this.site.code,
             url: url
           })
-          console.log('data', data)
           if (isNil(data) || isNil(data.list) || isEmpty(data.list)) {
             this.$message.error(`获取数据失败`)
             return
@@ -345,7 +342,6 @@
             code: this.site.code,
             url: supplementUrl
           })
-          console.log('supplementData', supplementData)
           if (isNil(supplementData) || isNil(supplementData.text) || isEmpty(supplementData.text)) {
             this.$message.error(`获取简介失败`)
           }

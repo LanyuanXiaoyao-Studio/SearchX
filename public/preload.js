@@ -85,7 +85,6 @@ const groupBy = (arr, func) =>
 // uTools life circle
 utools.onPluginReady(() => {
   if (window.squirrel) {
-    console.log(window.squirrel.test(JSON.stringify(sites)))
     window.squirrel.load(window.get())
     window.squirrel.import(JSON.stringify(sites))
     window.store.commit('updateSites', sites)

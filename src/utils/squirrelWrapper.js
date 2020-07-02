@@ -1,4 +1,4 @@
-import Squirrel from '/Users/lanyuanxiaoyao/Project/squirrel/build/distributions/squirrel';
+import Squirrel from './squirrel-0.0.3-beta';
 
 window.squirrel = Squirrel
 

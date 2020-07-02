@@ -1,4 +1,9 @@
 # 资源搜索
+![GitHub package.json version](https://img.shields.io/github/package-json/v/LanyuanXiaoyao-Studio/utools-torrent?label=%E4%BB%A3%E7%A0%81%E7%89%88%E6%9C%AC)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/LanyuanXiaoyao-Studio/utools-torrent?label=%E4%BB%A3%E7%A0%81%E4%BD%93%E7%A7%AF)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/LanyuanXiaoyao-Studio/utools-torrent?label=%E5%8F%91%E5%B8%83%E7%89%88%E6%9C%AC)
+![uTools version](https://img.shields.io/badge/uTools%20%E7%89%88%E6%9C%AC-%3E%3D1.1.3-green)
+
 聚合资源搜索, 站点有空的时候会慢慢添加.
 
 > 1. 国外资源站点大多需要科学上网, 搜不出内容的时候多多检查自己的网络状况
@@ -20,6 +25,9 @@
   3. 增加1个 ACG 站点: Nyaa
 - 0.0.1 
 完成基本功能
+
+# 开源
+[Github](https://github.com/LanyuanXiaoyao-Studio/utools-torrent)
 
 # 截图
 ![](https://s1.ax1x.com/2020/06/18/NZrEfs.png)
