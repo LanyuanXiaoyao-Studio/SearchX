@@ -2,8 +2,8 @@
   <div class="detail">
     <el-card v-if="data.text">
       <div
-              slot="header"
               class="clearfix"
+              slot="header"
       >
         <span><b>简介</b></span>
       </div>
@@ -13,32 +13,32 @@
               size="mini"
       >
         <el-form-item
-                v-if="data.text.title"
                 label="名称"
+                v-if="data.text.title"
         >
           {{ data.text.title }}
         </el-form-item>
         <el-form-item
-                v-if="data.text.author"
                 label="作者"
+                v-if="data.text.author"
         >
           {{ data.text.author }}
         </el-form-item>
         <el-form-item
-                v-if="data.text.datetime"
                 label="时间"
+                v-if="data.text.datetime"
         >
           {{ data.text.datetime }}
         </el-form-item>
         <el-form-item
-                v-if="data.text.size"
                 label="大小"
+                v-if="data.text.size"
         >
           {{ data.text.size }}
         </el-form-item>
         <el-form-item
-                v-if="data.text.description"
                 label="描述"
+                v-if="data.text.description"
         >
           {{ data.text.description }}
         </el-form-item>
@@ -46,38 +46,38 @@
     </el-card>
     <el-card v-if="data.list">
       <div
-              slot="header"
               class="clearfix"
+              slot="header"
       >
         <span><b>下载</b></span>
       </div>
       <div
+              :key="item.content"
               class="download-item"
               v-for="item in data.list"
-              :key="item.content"
       >
         <el-divider content-position="left">{{ item.title ? item.title : '' }}</el-divider>
         <el-input
                 :value="item.content ? item.content : ''"
-                type="textarea"
-                resize="none"
-                readonly
                 autosize
+                readonly
+                resize="none"
+                type="textarea"
         />
         <div class="operation-bar">
           <el-button
                   :disabled="!item.content"
+                  @click="copy(item.content)"
                   size="mini"
                   type="primary"
-                  @click="copy(item.content)"
           >
             复制
           </el-button>
           <el-button
                   :disabled="!item.content"
+                  @click="open(item.content)"
                   size="mini"
                   type="success"
-                  @click="open(item.content)"
           >
             打开
           </el-button>

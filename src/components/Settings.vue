@@ -2,8 +2,8 @@
   <div class="settings">
     <el-card>
       <div
-              slot="header"
               class="clearfix"
+              slot="header"
       >
         <span><b>基本设置</b></span>
       </div>
@@ -11,8 +11,8 @@
     </el-card>
     <el-card>
       <div
-              slot="header"
               class="clearfix"
+              slot="header"
       >
         <span><b>关于插件</b></span>
       </div>
@@ -20,8 +20,8 @@
     </el-card>
     <el-card>
       <div
-              slot="header"
               class="clearfix"
+              slot="header"
       >
         <span><b>交个朋友</b></span>
       </div>
@@ -29,8 +29,8 @@
     </el-card>
     <el-card>
       <div
-              slot="header"
               class="clearfix"
+              slot="header"
       >
         <span><b>更多插件</b></span>
       </div>

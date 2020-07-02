@@ -13,7 +13,6 @@ window.nodeDownload = async (url, headers, proxy, charset) => {
     requestAgent.proxy(proxy)
   }
   let response = await requestAgent
-  // console.log('result', result)
   return iconv.decode(response.body, charset)
 }
 
@@ -92,6 +91,7 @@ utools.onPluginReady(() => {
     window.store.commit('updateSites', sites)
     window.store.commit('updateCategories', groupBy(sites, 'category'))
 
+    // 插件信息放在 gitee 上可以保证国内的访问速度, github 在国内访问不稳定
     window.nodeDownload('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/common.json', '{}', '', 'utf8')
           .then(result => {
             let data = JSON.parse(result)
@@ -112,7 +112,6 @@ utools.onPluginReady(() => {
     window.nodeDownload('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/plugins.json', '{}', '', 'utf8')
           .then(result => {
             let data = JSON.parse(result)
-            console.log(data)
             window.store.commit('updatePlugins', data)
           })
           .catch(error => {

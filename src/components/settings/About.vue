@@ -3,8 +3,8 @@
     <div v-html="about.disclaimer"/>
     <div>
       <el-button
-              type="text"
               @click="openPublish"
+              type="text"
       >
         插件发布页
       </el-button>

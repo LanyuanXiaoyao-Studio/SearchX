@@ -1,50 +1,53 @@
 <template>
   <div class="main">
+    <!-- 主界面 -->
     <el-card class="box-card">
       <div
-              slot="header"
               class="clearfix"
+              slot="header"
       >
         <span><b>资源搜索</b></span>
         <el-button
+                @click="settingDialog.show = true"
                 style="float: right; padding: 3px 0"
                 type="text"
-                @click="settingDialog.show = true"
         >
           设置
         </el-button>
       </div>
+
+      <!-- 搜索输入框 -->
       <el-input
-              size="medium"
+              :disabled="loading"
               class="search-input"
               placeholder="搜索内容"
+              size="medium"
               v-model="input.search"
-              :disabled="loading"
       >
         <el-select
-                slot="prepend"
-                placeholder="请选择站点"
-                v-model="input.code"
                 :disabled="loading"
                 filterable
+                placeholder="请选择站点"
+                slot="prepend"
+                v-model="input.code"
         >
           <el-option-group
-                  v-for="(sites, category) in categories"
                   :key="category"
                   :label="category"
+                  v-for="(sites, category) in categories"
           >
             <el-option
-                    v-for="site in sites"
                     :key="site.code"
                     :label="site.name"
                     :value="site.code"
+                    v-for="site in sites"
             >
               <el-row :gutter="2">
                 <el-col :span="4">
                   <el-image
-                          style="width: 32px;height: 32px"
                           :src="site.icon"
                           fit="scale-down"
+                          style="width: 32px;height: 32px"
                   />
                 </el-col>
                 <el-col :span="20">
@@ -67,18 +70,20 @@
 
         </el-select>
         <el-button
-                slot="append"
-                icon="el-icon-search"
-                @click="query"
                 :disabled="loading"
+                @click="query"
+                icon="el-icon-search"
+                slot="append"
         />
       </el-input>
+
+      <!-- 搜索结果 -->
       <el-table
-              class="result-table"
               :data="result"
-              style="width: 100%"
               :show-header="false"
+              class="result-table"
               empty-text="空空如也"
+              style="width: 100%"
       >
         <el-table-column>
           <template slot-scope="scope">
@@ -99,44 +104,49 @@
             </div>
             <div class="tags">
               <el-tag
+                      effect="plain"
+                      size="small"
+                      type="info"
                       v-if="scope.row.datetime"
-                      size="small"
-                      type="info"
-                      effect="plain"
               >
-                <i class="el-icon-alarm-clock"/> {{ scope.row.datetime }}
+                <i class="el-icon-alarm-clock"/>
+                {{ scope.row.datetime }}
               </el-tag>
               <el-tag
+                      effect="plain"
+                      size="small"
+                      type="info"
                       v-if="scope.row.size"
-                      size="small"
-                      type="info"
-                      effect="plain"
               >
-                <i class="el-icon-box"/> {{ scope.row.size }}
+                <i class="el-icon-box"/>
+                {{ scope.row.size }}
               </el-tag>
               <el-tag
+                      effect="plain"
+                      size="small"
+                      type="info"
                       v-if="scope.row.view"
-                      size="small"
-                      type="info"
-                      effect="plain"
               >
-                <i class="el-icon-view"/> {{ scope.row.view }}
+                <i class="el-icon-view"/>
+                {{ scope.row.view }}
               </el-tag>
               <el-tag
+                      effect="plain"
+                      size="small"
+                      type="info"
                       v-if="scope.row.number"
-                      size="small"
-                      type="info"
-                      effect="plain"
               >
-                <i class="el-icon-document"/> {{ scope.row.number }}
+                <i class="el-icon-document"/>
+                {{ scope.row.number }}
               </el-tag>
               <el-tag
-                      v-if="scope.row.location"
+                      effect="plain"
                       size="small"
                       type="info"
-                      effect="plain"
+                      v-if="scope.row.location"
               >
-                <i class="el-icon-location"/> {{ scope.row.location }}
+                <i class="el-icon-location"/>
+                {{ scope.row.location }}
               </el-tag>
             </div>
           </template>
@@ -149,55 +159,61 @@
             <div style="float: right">
               <el-button-group>
                 <el-button
-                        icon="el-icon-attract"
-                        type="success"
-                        size="medium"
-                        circle
-                        plain
                         @click="showDetail(scope.row.link)"
+                        circle
+                        icon="el-icon-attract"
+                        plain
+                        size="medium"
+                        type="success"
                 />
                 <el-button
-                        icon="el-icon-link"
-                        type="primary"
-                        size="medium"
-                        circle
-                        plain
                         @click="openInBrowser(scope.row.link)"
+                        circle
+                        icon="el-icon-link"
+                        plain
+                        size="medium"
+                        type="primary"
                 />
               </el-button-group>
             </div>
           </template>
         </el-table-column>
       </el-table>
+
+      <!-- 加载更多 -->
       <div style="width: 100%; text-align: center">
         <el-button
-                type="text"
                 :loading="loading"
-                @click="more"
                 :style="`visibility: ${isShowLoadMoreButton ? 'visible' : 'hidden'}`"
+                @click="more"
+                type="text"
         >
           加载更多
         </el-button>
       </div>
     </el-card>
+
+    <!-- 设置弹窗 -->
     <el-dialog
+            :close-on-press-escape="false"
+            :destroy-on-close="true"
+            :visible.sync="settingDialog.show"
             title="设置"
             top="20px"
-            :visible.sync="settingDialog.show"
-            :destroy-on-close="true"
-            :close-on-press-escape="false"
             width="80%"
     >
       <Settings/>
     </el-dialog>
+
+    <!-- 详情弹窗 -->
     <el-dialog
-            v-loading="detailDialog.loading"
-            title="详情"
-            top="20px"
-            :visible.sync=" detailDialog.show"
-            :destroy-on-close="true"
             :close-on-click-modal="!detailDialog.loading"
             :close-on-press-escape="false"
+            :destroy-on-close="true"
+            :visible.sync=" detailDialog.show"
+            title="详情"
+            top="20px"
+            v-loading="detailDialog.loading"
             width="80%"
     >
       <Detail :data="detailDialog.data"/>
@@ -321,6 +337,8 @@
           this.detailDialog.loading = false
           this.detailDialog.show = false
         }
+
+        // 如果有 supplement 字段, 就处理补充信息
         if (!isNil(this.detailDialog.data.text) && !isNil(this.detailDialog.data.text.supplement) && !isEmpty(this.detailDialog.data.text.supplement)) {
           let supplementUrl = this.detailDialog.data.text.supplement
           let supplementData = await Squirrel.page({
@@ -335,6 +353,7 @@
             this.$set(this.detailDialog.data.text, k, supplementData.text[k])
           }
         }
+
         this.detailDialog.loading = false
       },
       finnishAndMessage(text, type) {

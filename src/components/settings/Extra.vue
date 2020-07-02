@@ -10,26 +10,26 @@
     >
       <el-card
               class="plugin-item"
-              v-for="plugin in about.plugins.plugins"
               v-bind:key="plugin.name"
+              v-for="plugin in about.plugins.plugins"
       >
         <el-row :gutter="10">
           <el-col
-                  class="icon"
                   :span="6"
+                  class="icon"
           >
             <el-image :src="plugin.icon"/>
           </el-col>
           <el-col
-                  class="description"
                   :span="18"
+                  class="description"
           >
             <div class="title">{{ plugin.name }}</div>
             <div class="text">{{ plugin.description }}</div>
             <div class="try">
               <el-button
-                      type="text"
                       @click="open(plugin.key)"
+                      type="text"
               >
                 试一试
               </el-button>

@@ -15,20 +15,20 @@
         <el-col :span="16">
           <div class="business-card">
             <el-image
-                    class="avatar"
                     :src="about.author.avatar"
+                    class="avatar"
             />
             <div class="name">
               {{ about.author.name }}
               <el-tooltip
-                      effect="dark"
                       content="论坛找我"
+                      effect="dark"
                       placement="top"
               >
                 <el-button
-                        type="text"
-                        icon="el-icon-link"
                         @click="openUtoolsHome"
+                        icon="el-icon-link"
+                        type="text"
                 />
               </el-tooltip>
             </div>
