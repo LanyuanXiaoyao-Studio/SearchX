@@ -2,12 +2,12 @@
   <div class="settings-about">
     <div v-html="about.disclaimer"/>
     <div>
-      <el-button
+      <a-button
               @click="openPublish"
-              type="text"
+              type="link"
       >
         插件发布页
-      </el-button>
+      </a-button>
     </div>
   </div>
 </template>

@@ -8,7 +8,7 @@
             :cols="2"
             :gutter="10"
     >
-      <el-card
+      <a-card
               class="plugin-item"
               v-bind:key="plugin.name"
               v-for="plugin in about.plugins.plugins"
@@ -18,25 +18,30 @@
                   :span="6"
                   class="icon"
           >
-            <el-image :src="plugin.icon"/>
+            <a-avatar
+                    :src="plugin.icon"
+                    size="large"
+            />
           </el-col>
           <el-col
                   :span="18"
                   class="description"
           >
-            <div class="title">{{ plugin.name }}</div>
-            <div class="text">{{ plugin.description }}</div>
-            <div class="try">
-              <el-button
-                      @click="open(plugin.key)"
-                      type="text"
-              >
-                试一试
-              </el-button>
+            <div
+                    @click="open(plugin.key)"
+                    class="title"
+            >
+              <a-tooltip placement="top">
+                <template slot="title">
+                  <span>试一试</span>
+                </template>
+                {{ plugin.name }}
+              </a-tooltip>
             </div>
+            <div class="text">{{ plugin.description }}</div>
           </el-col>
         </el-row>
-      </el-card>
+      </a-card>
     </masonry>
   </div>
 </template>
@@ -81,6 +86,8 @@
       .title
         font-weight bold
         font-size 1.2em
+        text-decoration underline
+        cursor pointer
 
       .text
         word-break: break-word
@@ -88,10 +95,4 @@
       .el-button
         margin 0
         padding 0
-</style>
-
-<style lang="stylus">
-  .settings-extra
-    .el-card__body
-      padding 10px
 </style>

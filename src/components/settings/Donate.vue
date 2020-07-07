@@ -4,33 +4,34 @@
             style="font-family: serif"
             v-html="about.author.lines"
     />
-    <el-card>
+    <a-card>
       <el-row :gutter="10">
         <el-col :span="8">
-          <el-image
+          <a-avatar
+                  :size="110"
                   :src="about.author.donateCode"
-                  fit="fill"
+                  shape="square"
           />
         </el-col>
         <el-col :span="16">
           <div class="business-card">
-            <el-image
+            <a-avatar
                     :src="about.author.avatar"
                     class="avatar"
+                    size="large"
             />
             <div class="name">
-              {{ about.author.name }}
-              <el-tooltip
-                      content="论坛找我"
-                      effect="dark"
-                      placement="top"
-              >
-                <el-button
+              <a-tooltip placement="right">
+                <template slot="title">
+                  <span>论坛找我</span>
+                </template>
+                <span
                         @click="openUtoolsHome"
-                        icon="el-icon-link"
-                        type="text"
-                />
-              </el-tooltip>
+                        class="find-me"
+                >
+                  {{ about.author.name }}
+                </span>
+              </a-tooltip>
             </div>
             <div
                     class="slogan"
@@ -39,7 +40,7 @@
           </div>
         </el-col>
       </el-row>
-    </el-card>
+    </a-card>
   </div>
 </template>
 
@@ -69,24 +70,20 @@
         scoped
 >
   .settings-donate
-    .el-card
+    .ant-card
       width 360px
 
       .business-card
         text-align center
 
-        .avatar
-          width 40px
-
         .name
-          font-size 1.3rem
-          font-weight bold
-          font-family serif
-
-          .el-button
-            margin 0
-            padding 0
+          font-size 1.25rem
+          font-weight 450
+          font-family sans-serif
+          text-decoration underline
+          cursor pointer
 
         .slogan
+          color darkgray
           margin-top 5px
 </style>

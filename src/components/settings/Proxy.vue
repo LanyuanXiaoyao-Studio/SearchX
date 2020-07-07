@@ -1,25 +1,22 @@
 <template>
   <div class="settings-proxy">
-    <el-input
+    <a-input
             placeholder="代理地址"
-            size="medium"
             v-model="proxyUrl"
     />
     <div class="setting-buttons">
-      <el-button
+      <a-button
               @click="change"
-              size="small"
               type="primary"
       >
         更改代理地址
-      </el-button>
-      <el-button
+      </a-button>
+      <a-button
               @click="clear"
-              size="small"
               type="danger"
       >
         清空代理
-      </el-button>
+      </a-button>
     </div>
   </div>
 </template>

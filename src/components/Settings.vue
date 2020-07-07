@@ -1,41 +1,29 @@
 <template>
   <div class="settings">
-    <el-card>
-      <div
-              class="clearfix"
-              slot="header"
-      >
-        <span><b>基本设置</b></span>
-      </div>
+    <a-card
+            size="small"
+            title="基本设置"
+    >
       <Proxy/>
-    </el-card>
-    <el-card>
-      <div
-              class="clearfix"
-              slot="header"
-      >
-        <span><b>关于插件</b></span>
-      </div>
+    </a-card>
+    <a-card
+            size="small"
+            title="关于插件"
+    >
       <About/>
-    </el-card>
-    <el-card>
-      <div
-              class="clearfix"
-              slot="header"
-      >
-        <span><b>交个朋友</b></span>
-      </div>
+    </a-card>
+    <a-card
+            size="small"
+            title="关于插件"
+    >
       <Donate/>
-    </el-card>
-    <el-card>
-      <div
-              class="clearfix"
-              slot="header"
-      >
-        <span><b>更多插件</b></span>
-      </div>
+    </a-card>
+    <a-card
+            size="small"
+            title="关于插件"
+    >
       <Extra/>
-    </el-card>
+    </a-card>
   </div>
 </template>
 
@@ -58,12 +46,12 @@
 
 <style lang="stylus">
   .settings
-    .el-card + .el-card
+    .ant-card + .ant-card
       margin-top 10px
 
-    .el-button
+    .ant-btn
       margin-top 5px
 
-    .el-button + .el-button
+    .ant-btn + .ant-btn
       margin-left 5px
 </style>

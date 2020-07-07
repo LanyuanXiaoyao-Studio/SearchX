@@ -3,10 +3,14 @@
   "author": "lanyuanxiaoyao",
   "homepage": "http://lanyuanxiaoyao.com",
   "description": "海纳百川, 搜遍天下",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "logo": "logo.png",
   "main": "index.html",
   "preload": "preload.js",
+  "development": {
+    "main": "http://127.0.0.1:8080/index.html",
+    "preload": "preload.js"
+  },
   "pluginSetting": {
     "single": true
   },

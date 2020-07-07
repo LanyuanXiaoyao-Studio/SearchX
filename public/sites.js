@@ -602,6 +602,71 @@ const sites = [
       'JS'
     ],
     'search': 'https://crso.pw/search/{query}/page-1.html'
+  },
+  {
+    'code': '8e130dbc-7f2e-45cb-a927-76574f666155',
+    'enabled': true,
+    'version': 0,
+    'name': '大圣盘',
+    'category': '网盘',
+    'icon': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAlCAYAAADMdYB5AAAFTElEQVRYhZ3YX4hU9xUH8M+df+7M+qcPqymBpGwtKZSCrGClUBRqAinUPpdAqbY1o9EHBbcvhTgNSB8stA9rdHStFivdp9IQKX1oH8xLqxJDQn1w20WaYMlaoUn8M+vemfn1YWaud3Zm3Jl8YRju+Z17zvece865v/uLfA6EWVOyjip4UcYmTXc98EdZp6OfeG9Ue9FIzisKJh1XcHSg0md+HpVVRrGbGUV5VQINjDsWzjk8itmhMxFmTRl3Y6DzDrKoW7Lka9E+t4exPXwmsn0y0FhBoCOLjCl4bVjTw2fikkUZm7qc9UNHnnHVI+/DagU7VCZCRUHTbXVLfaPvR6xhQsFaY16VcSP81olQURiJRKiaCFWVcMmir3osY1LdH0TuthRc7XKevoase3I2J8Qajpp0fGgSYdaUko+sd0zGpraTTfJe0bQeLJtTtyBYEixYNtdlpG5BbHuXrOFomDW1KolwwriiP8sZS6JMI2rLsw6JvWTBBrGXZB1K9BvI2dwvQA37V4pyPUrrTSfRr0Tkrqbbls2puSHvvnF5Tfc98CNFWxV8X8NETxYgxhq7VidR8nIXgWDJQ3+R87rgE5EveGyLdXZrKpto6435jwduCg4kenVviOxCMbH32LOrk2BLisBVn/qpnGn51KDKJ+tP0Ohy1cFlsZdl/VLGtrasR6tnToTftU23qn2LZrsGMpYSpaaxgW0aq6WuOg5rSj7wyHbUorJS+pauwuzq46btmsbk3BXbGv1AsfNT8z1r2q36xNKCpq1RWanzk7VV3SKKbQI0/WOlryQTYdaUujcUfTcxnHPXPz0XVSz3CzqcNWnZTgVXBr0nQkXBRh/KeaadqXmRDbL2Rfu93UUCwkV/10xVdd2R6Md+3c/4KAgn7ZFzPhE0XY8O+EbnMhcqCjZ7p53+bsQWaM+OL7rnMweigy4M6fRNPB+V3bPG+0kNxWBbmBEwr2Zrxpec74q+g1ThRdMeeiQoOh9+I4Rq/01LqKqEqtCJOiq7B5asEycE0njBOnMZBS8OJFC0I5GVfJDSOBZOudZFoHV9LBG0CxDkfbsfaTEiu6JwUS1pw5Vtl7fkkec6EYWKgvH2lHgoThfsoLVQNYEPxX2mSMtHLUqKcVDf1ywq+Oawu6Q02t3zN6HdGSsRY8z1jIeODyQARc9ourmyDsJZk+GUa2HGjnDKtXDWZNd6VVXTzb4E0vXR9GYm2u9tNXt7lLqVizgWZtxKnN1xR8kVeVdkvOeOO7TmTTjpY7FX+z6CdHGudyQ66EIGooMuiG0UHEnGbm8lk/d7n7QmZVSxHP3QNDZGZeWkPv5n3loXB0ZfdFneTiUbOzOo991xwb887rMXqFv0X88Pmp5dNk4YV7KQPIpY66UXo+RMVFZO6/dsaqI9viI232M5561+BMJpu8Mp18JJH4cZt8Jpu6NpD5X8NSGQ/udnvab7IfILUmO2E0na+TmHxXaJvKvuqDH3k7UTxlc4bj2GVmYO0V3kA7f84bxLlr2SGMs+mfft3n8yEfvdP+OW2AuJYK0vD2rzwVv+f9uLM0k0DdvCTGuCRmX3nkrgpD1dBErOPG3OrPrxE845rOZXbe1Fa3znaR8y4bTdGs5abhdlwaKcrz+N9FBfYGHWlCVztKPLuSzn9TSZMGOHnGm11H4E8nZGh7zzNPvDfwZWTWj6k0Z7rxhrRRl8KrIhiTyNgr3DvPpHO584Ydw6cz3R9sOQBEYmkRAputFVeGmMuS6vPMqJzWiHJNobHPb1LOTNK9hr0bdGPTIaORMdhKqq4FmRd2W99XnOqjr4P74eAF3dXEzzAAAAAElFTkSuQmCC',
+    'target': 'SEARCH',
+    'home': 'https://www.dashengpan.com',
+    'author': 'lanyuanxiaoyao',
+    'description': '网盘搜索，就用大圣盘 - 最好用的百度网盘搜索引擎',
+    'parser': 'CSS',
+    'headers': {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'
+    },
+    'rules': {
+      'https:\\/\\/www\\.dashengpan\\.com\\/search\\?keyword=.+&page=\\d+': {
+        'list': {
+          'expression': '.search-result .result-wrap > .resource-item-wrap',
+          'title': {
+            'expression': '.resource-info > .resource-title > a'
+          },
+          'description': {
+            'expression': '.detail-wrap',
+          },
+          'dateTime': {
+            'expression': '.other-info > .time'
+          },
+          'link': {
+            'expression': '.resource-info > .resource-title > a',
+            'attribute': 'href',
+            'replace': [
+              {
+                'regex': '^',
+                'text': 'https://www.dashengpan.com'
+              }
+            ]
+          },
+          'extra': {
+            'size': {
+              'expression': '.resource-meta > .meta-item > .label:contains(文件大小) + .em'
+            }
+          }
+        },
+        'next': {
+          'expression': '.pager-wrap a.pager-item:contains(下一页)',
+          'attribute': 'href',
+          'replace': [
+            {
+              'regex': '^',
+              'text': 'https://www.dashengpan.com'
+            }
+          ]
+        },
+        'options': [
+          'OPEN_DIRECTLY'
+        ]
+      }
+    },
+    'platform': [
+      'JVM',
+      'JS'
+    ],
+    'search': 'https://www.dashengpan.com/search?keyword={query}&page=1'
   }
 ]
 

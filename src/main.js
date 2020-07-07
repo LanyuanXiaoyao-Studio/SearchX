@@ -5,6 +5,7 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+import './plugins/ant'
 import './plugins/element'
 import './plugins/masonry'
 

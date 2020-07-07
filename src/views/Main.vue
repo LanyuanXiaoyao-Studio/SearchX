@@ -153,25 +153,24 @@
         </el-table-column>
         <el-table-column
                 fixed="right"
-                width="110"
+                width="200"
         >
           <template slot-scope="scope">
             <div style="float: right">
               <el-button-group>
                 <el-button
                         @click="showDetail(scope.row.link)"
-                        circle
                         icon="el-icon-attract"
                         plain
-                        size="medium"
+                        size="mini"
                         type="success"
+                        v-if="isOpenDirectly(scope.row.options)"
                 />
                 <el-button
                         @click="openInBrowser(scope.row.link)"
-                        circle
                         icon="el-icon-link"
                         plain
-                        size="medium"
+                        size="mini"
                         type="primary"
                 />
               </el-button-group>
@@ -227,6 +226,7 @@
   import Detail from '../components/Detail'
   import isNil from 'licia/isNil'
   import isEmpty from 'licia/isEmpty'
+  import contain from 'licia/contain'
   import Squirrel from '../utils/squirrelWrapper'
 
   export default {
@@ -313,6 +313,7 @@
           return
         }
         this.result = this.result.concat(data.list)
+        console.log(JSON.stringify(this.result))
         this.next = data.next
         this.finnishAndMessage(`读取数据成功`, 'success')
       },
@@ -351,6 +352,12 @@
         }
 
         this.detailDialog.loading = false
+      },
+      isOpenDirectly(options) {
+        if (isEmpty(options)) {
+          return false
+        }
+        return contain(options, 'OPEN_DIRECTLY')
       },
       finnishAndMessage(text, type) {
         this.loading = false
