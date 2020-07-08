@@ -43,6 +43,7 @@
               :data="result"
               :loading="loading"
               :show-load-more="showLoadMore"
+              :open-directly="isOpenDirectly(options)"
               @detail="detail"
               @more="load"
       />
@@ -84,6 +85,7 @@
   import Squirrel from '../utils/squirrelWrapper'
   import isEmpty from 'licia/isEmpty'
   import isNil from 'licia/isNil'
+  import contain from 'licia/contain';
 
   export default {
     name: 'Main',
@@ -99,6 +101,7 @@
         search: '',
         next: '',
         result: [],
+        options: [],
         loading: false,
         siteListVisible: false,
         settingDialog: {
@@ -123,11 +126,11 @@
     methods: {
       async query() {
         if (isEmpty(this.site)) {
-          this.$message2.warning(`站点未选择`)
+          this.$message.warning(`站点未选择`)
           return
         }
         if (isEmpty(this.search)) {
-          this.$message2.warning(`未输入搜索内容`)
+          this.$message.warning(`未输入搜索内容`)
           return
         }
         this.result = []
@@ -138,14 +141,14 @@
         this.loading = true
 
         if (isNil(this.next) || isEmpty(this.next)) {
-          this.$message2.warning(`没有更多内容`)
+          this.$message.warning(`没有更多内容`)
           return
         }
 
         try {
           await this.fetch(this.site.code, this.next)
         } catch (e) {
-          this.$message2.error(`读取数据失败 ${e.message}`)
+          this.$message.error(`读取数据失败 ${e.message}`)
           this.loading = false
         }
       },
@@ -158,19 +161,20 @@
           url: url,
         })
         if (isNil(data) || isNil(data.list) || isEmpty(data.list)) {
-          this.$message2.warning(`没有更多内容`)
+          this.$message.warning(`没有更多内容`)
           this.loading = false
           return
         }
         this.result = this.result.concat(data.list)
+        this.options = data.options
         this.next = data.next
-        this.$message2.success(`读取数据成功`)
+        this.$message.success(`读取数据成功`)
         this.loading = false
       },
       async detail(url) {
         this.detailDialog.loading = true
         this.detailDialog.data = {}
-        const hide = this.$message2.loading(`加载中...`, 0);
+        const hide = this.$message.loading(`加载中...`, 0);
         this.detailDialog.show = true
         try {
           let data = await Squirrel.page({
@@ -178,12 +182,12 @@
             url: url
           })
           if (isNil(data) || isNil(data.list) || isEmpty(data.list)) {
-            this.$message2.error(`获取数据失败`)
+            this.$message.error(`获取数据失败`)
             return
           }
           this.detailDialog.data = data
         } catch (e) {
-          this.$message2.error(`获取数据失败 ${e.message}`)
+          this.$message.error(`获取数据失败 ${e.message}`)
           this.detailDialog.loading = false
           this.detailDialog.show = false
         }
@@ -196,7 +200,7 @@
             url: supplementUrl
           })
           if (isNil(supplementData) || isNil(supplementData.text) || isEmpty(supplementData.text)) {
-            this.$message2.error(`获取简介失败`)
+            this.$message.error(`获取简介失败`)
           }
           for (let key in supplementData.text) {
             this.$set(this.detailDialog.data.text, key, supplementData.text[key])
@@ -205,6 +209,12 @@
 
         this.detailDialog.loading = false
         hide()
+      },
+      isOpenDirectly(options) {
+        if (isEmpty(options)) {
+          return false
+        }
+        return contain(options, 'OPEN_DIRECTLY')
       },
       resultDom() {
         return () => this.$refs.result

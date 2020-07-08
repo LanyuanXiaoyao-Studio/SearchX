@@ -5,6 +5,7 @@ import {
   Button,
   Card,
   Col,
+  ConfigProvider,
   Descriptions,
   Drawer,
   Empty,
@@ -38,10 +39,11 @@ Vue.use(Col)
 Vue.use(Avatar)
 Vue.use(Tooltip)
 Vue.use(Tag)
+Vue.use(ConfigProvider)
 Vue.use(Empty)
 Vue.use(Layout)
 Vue.use(Modal)
 Vue.use(Spin)
 Vue.use(BackTop)
 
-Vue.prototype.$message2 = message
+Vue.prototype.$message = message

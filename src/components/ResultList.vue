@@ -30,6 +30,7 @@
                 class="operation-btn"
                 slot="actions"
                 type="link"
+                v-if="!openDirectly"
         >
           <a-icon type="file-text"/>
           详情
@@ -108,6 +109,7 @@
     name: 'ResultList',
     props: {
       data: Array,
+      openDirectly: Boolean,
       loading: Boolean,
       showLoadMore: Boolean,
     },

@@ -2,7 +2,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 const path = require('path')
 
 module.exports = {
-  publicPath: '/',
+  publicPath: './',
   productionSourceMap: false,
   chainWebpack: config => {
     config.plugin('copy-plugin')
