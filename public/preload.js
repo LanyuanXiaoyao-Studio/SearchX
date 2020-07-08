@@ -13,7 +13,10 @@ window.nodeDownload = async (url, headers, proxy, charset) => {
     requestAgent.proxy(proxy)
   }
   let response = await requestAgent
-  return iconv.decode(response.body, charset)
+  if (response && response.body) {
+    return iconv.decode(response.body, charset)
+  }
+  return ''
 }
 
 // uTools ubrowser downloader

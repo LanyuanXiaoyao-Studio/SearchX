@@ -15,7 +15,7 @@
                 placement="bottomRight"
                 slot="addonBefore"
                 title="站点列表"
-                trigger="hover"
+                trigger="click"
                 v-model="siteListVisible"
         >
           <template slot="content">
@@ -26,7 +26,17 @@
               />
             </div>
           </template>
-          <span style="cursor: pointer">{{ site.name ? site.name : '选择站点' }}</span>
+          <span style="cursor: pointer; display: inline-block; width: 150px; font-weight: 500">
+            <a-avatar
+                    style="margin-right: 5px; top: -1px"
+                    :size="18"
+                    :src="site.icon"
+                    icon="bulb"
+                    shape="square"
+                    v-if="site.name"
+            />
+            {{ site.name ? site.name : '选择站点' }}
+          </span>
         </a-popover>
         <a-icon
                 @click="settingDialog.show = true"
@@ -42,8 +52,8 @@
       <ResultList
               :data="result"
               :loading="loading"
-              :show-load-more="showLoadMore"
               :open-directly="isOpenDirectly(options)"
+              :show-load-more="showLoadMore"
               @detail="detail"
               @more="load"
       />

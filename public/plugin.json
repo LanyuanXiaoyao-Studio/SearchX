@@ -3,7 +3,7 @@
   "author": "lanyuanxiaoyao",
   "homepage": "http://lanyuanxiaoyao.com",
   "description": "海纳百川, 搜遍天下",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "logo": "logo.png",
   "main": "index.html",
   "preload": "preload.js",

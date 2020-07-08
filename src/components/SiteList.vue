@@ -121,7 +121,7 @@
 
       .description
         color darkgray
-        width 300px
+        width 400px
 
       .tags
         margin-top 5px
