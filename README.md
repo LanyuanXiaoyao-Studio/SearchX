@@ -33,8 +33,8 @@
 [Github](https://github.com/LanyuanXiaoyao-Studio/utools-torrent)
 
 # 截图
-![](https://s1.ax1x.com/2020/06/18/NZrEfs.png)
+![](https://s1.ax1x.com/2020/07/08/UVHJ0I.png)
 
-![](https://img04.sogoucdn.com/app/a/100520146/4dc88772d42c2775b645eea6e1608f84)
+![](https://s1.ax1x.com/2020/07/08/UVHX9O.png)
 
-![](https://s1.ax1x.com/2020/06/18/NZrQ7F.png)
+![](https://s1.ax1x.com/2020/07/08/UVbMEq.png)
