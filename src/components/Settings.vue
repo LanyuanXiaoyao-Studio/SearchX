@@ -51,6 +51,7 @@
 
     .ant-btn
       margin-top 5px
+      font-size 0.9rem
 
     .ant-btn + .ant-btn
       margin-left 5px

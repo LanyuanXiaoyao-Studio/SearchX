@@ -8,12 +8,14 @@
       <a-button
               @click="change"
               type="primary"
+              size="small"
       >
         更改代理地址
       </a-button>
       <a-button
               @click="clear"
               type="danger"
+              size="small"
       >
         清空代理
       </a-button>

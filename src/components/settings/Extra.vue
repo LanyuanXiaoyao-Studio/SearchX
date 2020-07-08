@@ -13,8 +13,8 @@
               v-bind:key="plugin.name"
               v-for="plugin in about.plugins.plugins"
       >
-        <el-row :gutter="10">
-          <el-col
+        <a-row :gutter="20">
+          <a-col
                   :span="6"
                   class="icon"
           >
@@ -22,8 +22,8 @@
                     :src="plugin.icon"
                     size="large"
             />
-          </el-col>
-          <el-col
+          </a-col>
+          <a-col
                   :span="18"
                   class="description"
           >
@@ -39,8 +39,8 @@
               </a-tooltip>
             </div>
             <div class="text">{{ plugin.description }}</div>
-          </el-col>
-        </el-row>
+          </a-col>
+        </a-row>
       </a-card>
     </masonry>
   </div>
@@ -81,11 +81,11 @@
       .title
       .text
       .try
-        padding 5px
+        padding 0
 
       .title
         font-weight bold
-        font-size 1.2em
+        font-size 1.2rem
         text-decoration underline
         cursor pointer
 

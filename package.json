@@ -9,7 +9,6 @@
   "dependencies": {
     "ant-design-vue": "^1.6.3",
     "core-js": "^3.6.4",
-    "element-ui": "^2.13.2",
     "licia": "^1.22.0",
     "vue": "^2.6.11",
     "vue-masonry-css": "^1.0.3",
@@ -21,11 +20,9 @@
     "@vue/cli-plugin-router": "~4.3.0",
     "@vue/cli-plugin-vuex": "~4.3.0",
     "@vue/cli-service": "~4.3.0",
-    "babel-plugin-component": "^1.1.1",
     "babel-plugin-import": "^1.13.0",
     "copy-webpack-plugin": "^6.0.2",
     "deepmerge": "^4.2.2",
-    "element-theme-chalk": "^2.13.2",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
     "vue-template-compiler": "^2.6.11"

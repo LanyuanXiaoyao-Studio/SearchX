@@ -1,89 +1,73 @@
 <template>
   <div class="detail">
-    <el-card v-if="data.text">
-      <div
-              class="clearfix"
-              slot="header"
+    <a-descriptions
+            :column="3"
+            bordered
+            layout="vertical"
+    >
+      <a-descriptions-item
+              :span="3"
+              label="名称"
+              v-if="text.title"
       >
-        <span><b>简介</b></span>
-      </div>
-      <el-form
-              label-position="right"
-              label-width="60px"
-              size="mini"
+        {{ text.title }}
+      </a-descriptions-item>
+      <a-descriptions-item
+              label="作者"
+              v-if="text.author"
       >
-        <el-form-item
-                label="名称"
-                v-if="data.text.title"
-        >
-          {{ data.text.title }}
-        </el-form-item>
-        <el-form-item
-                label="作者"
-                v-if="data.text.author"
-        >
-          {{ data.text.author }}
-        </el-form-item>
-        <el-form-item
-                label="时间"
-                v-if="data.text.datetime"
-        >
-          {{ data.text.datetime }}
-        </el-form-item>
-        <el-form-item
-                label="大小"
-                v-if="data.text.size"
-        >
-          {{ data.text.size }}
-        </el-form-item>
-        <el-form-item
-                label="描述"
-                v-if="data.text.description"
-        >
-          {{ data.text.description }}
-        </el-form-item>
-      </el-form>
-    </el-card>
-    <el-card v-if="data.list">
-      <div
-              class="clearfix"
-              slot="header"
+        {{ text.author }}
+      </a-descriptions-item>
+      <a-descriptions-item
+              label="时间"
+              v-if="text.datetime"
       >
-        <span><b>下载</b></span>
-      </div>
-      <div
-              :key="item.content"
-              class="download-item"
-              v-for="item in data.list"
+        {{ text.datetime }}
+      </a-descriptions-item>
+      <a-descriptions-item
+              label="大小"
+              v-if="text.size"
       >
-        <el-divider content-position="left">{{ item.title ? item.title : '' }}</el-divider>
-        <el-input
-                :value="item.content ? item.content : ''"
-                autosize
-                readonly
-                resize="none"
-                type="textarea"
-        />
-        <div class="operation-bar">
-          <el-button
-                  :disabled="!item.content"
-                  @click="copy(item.content)"
-                  size="mini"
-                  type="primary"
-          >
-            复制
-          </el-button>
-          <el-button
-                  :disabled="!item.content"
-                  @click="open(item.content)"
-                  size="mini"
-                  type="success"
-          >
-            打开
-          </el-button>
-        </div>
-      </div>
-    </el-card>
+        {{ text.size }}
+      </a-descriptions-item>
+      <a-descriptions-item
+              :span="3"
+              label="描述"
+              v-if="text.description"
+      >
+        {{ text.description }}
+      </a-descriptions-item>
+    </a-descriptions>
+    <a-card
+            :key="item.content"
+            :title="item.title ? item.title : ''"
+            size="small"
+            v-for="item in list"
+    >
+          <span slot="extra">
+            <a-button
+                    :disabled="!item.content"
+                    @click="copy(item.content)"
+                    size="small"
+                    type="link"
+            >
+              复制
+            </a-button>
+            <a-button
+                    :disabled="!item.content"
+                    @click="open(item.content)"
+                    size="small"
+                    type="link"
+            >
+              打开
+            </a-button>
+          </span>
+      <a-textarea
+              :auto-size="{ minRows: 1, maxRows: 5 }"
+              :value="item.content ? item.content : ''"
+              readOnly
+      />
+    </a-card>
   </div>
 </template>
 
@@ -98,6 +82,18 @@
     },
     data() {
       return {}
+    },
+    computed: {
+      text() {
+        return (isNil(this.data.text) || isEmpty(this.data.text))
+            ? {}
+            : this.data.text
+      },
+      list() {
+        return (isNil(this.data.list) || isEmpty(this.data.list))
+            ? []
+            : this.data.list
+      },
     },
     methods: {
       copy(url) {
@@ -124,21 +120,6 @@
         scoped
 >
   .detail
-    .el-card + .el-card
+    .ant-card
       margin-top 10px
-
-    .el-form-item
-      word-break break-word
-
-    .download-item + .download-item
-      margin-top 10px
-
-    .operation-bar
-      display flex
-      flex-direction row-reverse
-      margin-top 5px
-
-      .el-button
-        margin-left 5px
-
 </style>

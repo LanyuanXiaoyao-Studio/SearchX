@@ -5,15 +5,15 @@
             v-html="about.author.lines"
     />
     <a-card>
-      <el-row :gutter="10">
-        <el-col :span="8">
+      <a-row :gutter="10">
+        <a-col :span="8">
           <a-avatar
                   :size="110"
                   :src="about.author.donateCode"
                   shape="square"
           />
-        </el-col>
-        <el-col :span="16">
+        </a-col>
+        <a-col :span="16">
           <div class="business-card">
             <a-avatar
                     :src="about.author.avatar"
@@ -38,8 +38,8 @@
                     v-html="about.author.slogan"
             />
           </div>
-        </el-col>
-      </el-row>
+        </a-col>
+      </a-row>
     </a-card>
   </div>
 </template>

@@ -115,7 +115,7 @@
     .site-info
       .name
         font-weight 450
-        font-size 1.05em
+        font-size 1.05rem
         text-decoration underline
         cursor pointer
 
