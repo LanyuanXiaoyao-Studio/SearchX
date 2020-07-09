@@ -667,6 +667,427 @@ const sites = [
       'JS'
     ],
     'search': 'https://www.dashengpan.com/search?keyword={query}&page=1'
+  },
+  {
+    'code': 'afee8741-8deb-4a34-8827-7ec0cc4fd651',
+    'enabled': true,
+    'version': 0,
+    'name': '罗马盘',
+    'category': '网盘',
+    'icon': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAY1BMVEUAAAAAT7IAULMAT7MAT7IAT7IAT7UAULMAT7MAT7MAVbgAUbQAT7MAT7MATrMAULMAT7MAT7MAULQAT7MAUbMATrIAT7MAT7IAT7MAULIAULQAULUAT7IAT7MAULMAT7MAULPYtpYGAAAAIHRSTlMA5COu7vYeEIYsCRhLqLY/bs5ZxTLcj9V7n2U4vmCWdRcC04sAAAR7SURBVFjDnVbpgrIwDGxrD2jLfYNi3/8pv0nZdb0WPjc/FCWZhMk0hL2zNuHh0dSptux/rTipLUp2VdMM31g80f8XnlO4alYvtDPWGKeX8cQ3CHcYrnuJ6CppDROFv/bTmtQF/agjblUfpa/gdfbGtmPOEbGZbKbC4ckIuzd78TNcutlYD98nq0bNPME3O0yMyJlr1mZqy5vMl7q+lKcu/ualMQmuhvS3+AQVJviSFN37uzuirGIVC/NU4y8II8IuTDTkWVrmLv2wZT5dF8aWnHozspSjBvEuvlZB1mzpYq3skQU1lG5jYLICHs2bdgoZ1Mw88M8t0qkYx6tzMxBSRHUTvjO7wGd9iTeoPIn5M2dLThFZ3WoIyYkiqQgvby2xvFqPXC96KOFgRIV4Yya4daO4h/c5QXo749aV2O7M0wPwIFubhXAyBr5qEi8U8QCO7BWfhTmH0D/e7kMY2Qz6tUU8fyfYtEKsZxOcXKGCcs8FGM0BTlBdy96ZA7RMbUe5UGvyJKErhfasDoTy3lyD7BbZuUgVMt5xVAXptAydcEMIvx+49JadPuafG16FiV3p5kgt/t2oPlPIMDiPrtk7CpVnFSrTHUrZAbAnynJGlQaE6dvfTeBOQALUh2R/XoBie4ErdcPf9SAnJV3QQpXuApBgC5ynjvz7OwqIFSWA1LB9G6nGBp1KqYwvQ0m1rcJgPN3dN0HkTdQqtNTcVAB1Stwo6bn2DX7cgaqSySC/9b7iHDgcdXRDLgcAdghKF/T8ww9fGRoo6L8JoEcA6CEBZCBCfUv+RNrc5MUPXz44EAIAJ1LDC8DpGMA2WwUThKf+BNCBg9gtiDb9A4BRaHdJJ0ki6g8AC/GXbTpozB8AEjpNFfoeO/E5gBnQhAXnOWr6DwA1CqfBulI7l88BTENnFg30TkHSnwMgd0fvwMrMJIWPAbwE/SSlkhTtPwZo+Ta1tpHI7acA7YBQrWUcXXSgdwCcfVO/QtaUHiA3GEGS7QGU5+e54PoAAun1CWeNWuZ9gCCn4mVzPadmDWihyUgNuwCXbcfyrRDtUoznbWtyDpF49jK+/nYBzFwFMsm5VPFK5Qsrmrgl1ZJQ9gEsc/Xdoqk4HsglEohlFMNkDwDqXjCm/XU9NV01ld4wc+XEoocOqQ3sAKBEybO7OZjLtnpOzo4h7mjHAGQ8X5PruDYyRMsLJvJAWxA7AkDKswoPJrPCmjF2I+Y/JNGKMqu4+l7Wa8102eE6bmnHAHXmcWFE2xZF2wrDdDEhHOX72yw94qDLR+hI67RtfZIPYbOShuJ6DDCrr/7zTt7IOF9l6LShXe6YxII29TuTNEq2Pe5yrIPNtC/7LK94lfdQ0kJjRHf0OmuAdQjwais5zMjO4pb2OYAD/a2Jo3B6XmT6IddiGEpcnN3eRM6sp4mccoymh2nvEOacjRe/Gq2z3mbUyhFYD9WJm+0NZZzDxqQkJFcFdd/Kid+s2kPINyFtK3nzQOLN+B7AchOSAdbl50aZ3Ww1OwBRSLGVdlGBf7n+A2koklM17t7xAAAAAElFTkSuQmCC',
+    'target': 'SEARCH',
+    'home': 'https://www.luomapan.com',
+    'author': 'lanyuanxiaoyao',
+    'description': '网盘资源搜索，就用罗马盘 - 最好用的百度网盘搜索引擎',
+    'parser': 'CSS',
+    'headers': {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'
+    },
+    'tags': {},
+    'rules': {
+      'https:\\/\\/www\\.luomapan\\.com\\/search\\?keyword=.+&page=\\d+': {
+        'list': {
+          'expression': '.main .search-result .result-inner .result-wrapper .roma-item-wrapper',
+          'title': {
+            'expression': '.roma-info > h1.roma-title > a'
+          },
+          'description': {
+            'expression': '.roma-info > .roma-detail-wrap'
+          },
+          'dateTime': {
+            'expression': '.roma-info > .roma-meta > .meta-it:contains(时间)',
+            'replace': [
+              {
+                'regex': '时间：\\s*',
+                'text': ''
+              }
+            ]
+          },
+          'link': {
+            'expression': '.roma-info > h1.roma-title > a',
+            'attribute': 'href',
+            'replace': [
+              {
+                'regex': '^',
+                'text': 'https://www.luomapan.com'
+              }
+            ]
+          },
+          'extra': {
+            'size': {
+              'expression': '.roma-info > .roma-meta > .meta-it:contains(大小)',
+              'replace': [
+                {
+                  'regex': '大小：\\s*',
+                  'text': ''
+                }
+              ]
+            }
+          }
+        },
+        'next': {
+          'expression': '.pager-wrapper > .pc-pager-wrapper > a:contains(下一页)',
+          'attribute': 'href',
+          'replace': [
+            {
+              'regex': '^',
+              'text': 'https://www.luomapan.com'
+            }
+          ]
+        }
+      },
+      'https:\\/\\/www\\.luomapan\\.com\\/detail\\/.+': {
+        'text': {
+          'expression': '#info',
+          'title': {
+            'expression': 'h1.filename'
+          },
+          'dateTime': {
+            'expression': '.roma-meta > .meta-item:contains(时间)',
+            'replace': [
+              {
+                'regex': '分享时间\\s*',
+                'text': ''
+              }
+            ]
+          },
+          'extra': {
+            'size': {
+              'expression': '.roma-meta > .meta-item:contains(大小)',
+              'replace': [
+                {
+                  'regex': '资源大小\\s*',
+                  'text': ''
+                }
+              ]
+            },
+            'password': {
+              'expression': '.roma-meta > .meta-item:contains(密码)',
+              'replace': [
+                {
+                  'regex': '提取密码\\s*',
+                  'text': ''
+                }
+              ]
+            }
+          }
+        },
+        'list': {
+          'expression': '.detail-content',
+          'title': {
+            'expression': '#info h1.filename'
+          },
+          'content': {
+            'expression': '#statement > .button-wrap > .button-inner > a',
+            'attribute': 'href'
+          }
+        }
+      }
+    },
+    'platform': [
+      'JVM',
+      'JS'
+    ],
+    'search': 'https://www.luomapan.com/search?keyword={query}&page=1'
+  },
+  {
+    'code': '52e8bdc3-84bc-495c-a406-b053a94fc825',
+    'enabled': true,
+    'version': 0,
+    'name': '52网盘',
+    'category': '网盘',
+    'icon': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAe1BMVEUAt2D////6/vwpwnny+/d12apd0ZskwXcEuGL2/Pmz6tBX0JYKumfb9ejT8+Oa48BLzI9Gy4wUvW3u+vXl+O/G79yr58qi5cWP37lm1KAQvGrr+fPg9uuK3raE3LM5x4MxxX8ewHMcv3HN8N+569OU4bxw16Y/yYd92q7de33rAAABJ0lEQVQ4y5VS6XqDMAwDCgFCuI9Cabl6bO//hBOMJjjQfd/0T5awkWPjH8hYVfgtb8ZjeYp98xdWdTrQg9xU8J2d7ljr16sl1nRmzSIP3GxMzoupI/rJRins36yc3enWwFGJMknFY+ae0gc0tV1D4XKFI1C8Bv2mmVDhikYIlhGDd0VPIRtiQqnFitFCrss9yP1CLZUhQWrN0KCWvMkIctY3u+0gbKTWDBUMKniJxdEHvODpCo/0i+kEOnXy1e7V23xtCk/wvJfUDcEfhr573xEL8Vhr0rcBetsEiidLghs+ByJBY6W5qaGSIeSVaLhRA0bf14MMX/Vyno2hw2Vd3TUDzHxxyKB7iPvsaE+fHVOxDMs+Owab/ugegbW7gv1JWInxFxif9R+gmwvlxb25oAAAAABJRU5ErkJggg==',
+    'target': 'SEARCH',
+    'home': 'https://www.56wangpan.com',
+    'author': 'lanyuanxiaoyao',
+    'description': '专业网盘搜索引擎-56网盘搜索为您带来最佳网盘搜索体验',
+    'parser': 'CSS',
+    'headers': {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'
+    },
+    'tags': {},
+    'rules': {
+      'https:\\/\\/www\\.56wangpan\\.com\\/search\\/kw.+pg\\d+': {
+        'list': {
+          'expression': '.content .sellListContent > li',
+          'title': {
+            'expression': 'div.info > .title > a'
+          },
+          'description': {
+            'expression': 'div.info > .address'
+          },
+          'author': {
+            'expression': 'div.info > .rInfo > .sharer'
+          },
+          'dateTime': {
+            'expression': 'div.info > .rInfo > .feed_time'
+          },
+          'link': {
+            'expression': 'div.info > .title > a',
+            'attribute': 'href',
+            'replace': [
+              {
+                'regex': '^',
+                'text': 'https://www.56wangpan.com'
+              }
+            ]
+          }
+        },
+        'next': {
+          'expression': '.content .contentBottom .list-page-box > a:contains(下一页)',
+          'attribute': 'href',
+          'replace': [
+            {
+              'regex': '^',
+              'text': 'https://www.56wangpan.com'
+            }
+          ]
+        },
+        'options': [
+          'OPEN_DIRECTLY'
+        ]
+      }
+    },
+    'platform': [
+      'JVM',
+      'JS'
+    ],
+    'search': 'https://www.56wangpan.com/search/kw{query}pg1'
+  },
+  {
+    'code': 'bb32f4ff-06ad-4709-b0c3-fb648ea210bd',
+    'enabled': true,
+    'version': 0,
+    'name': '小白盘',
+    'category': '网盘',
+    'icon': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAACClBMVEUAAAAVoIUVoIUVoIUWoIYTn4MXoIYhpYsWoIYVoIUMnICi1M4ao4kfpoyJysP///8wq5IhmYIKjnQUn4Q7sJgXoIZKtqEMnYEboogWoYQNnIEUoIYMnIEWoYi04dYTn4Ujporc7+zJ6eTk8vIjpo0boogPnYE2rZY0rpVjv60so4tKqpZevatdtKJEp5Rquaw8ppKOz8QdoYhru61SuKSBxrgMm4Cj181JrJkVoYRYuqe64ttQuqQ2rpfE5+AiqpAWoIUUkHj///8Ul30LjXQNnH8Ii3MUoIMOnYISn4QUkXkHiXANim4RnoEJm34IjHgMjnf3//////sKnIIQkHjr/v+w6vf//fS46vL/++3/+uVQtqURnZwVoYYLn4VSoH5FnncGincQjXHe/P/7/f3B6uyF4uzz9ev18d3u8N398dhiz9fn5slBu8STzr8+tbWdx64crKgToKIUpJAtnIhIoIURmoMVmYELlX4mk3RlqHIEh23K9P217/vA8fme4++Z4u564+tc2eXs8OOn4OKB1+L/9eBQzt3778673stszctRycul0Mc2v8Tf4MGJxbZ6wLbK2LXS17Szz7QutLJdtrBJsa52vaulxaW3yKFBtKFXrZwSppphtpY+rZAKl4+VuI6KsI0In4x3q4lqrohppIUDjIRZoIFZoIAdnH5ennIqjHJRlHFCnG47yfEnAAAAQHRSTlMA9Pv669qM+tLCnSgmFgsE6unp3tbLwbu2onZiVko7OjIoHBLf19PRubKyqqOdnZqahYVwcG9ubGxsa05GQkEefd7CpQAAAitJREFUOMttk2VXG0EUhmclIQlFStECFerubpOb3dhGiDUNKSUBSinFrVDq7u7uzn9kZDdLCM+nPec+570z986iWZTU19kEUbZbD5aieVhmrRIkEWNREuTa/U1zywscAjbxqJad+SkNi3A+vtDaYmSyWMIFBFctMeuiHhwKeU3Du9IwGiRWDo28Tac/qjHTWNPEz8f6qyN3T0YATt35oPoMI7SxjAoOVh86Bpzk4B/D8EkH6P0FeqKhiwDXBt+9uB6B6OvxXJNqEmGl/b92QfTJpFtzhwc6IPU9dw7xMCqpog2ed8DDyWYnQetLwFN/qxGxDdXTDrFbkPymORk/L0HP/wndUKtRHRVOXIGeTJgLgTPQci7r0qdViWwiFbrg9vRsIezkhq8cCZgKV6Glzc2F7A24+ZfILiYUIZG16otE3wTiLGD4PPT+I5/M8BQhmbV6fwFSXwJuRQl8ugzRzzzMxRLsErvOgwQkn42Njr4kA0390LudxcFyZOUPJXYvAQCdnUA5/dswvJWoUear9g7QXZFt3ScZ3b+44Z9Yh1At5qjj6cf9j16NTR0/SjL4nfzNexDal3uIypRb0xRnOzW62+jg4wuXk8du0YVW7NJHRYzeDBWULYiwGxsYRvtwfyZL6ySAUFpTaGhss8ou/Z+wFBgMZRPSWTqvoW1YgXLG6kJD2czrnCMO0TT8BKViRxnKo7Em6DGMuFKxtRgVcGi73SJLWJBt6/ea5Rm3W+LNZpzidAAAAABJRU5ErkJggg==',
+    'target': 'SEARCH',
+    'home': 'https://www.xiaobaipan.com',
+    'author': 'lanyuanxiaoyao',
+    'description': '小白盘帮收录了大量的网盘资源,页面清新，实时检查失效资源.帮您省心快速找到想要的电影,电视剧,小说,文档,音乐,软件,种子等热门网盘资源',
+    'parser': 'CSS',
+    'headers': {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'
+    },
+    'tags': {},
+    'rules': {
+      'https:\\/\\/www\\.xiaobaipan\\.com\\/list-.+-p\\d+\\.html': {
+        'headers': {},
+        'list': {
+          'expression': '.main-container .category-list > .item-list:has(div[fid])',
+          'author': {
+            'expression': 'div[fid] h5.company-title > a'
+          },
+          'description': {
+            'expression': 'div[fid] .jobs-desc'
+          },
+          'title': {
+            'expression': 'div[fid] h4.job-title > a'
+          },
+          'dateTime': {
+            'expression': '.info-row > .date',
+            'replace': [
+              {
+                'regex': '分享时间:\\s*',
+                'text': ''
+              }
+            ]
+          },
+          'link': {
+            'expression': 'div[fid] h4.job-title > a',
+            'attribute': 'href',
+            'replace': [
+              {
+                'regex': '^',
+                'text': 'https://www.xiaobaipan.com'
+              }
+            ]
+          },
+          'extra': {
+            'view': {
+              'expression': '.info-row > .item-location:contains(查看)'
+            },
+            'size': {
+              'expression': '.info-row > .salary'
+            }
+          }
+        },
+        'next': {
+          'expression': '.pagination-bar > .pagination > li > a:contains(>>)',
+          'attribute': 'href',
+          'replace': [
+            {
+              'regex': '^',
+              'text': 'https://www.xiaobaipan.com'
+            }
+          ]
+        },
+        'options': [
+          'OPEN_DIRECTLY'
+        ]
+      }
+    },
+    'platform': [
+      'JVM',
+      'JS'
+    ],
+    'search': 'https://www.xiaobaipan.com/list-{query}-p4.html'
+  },
+  {
+    'code': '0d3e0c9f-a9c9-40c5-999a-e67519aabac4',
+    'enabled': true,
+    'version': 0,
+    'name': '小可搜搜',
+    'category': '网盘',
+    'icon': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAilBMVEX///8AAAAFBQUSEhIMDAz29vbs7Oz6+vqbm5stLS06Ojrx8fHf3992dnZAQEAaGhra2tqSkpJ+fn5hYWFJSUk0NDQiIiJTU1Pj4+PHx8etra3W1tbR0dG4uLimpqbDw8OxsbGioqJaWlqHh4dsbGwnJyfLy8uDg4NwcHDn5+e8vLyNjY1NTU1nZ2e/NUqvAAACfklEQVRIx+1Ux5ajMBCkWkLkHA3G4Dwz9v7/761Akj3sTrjt28PUhaap6qBuYf3g/4QjNm706yBRnI5Tan/HF25TJYQFxM5xtHG+YNtjYcgGxCv39TP+WDB8APL3H2YJropOdVzkbtftsqipdISm/5ufNnMxzM+H0HaCcbcftrYltruTN/vr3Z/83pd+3gzCsZxLUTMizrxrKvsKs1nCXGcd3wfoPsymuHIYJJk9F3urAb5SBI305GLhH2jphNQjCmbnReZP3t4JXA5+W2Zkv5CknZuXU7G0TO5CaO9A/DzetgId1Ux3HPD2Ye+2MtnkA+deUXxQ9kwA3IUadAwqexHVfL+0VoJyxRkS+KERxGCTsiaGqrcLAlPnuD3DF+pTAZ6ZzSLE2huB76yOo+q040ZcNzsyeKnJwCKltUt4rX0Hu5jkmwSuskSVlEYgtq0+Xh9NYEdlbhtB6EE34aSheIxCGkZQrG/AtkZkwj6/7ArXMSU1YiUYmMkgmmIKHk032jyhDleCK5ke0gTctHZGvVXWnvRony2wjTKPhNIEi0C5o8J48LTWLEocKGn1bg4XhlrHyYH4oRARmWVypBm3j0OSgfxU7Uy87JIz04eSgFIsDJeD3i1474F0gRsP4NXpeItKBujMdsa01KCTjmqjFD6eqAdVGgeSzer3lUkXOy6lhAf++F+M8zQHnwDWWSvYOUlClaWzvY/narh3bCX9Ter1DV0rXJpjJkUXypd+l+23gRWMR3/WmvhrjJ6++X6Ru9Nbl72UZ1Klxan1EdprDQ0iTmRsLwusT9DnNWEN7mWh9QXa7uAlZMhJ9Wt6tb7B63TyGM1I4nwU1g/+BX4Dr4ckcW4axqUAAAAASUVORK5CYII=',
+    'target': 'SEARCH',
+    'home': 'https://www.xiaokesoso.com',
+    'author': 'lanyuanxiaoyao',
+    'description': '小可搜搜，有你更方便',
+    'parser': 'CSS',
+    'headers': {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'
+    },
+    'tags': {},
+    'rules': {
+      'https:\\/\\/www\\.xiaokesoso\\.com\\/s\\/search\\?q=.+&currentPage=\\d+': {
+        'list': {
+          'expression': '.container .result-box .row .document-piece:not(:contains(争议))',
+          'title': {
+            'expression': '.media-body > h4.media-heading > a'
+          },
+          'description': {
+            'expression': '.media-bottom .file-list-contain'
+          },
+          'author': {
+            'expression': '.media-bottom span:nth-child(2) button',
+            'replace': [
+              {
+                'regex': '\\s',
+                'text': ''
+              }
+            ],
+            'script': 'var regex = /(.+)分享\\s*(.+)/\nvar result = text.match(regex)\nif (result) {\n    return result[1]\n}\nreturn \'\''
+          },
+          'dateTime': {
+            'expression': '.media-bottom span:nth-child(1) button',
+            'replace': [
+              {
+                'regex': '&nbsp;',
+                'text': ' '
+              }
+            ],
+            'script': 'var regex = /(\\d{4}-\\d{2}-\\d{2})\\s(.+)/\nvar result = text.match(regex)\nif (result) {\n    return result[1]\n}\nreturn \'\''
+          },
+          'link': {
+            'expression': '.media-body > h4.media-heading > a',
+            'attribute': 'href',
+            'replace': [
+              {
+                'regex': '\\s*',
+                'text': ''
+              },
+              {
+                'regex': '^',
+                'text': 'https://www.xiaokesoso.com'
+              }
+            ]
+          },
+          'extra': {
+            'size': {
+              'expression': '.media-bottom span:nth-child(1) button',
+              'replace': [
+                {
+                  'regex': '&nbsp;',
+                  'text': ' '
+                }
+              ],
+              'script': 'var regex = /(\\d{4}-\\d{2}-\\d{2})\\s(.+)/\nvar result = text.match(regex)\nif (result) {\n    return result[2]\n}\nreturn \'\''
+            },
+            'number': {
+              'expression': '.media-bottom span:nth-child(2) button',
+              'replace': [
+                {
+                  'regex': '&nbsp;',
+                  'text': ' '
+                }
+              ],
+              'script': 'var regex = /(.+)分享\\s*(.+)/\nvar result = text.match(regex)\nif (result) {\n    return result[2]\n}\nreturn \'\''
+            }
+          }
+        },
+        'next': {
+          'script': 'var regex = /(.+currentPage=)(\\d+)/\nvar result = params.url.match(regex)\nif (result && result.length > 2) {\n    return result[1] + (parseInt(result[2]) + 1)\n}\nreturn \'\''
+        }
+      },
+      'https:\\/\\/www\\.xiaokesoso\\.com\\/info\\/.+': {
+        'text': {
+          'expression': '.container .row .detail-box:has(h3)',
+          'title': {
+            'expression': 'h3'
+          },
+          'dateTime': {
+            'expression': 'span:contains(时间)',
+            'replace': [
+              {
+                'regex': '时间：',
+                'text': ''
+              }
+            ]
+          },
+          'extra': {
+            'size': {
+              'expression': 'span:contains(大小)',
+              'replace': [
+                {
+                  'regex': '大小：',
+                  'text': ''
+                }
+              ]
+            },
+            'number': {
+              'expression': 'span:contains(文件个数)',
+              'replace': [
+                {
+                  'regex': '文件个数：',
+                  'text': ''
+                }
+              ]
+            },
+            'password': {
+              'expression': 'span:contains(密码)',
+              'replace': [
+                {
+                  'regex': '密码：',
+                  'text': ''
+                }
+              ]
+            }
+          }
+        },
+        'list': {
+          'expression': '.container .row .detail-box:has(h3)',
+          'title': {
+            'expression': 'h3'
+          },
+          'content': {
+            'expression': '.download-erea button',
+            'attribute': 'data-downloadurl',
+            'replace': [
+              {
+                'regex': '^',
+                'text': 'http://norefer.mimixiaoke.com/api/jump?target='
+              }
+            ]
+          }
+        }
+      }
+    },
+    'platform': [
+      'JVM',
+      'JS'
+    ],
+    'search': 'https://www.xiaokesoso.com/s/search?q={query}&currentPage=1'
   }
 ]
 

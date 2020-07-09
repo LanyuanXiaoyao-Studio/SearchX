@@ -31,6 +31,12 @@
         {{ text.size }}
       </a-descriptions-item>
       <a-descriptions-item
+              label="提取码"
+              v-if="text.password"
+      >
+        {{ text.password }}
+      </a-descriptions-item>
+      <a-descriptions-item
               :span="3"
               label="描述"
               v-if="text.description"

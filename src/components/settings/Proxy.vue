@@ -1,7 +1,7 @@
 <template>
   <div class="settings-proxy">
     <a-input
-            placeholder="代理地址"
+            placeholder="代理地址: IP:PORT (无需协议名, 仅支持 HTTP 协议)"
             v-model="proxyUrl"
     />
     <div class="setting-buttons">

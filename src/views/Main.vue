@@ -15,7 +15,7 @@
                 placement="bottomRight"
                 slot="addonBefore"
                 title="站点列表"
-                trigger="click"
+                trigger="hoverr"
                 v-model="siteListVisible"
         >
           <template slot="content">
