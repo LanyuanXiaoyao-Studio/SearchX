@@ -34,6 +34,7 @@
 
 # 开源
 [Github](https://github.com/LanyuanXiaoyao-Studio/utools-torrent)
+[Gitee](https://gitee.com/LanyuanXiaoyao-Studio/utools-torrent)
 
 # 截图
 ![](https://s1.ax1x.com/2020/07/08/UVHJ0I.png)
