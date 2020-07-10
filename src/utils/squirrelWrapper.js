@@ -1,4 +1,6 @@
-import Squirrel from './squirrel-0.0.3-beta';
+import SquirrelUtools from './squirrel-utools-0.0.1-alpha-1';
+
+const Squirrel = SquirrelUtools.com.lanyuanxiaoyao.squirrel.utools
 
 window.squirrel = Squirrel
 
@@ -10,4 +12,3 @@ export default {
   fetch: () => JSON.parse(Squirrel.fetch()),
   save: information => Squirrel.save(JSON.stringify(information))
 }
-
