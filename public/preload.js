@@ -1,18 +1,20 @@
 // Node native http/https downloader
-const superagent = require('superagent')
-require('superagent-proxy')(superagent)
+const agent = require('https-proxy-agent')
+const phin = require('phin')
 const iconv = require('iconv-lite')
 
 window.nodeDownload = async (url, headers, proxy, charset) => {
   headers = JSON.parse(headers)
-  let requestAgent = superagent.get(encodeURI(url))
-                               .buffer(true)
-                               .parse(superagent.parse.image)
-                               .set(headers)
-  if (proxy && proxy !== '') {
-    requestAgent.proxy(proxy)
+  let options = {
+    url: url,
+    core: {
+      headers: headers
+    }
   }
-  let response = await requestAgent
+  if (proxy && proxy !== '') {
+    options.core.agent = new agent(`${proxy}`)
+  }
+  let response = await phin(options)
   if (response && response.body) {
     return iconv.decode(response.body, charset)
   }
