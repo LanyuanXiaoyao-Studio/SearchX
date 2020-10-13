@@ -25,7 +25,7 @@
 
 <script>
   import {mapGetters} from 'vuex'
-  import Squirrel from '../../utils/squirrelWrapper'
+  import Squirrel from '../../utils/squirrel'
 
   export default {
     name: 'SettingsProxy',
