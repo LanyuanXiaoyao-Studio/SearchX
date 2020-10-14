@@ -92,7 +92,7 @@
   import SiteList from '../components/SiteList'
   import Settings from '../components/Settings'
   import Detail from '../components/Detail'
-  import Squirrel from '../utils/squirrelWrapper'
+  import Squirrel from '../utils/squirrel'
   import isEmpty from 'licia/isEmpty'
   import isNil from 'licia/isNil'
   import contain from 'licia/contain';
