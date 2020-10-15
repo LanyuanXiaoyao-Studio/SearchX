@@ -145,6 +145,7 @@
         }
         this.result = []
         this.next = this.site.search.replace('{query}', this.search)
+        console.log(this.next)
         await this.load()
       },
       async load() {
@@ -170,6 +171,7 @@
           code: code,
           url: url,
         })
+        console.log(data)
         if (isNil(data) || isNil(data.list) || isEmpty(data.list)) {
           this.$message.warning(`没有更多内容`)
           this.loading = false

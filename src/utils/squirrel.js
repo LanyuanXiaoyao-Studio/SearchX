@@ -1,4 +1,4 @@
-import SquirrelUtools from './squirrel-utools-0.2.64';
+import SquirrelUtools from './squirrel-utools-0.2.69';
 
 const Squirrel = SquirrelUtools.com.lanyuanxiaoyao.squirrel.utools
 

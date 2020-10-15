@@ -15,6 +15,8 @@
 [备用下载](https://github.com/LanyuanXiaoyao-Studio/utools-torrent/releases)
 
 # 版本
+- 0.2.0
+  1. 增加「开发」分类
 - 0.1.0
   1. 更换 UI 到 Ant Design
   2. 增加「网盘」分类

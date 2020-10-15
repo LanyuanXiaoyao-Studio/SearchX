@@ -1,45 +1,45 @@
 <template>
   <div class="result-list">
     <a-list
-            :data-source="data"
-            item-layout="vertical"
+        :data-source="data"
+        item-layout="vertical"
     >
       <div slot="header">
         <b>搜索结果</b>
       </div>
       <div
-              :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }"
-              slot="loadMore"
-              v-if="showLoadMore"
+          v-if="showLoadMore"
+          slot="loadMore"
+          :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }"
       >
         <a-spin v-if="loading"/>
         <a-button
-                @click="more"
-                type="link"
-                v-else
+            v-else
+            type="link"
+            @click="more"
         >
           加载更多
         </a-button>
       </div>
       <a-list-item
-              slot="renderItem"
-              slot-scope="item, index"
+          slot="renderItem"
+          slot-scope="item, index"
       >
         <a-button
-                @click="detail(item.link)"
-                class="operation-btn"
-                slot="actions"
-                type="link"
-                v-if="!openDirectly"
+            v-if="!openDirectly"
+            slot="actions"
+            class="operation-btn"
+            type="link"
+            @click="detail(item.link)"
         >
           <a-icon type="file-text"/>
           详情
         </a-button>
         <a-button
-                @click="openInBrowser(item.link)"
-                class="operation-btn"
-                slot="actions"
-                type="link"
+            slot="actions"
+            class="operation-btn"
+            type="link"
+            @click="openInBrowser(item.link)"
         >
           <a-icon type="eye"/>
           查看
@@ -48,55 +48,25 @@
           <span slot="title">
             {{ item.title }}
           </span>
+          <a-avatar
+              v-if="item.image"
+              slot="avatar"
+              :src="item.image"
+          />
         </a-list-item-meta>
         <div class="item-description">
           {{ item.description ? item.description : '暂无简介' }}
         </div>
         <div class="item-tags">
           <a-tag
-                  effect="plain"
-                  size="small"
-                  type="info"
-                  v-if="item.datetime"
+              v-for="tag in generateTagList(item)"
+              :key="tag"
+              effect="plain"
+              size="small"
+              type="info"
           >
-            <a-icon type="clock-circle"/>
-            {{ item.datetime }}
-          </a-tag>
-          <a-tag
-                  effect="plain"
-                  size="small"
-                  type="info"
-                  v-if="item.size"
-          >
-            <a-icon type="inbox"/>
-            {{ item.size }}
-          </a-tag>
-          <a-tag
-                  effect="plain"
-                  size="small"
-                  type="info"
-                  v-if="item.view"
-          >
-            <a-icon type="eye"/>
-            {{ item.view }}
-          </a-tag>
-          <a-tag
-                  effect="plain"
-                  size="small"
-                  type="info"
-                  v-if="item.number"
-          >
-            <a-icon type="file"/>
-            {{ item.number }}
-          </a-tag>
-          <a-tag
-                  effect="plain"
-                  size="small"
-                  type="info"
-                  v-if="item.location"
-          >
-            <a-icon type="environment"/>
-            {{ item.location }}
+            <a-icon :type="tag.icon"/>
+            {{ tag.content }}
           </a-tag>
         </div>
       </a-list-item>
@@ -105,43 +75,63 @@
 </template>
 
 <script>
-  export default {
-    name: 'ResultList',
-    props: {
-      data: Array,
-      openDirectly: Boolean,
-      loading: Boolean,
-      showLoadMore: Boolean,
+export default {
+  name: 'ResultList',
+  props: {
+    data: Array,
+    openDirectly: Boolean,
+    loading: Boolean,
+    showLoadMore: Boolean,
+  },
+  methods: {
+    more() {
+      this.$emit('more')
     },
-    methods: {
-      more() {
-        this.$emit('more')
-      },
-      detail(url) {
-        this.$emit('detail', url)
-      },
-      openInBrowser(url) {
-        utools.shellOpenExternal(url)
-      },
-    }
+    detail(url) {
+      this.$emit('detail', url)
+    },
+    openInBrowser(url) {
+      utools.shellOpenExternal(url)
+    },
+    generateTagList(item) {
+      let tagList = []
+      if (item.datetime) tagList.push(this.generateTagData('clock-circle', item.datetime))
+      if (item.size) tagList.push(this.generateTagData('inbox', item.size))
+      if (item.view) tagList.push(this.generateTagData('eye', item.view))
+      if (item.number) tagList.push(this.generateTagData('file', item.number))
+      if (item.location) tagList.push(this.generateTagData('environment', item.location))
+      if (item.version) tagList.push(this.generateTagData('fork', item.version))
+      if (item.star) tagList.push(this.generateTagData('star', item.star))
+      if (item.language) tagList.push(this.generateTagData('code', item.language))
+      if (item.download) tagList.push(this.generateTagData('download', item.download))
+      if (item.author) tagList.push(this.generateTagData('user', item.author))
+      return tagList
+    },
+    generateTagData(iconName, content) {
+      return {
+        icon: iconName,
+        content: content,
+      }
+    },
   }
+}
 </script>
 
 <style
-        lang="stylus"
-        scoped
+    lang="stylus"
+    scoped
 >
-  .result-list
+.result-list
+  height 100%
+  padding 5px
+
+  .ant-list
     height 100%
-    padding 5px
 
-    .ant-list
-      height 100%
+    .item-tags
+      margin-top 10px
 
-      .item-tags
-        margin-top 10px
-
-      .operation-btn
-        margin 0
-        padding 0
+    .operation-btn
+      margin 0
+      padding 0
 </style>
