@@ -1,131 +1,118 @@
 <template>
   <div class="detail">
     <a-descriptions
-            :column="3"
-            bordered
-            layout="vertical"
+        :column="3"
+        bordered
+        layout="vertical"
     >
       <a-descriptions-item
-              :span="3"
-              label="名称"
-              v-if="text.title"
+          v-if="text.title"
+          :span="3"
+          label="名称"
       >
         {{ text.title }}
       </a-descriptions-item>
       <a-descriptions-item
-              label="作者"
-              v-if="text.author"
+          v-for="tag in generateTagList(text)"
+          :key="tag.name"
+          :label="tag.name"
       >
-        {{ text.author }}
+        {{ tag.content }}
       </a-descriptions-item>
       <a-descriptions-item
-              label="时间"
-              v-if="text.datetime"
-      >
-        {{ text.datetime }}
-      </a-descriptions-item>
-      <a-descriptions-item
-              label="大小"
-              v-if="text.size"
-      >
-        {{ text.size }}
-      </a-descriptions-item>
-      <a-descriptions-item
-              label="提取码"
-              v-if="text.password"
-      >
-        {{ text.password }}
-      </a-descriptions-item>
-      <a-descriptions-item
-              :span="3"
-              label="描述"
-              v-if="text.description"
+          v-if="text.description"
+          :span="3"
+          label="描述"
       >
         {{ text.description }}
       </a-descriptions-item>
     </a-descriptions>
     <a-card
-            :key="item.content"
-            :title="item.title ? item.title : ''"
-            size="small"
-            v-for="item in list"
+        v-for="item in list"
+        :key="item.content"
+        :title="item.title ? item.title : ''"
+        size="small"
     >
           <span slot="extra">
             <a-button
-                    :disabled="!item.content"
-                    @click="copy(item.content)"
-                    size="small"
-                    type="link"
+                :disabled="!item.content"
+                size="small"
+                type="link"
+                @click="copy(item.content)"
             >
               复制
             </a-button>
             <a-button
-                    :disabled="!item.content"
-                    @click="open(item.content)"
-                    size="small"
-                    type="link"
+                :disabled="!item.content"
+                size="small"
+                type="link"
+                @click="open(item.content)"
             >
               打开
             </a-button>
           </span>
       <a-textarea
-              :auto-size="{ minRows: 1, maxRows: 5 }"
-              :value="item.content ? item.content : ''"
-              readOnly
+          :auto-size="{ minRows: 1, maxRows: 5 }"
+          :value="item.content ? item.content : ''"
+          readOnly
       />
     </a-card>
   </div>
 </template>
 
 <script>
-  import isNil from 'licia/isNil'
-  import isEmpty from 'licia/isEmpty'
+import isNil from 'licia/isNil'
+import isEmpty from 'licia/isEmpty'
+import utils from '@/utils/utils'
 
-  export default {
-    name: 'detail',
-    props: {
-      data: Object
+export default {
+  name: 'detail',
+  props: {
+    data: Object
+  },
+  data() {
+    return {}
+  },
+  computed: {
+    text() {
+      return (isNil(this.data.text) || isEmpty(this.data.text))
+          ? {}
+          : this.data.text
     },
-    data() {
-      return {}
+    list() {
+      return (isNil(this.data.list) || isEmpty(this.data.list))
+          ? []
+          : this.data.list
     },
-    computed: {
-      text() {
-        return (isNil(this.data.text) || isEmpty(this.data.text))
-            ? {}
-            : this.data.text
-      },
-      list() {
-        return (isNil(this.data.list) || isEmpty(this.data.list))
-            ? []
-            : this.data.list
-      },
+  },
+  methods: {
+    copy(url) {
+      if (isNil(url) || isEmpty(url)) {
+        this.$message.error('复制失败')
+        return
+      }
+      utools.copyText(url)
+      this.$message.success('复制成功')
     },
-    methods: {
-      copy(url) {
-        if (isNil(url) || isEmpty(url)) {
-          this.$message.error('复制失败')
-          return
-        }
-        utools.copyText(url)
-        this.$message.success('复制成功')
-      },
-      open(url) {
-        if (isNil(url) || isEmpty(url)) {
-          this.$message.error('打开失败')
-          return
-        }
-        utools.shellOpenExternal(url)
-      },
-    }
+    open(url) {
+      if (isNil(url) || isEmpty(url)) {
+        this.$message.error('打开失败')
+        return
+      }
+      utools.shellOpenExternal(url)
+    },
+    generateTagList(item) {
+      return utils.generateTagList(item)
+    },
   }
+}
 </script>
 
 <style
-        lang="stylus"
-        scoped
+    lang="stylus"
+    scoped
 >
-  .detail
-    .ant-card
-      margin-top 10px
+.detail
+  .ant-card
+    margin-top 10px
 </style>

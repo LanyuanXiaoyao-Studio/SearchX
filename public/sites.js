@@ -579,6 +579,39 @@ const sites = [
             }
           }
         }
+      },
+      'https://www\\.npmjs\\.com/package/.+': {
+        'text': {
+          'expression': '#top',
+          'title': {
+            'expression': 'span[title]',
+            'attribute': 'title'
+          },
+          'dateTime': {
+            'expression': 'div:has(h3:contains(Install)) > div > h3:contains(Last publish) + p time',
+            'attribute': 'title'
+          },
+          'extra': {
+            'version': {
+              'expression': 'div:has(h3:contains(Install)) > div > h3:contains(Version) + p'
+            },
+            'size': {
+              'expression': 'div:has(h3:contains(Install)) > div > h3:contains(Unpacked) + p'
+            },
+            'number': {
+              'expression': 'div:has(h3:contains(Install)) > div > h3:contains(Total Files) + p'
+            },
+            'license': {
+              'expression': 'div:has(h3:contains(Install)) > div > h3:contains(License) + p'
+            }
+          }
+        },
+        'list': {
+          'expression': '#top > div > h3:contains(Install) + p:has(code)',
+          'content': {
+            'expression': 'svg + code[title]'
+          }
+        }
       }
     },
     'search': '{home}/search?q={query}'

@@ -145,7 +145,6 @@
         }
         this.result = []
         this.next = this.site.search.replace('{query}', this.search)
-        console.log(this.next)
         await this.load()
       },
       async load() {
@@ -193,6 +192,7 @@
             code: this.site.code,
             url: url
           })
+          console.log(data)
           if (isNil(data) || isNil(data.list) || isEmpty(data.list)) {
             this.$message.error(`获取数据失败`)
             return

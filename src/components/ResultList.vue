@@ -60,7 +60,7 @@
         <div class="item-tags">
           <a-tag
               v-for="tag in generateTagList(item)"
-              :key="tag"
+              :key="tag.name"
               effect="plain"
               size="small"
               type="info"
@@ -75,6 +75,8 @@
 </template>
 
 <script>
+import utils from '@/utils/utils'
+
 export default {
   name: 'ResultList',
   props: {
@@ -94,24 +96,7 @@ export default {
       utools.shellOpenExternal(url)
     },
     generateTagList(item) {
-      let tagList = []
-      if (item.datetime) tagList.push(this.generateTagData('clock-circle', item.datetime))
-      if (item.size) tagList.push(this.generateTagData('inbox', item.size))
-      if (item.view) tagList.push(this.generateTagData('eye', item.view))
-      if (item.number) tagList.push(this.generateTagData('file', item.number))
-      if (item.location) tagList.push(this.generateTagData('environment', item.location))
-      if (item.version) tagList.push(this.generateTagData('fork', item.version))
-      if (item.star) tagList.push(this.generateTagData('star', item.star))
-      if (item.language) tagList.push(this.generateTagData('code', item.language))
-      if (item.download) tagList.push(this.generateTagData('download', item.download))
-      if (item.author) tagList.push(this.generateTagData('user', item.author))
-      return tagList
-    },
-    generateTagData(iconName, content) {
-      return {
-        icon: iconName,
-        content: content,
-      }
+      return utils.generateTagList(item)
     },
   }
 }
