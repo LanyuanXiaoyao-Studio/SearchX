@@ -1,13 +1,12 @@
 <template>
   <div class="detail">
     <a-descriptions
-        :column="3"
-        bordered
-        layout="vertical"
+        :column="2"
+        size="small"
     >
       <a-descriptions-item
           v-if="text.title"
-          :span="3"
+          :span="2"
           label="名称"
       >
         {{ text.title }}
@@ -21,7 +20,7 @@
       </a-descriptions-item>
       <a-descriptions-item
           v-if="text.description"
-          :span="3"
+          :span="2"
           label="描述"
       >
         {{ text.description }}

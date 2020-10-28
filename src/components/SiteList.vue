@@ -1,65 +1,55 @@
 <template>
   <div class="site-list">
-    <div class="tag-filter">
-      <template v-for="tag in siteTags">
-        <a-checkable-tag
-                :checked="selectedTags.indexOf(tag) > -1"
-                :key="tag"
-                @change="checked => handleChange(tag, checked)"
-        >
-          {{ tag }}
-        </a-checkable-tag>
-      </template>
-    </div>
-    <a-list
-            :data-source="filterSites"
+    <a-tabs :default-active-key="0">
+      <a-tab-pane v-for="(list, name, index) in categories" :key="index" :tab="name">
+        <a-list
+            :data-source="list"
             item-layout="horizontal"
-    >
-      <a-list-item
+        >
+          <a-list-item
               slot="renderItem"
               slot-scope="site, index"
-      >
-        <a-row>
-          <a-col
-                  :span="6"
-                  class="site-icon"
           >
-            <a-tooltip placement="top">
-              <template slot="title">
-                <span>点击访问官网</span>
-              </template>
-              <a-avatar
+            <a-row style="width: 100%">
+              <a-col
+                  :span="4"
+                  class="site-icon"
+              >
+                <a-tooltip placement="top">
+                  <template slot="title">
+                    <span>点击访问官网</span>
+                  </template>
+                  <a-avatar
                       :src="site.icon"
                       shape="square"
                       size="small"
-              />
-            </a-tooltip>
-          </a-col>
-          <a-col
-                  :span="18"
+                  />
+                </a-tooltip>
+              </a-col>
+              <a-col
+                  :span="20"
                   class="site-info"
-          >
-            <a-tooltip placement="top">
-              <template slot="title">
-                <span>点击选择站点</span>
-              </template>
-              <div
+              >
+                <a-tooltip placement="top">
+                  <template slot="title">
+                    <span>点击选择站点</span>
+                  </template>
+                  <div
                       @click="selectSite(site)"
                       class="name"
-              >
-                {{ site.name }}
-              </div>
-            </a-tooltip>
-            <div class="description">
-              {{ site.description }}
-            </div>
-            <div class="tags">
-              <a-tag color="blue">{{ site.category }}</a-tag>
-            </div>
-          </a-col>
-        </a-row>
-      </a-list-item>
-    </a-list>
+                  >
+                    {{ site.name }}
+                  </div>
+                </a-tooltip>
+                <div class="description">
+                  {{ site.description }}
+                </div>
+              </a-col>
+            </a-row>
+          </a-list-item>
+        </a-list>
+      </a-tab-pane>
+    </a-tabs>
   </div>
 </template>
 
@@ -70,11 +60,15 @@
     name: 'SiteList',
     props: {
       sites: Array,
+      categories: Object,
     },
     data() {
       return {
         selectedTags: [],
       }
+    },
+    mounted() {
+      console.log(this.categories)
     },
     computed: {
       siteTags() {
@@ -105,9 +99,6 @@
         scoped
 >
   .site-list
-    .tag-filter
-      margin-bottom 5px
-
     .site-icon
       width 50px
       cursor pointer
@@ -116,13 +107,8 @@
       .name
         font-weight 450
         font-size 1.05rem
-        text-decoration underline
         cursor pointer
 
       .description
         color darkgray
-        width 400px
-
-      .tags
-        margin-top 5px
 </style>

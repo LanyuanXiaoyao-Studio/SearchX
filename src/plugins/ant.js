@@ -20,6 +20,7 @@ import {
   Select,
   Spin,
   Table,
+  Tabs,
   Tag,
   Tooltip,
 } from 'ant-design-vue'
@@ -45,5 +46,6 @@ Vue.use(Layout)
 Vue.use(Modal)
 Vue.use(Spin)
 Vue.use(BackTop)
+Vue.use(Tabs)
 
 Vue.prototype.$message = message

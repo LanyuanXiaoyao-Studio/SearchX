@@ -1,7 +1,6 @@
 export default {
   generateTagList(item) {
     let tagList = []
-    if (item.author) tagList.push(this.generateTagData('作者', 'user', item.author))
     if (item.datetime) tagList.push(this.generateTagData('时间', 'clock-circle', item.datetime))
     if (item.size) tagList.push(this.generateTagData('大小', 'inbox', item.size))
     if (item.view) tagList.push(this.generateTagData('被浏览', 'eye', item.view))
