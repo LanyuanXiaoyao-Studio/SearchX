@@ -52,30 +52,38 @@ window.databaseInitial = (_id, _defaultData) => {
 }
 
 window.get = () => {
-  let data = utools.db.get(id)
-  if (!data || data.error) {
+  try {
+    let data = utools.db.get(id)
+    if (!data || data.error) {
+      return defaultData
+    }
+    rev = data._rev
+    return data.data
+  } catch (e) {
     return defaultData
   }
-  rev = data._rev
-  return data.data
 }
 
 window.put = data => {
-  let result
-  if (rev === '') {
-    result = utools.db.put({
-      _id: id,
-      data: data
-    })
+  try {
+    let result
+    if (rev === '') {
+      result = utools.db.put({
+        _id: id,
+        data: data
+      })
+    }
+    else {
+      result = utools.db.put({
+        _id: id,
+        data: data,
+        _rev: rev
+      })
+    }
+    return !result.error;
+  } catch (e) {
+    return false
   }
-  else {
-    result = utools.db.put({
-      _id: id,
-      data: data,
-      _rev: rev
-    })
-  }
-  return !result.error;
 }
 
 const sites = require('./sites')
@@ -92,8 +100,6 @@ utools.onPluginReady(() => {
   if (window.squirrel) {
     window.squirrel.load(window.get())
     window.squirrel.imports(JSON.stringify(sites))
-    window.store.commit('updateSites', sites)
-    window.store.commit('updateCategories', groupBy(sites, 'category'))
 
     // 插件信息放在 gitee 上可以保证国内的访问速度, github 在国内访问不稳定
     window.nodeDownload('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/common.json', '{}', '', 'utf8')
