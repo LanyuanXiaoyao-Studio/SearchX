@@ -96,7 +96,7 @@ import Detail from '../components/Detail'
 import Squirrel from '../utils/squirrel'
 import isEmpty from 'licia/isEmpty'
 import isNil from 'licia/isNil'
-import contain from 'licia/contain';
+import contain from 'licia/contain'
 
 export default {
   name: 'Main',

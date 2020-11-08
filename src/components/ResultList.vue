@@ -49,9 +49,9 @@
             {{ item.title }}
           </span>
           <a-avatar
-              v-if="item.image"
+              v-if="item.avatar && item.avatar !== ''"
               slot="avatar"
-              :src="item.image"
+              :src="item.avatar"
           />
         </a-list-item-meta>
         <div class="item-description">
@@ -69,6 +69,13 @@
             {{ tag.content }}
           </a-tag>
         </div>
+        <img
+            v-if="item.image && item.image !== ''"
+            slot="extra"
+            :src="item.image"
+            alt="image"
+            class="item-image"
+        />
       </a-list-item>
     </a-list>
   </div>
@@ -112,6 +119,9 @@ export default {
 
   .ant-list
     height 100%
+
+    .item-image
+      max-height 150px
 
     .item-tags
       margin-top 10px

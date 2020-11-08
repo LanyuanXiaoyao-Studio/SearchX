@@ -1,8 +1,16 @@
 <template>
   <div class="site-list">
-    <a-tabs :default-active-key="0">
-      <a-tab-pane v-for="(list, name, index) in categories" :key="index" :tab="name">
+    <a-tabs
+        :default-active-key="0"
+        tab-position="left"
+    >
+      <a-tab-pane
+          v-for="(list, name, index) in categories"
+          :key="index"
+          :tab="name"
+      >
         <a-list
+            class="site-list-panel"
             :data-source="list"
             item-layout="horizontal"
         >
@@ -35,8 +43,8 @@
                     <span>点击选择站点</span>
                   </template>
                   <div
-                      @click="selectSite(site)"
                       class="name"
+                      @click="selectSite(site)"
                   >
                     {{ site.name }}
                   </div>
@@ -54,61 +62,65 @@
 </template>
 
 <script>
-  import isEmpty from 'licia/isEmpty'
+import isEmpty from 'licia/isEmpty'
 
-  export default {
-    name: 'SiteList',
-    props: {
-      sites: Array,
-      categories: Object,
+export default {
+  name: 'SiteList',
+  props: {
+    sites: Array,
+    categories: Object,
+  },
+  data() {
+    return {
+      selectedTags: [],
+    }
+  },
+  mounted() {
+    console.log(this.categories)
+  },
+  computed: {
+    siteTags() {
+      return [...new Set(this.sites.map(s => s.category))]
     },
-    data() {
-      return {
-        selectedTags: [],
-      }
+    filterSites() {
+      return isEmpty(this.selectedTags)
+          ? this.sites
+          : this.sites.filter(s => this.selectedTags.indexOf(s.category) > -1)
     },
-    mounted() {
-      console.log(this.categories)
+  },
+  methods: {
+    handleChange(tag, checked) {
+      const {selectedTags} = this;
+      this.selectedTags = checked
+          ? [...selectedTags, tag]
+          : selectedTags.filter(t => t !== tag);
     },
-    computed: {
-      siteTags() {
-        return [...new Set(this.sites.map(s => s.category))]
-      },
-      filterSites() {
-        return isEmpty(this.selectedTags)
-            ? this.sites
-            : this.sites.filter(s => this.selectedTags.indexOf(s.category) > -1)
-      },
+    selectSite(site) {
+      this.$emit('select', site)
     },
-    methods: {
-      handleChange(tag, checked) {
-        const {selectedTags} = this;
-        this.selectedTags = checked
-            ? [...selectedTags, tag]
-            : selectedTags.filter(t => t !== tag);
-      },
-      selectSite(site) {
-        this.$emit('select', site)
-      },
-    },
-  }
+  },
+}
 </script>
 
 <style
-        lang="stylus"
-        scoped
+    lang="stylus"
+    scoped
 >
-  .site-list
-    .site-icon
-      width 50px
+.site-list
+  .site-list-panel
+    height 400px
+    overflow auto
+
+  .site-icon
+    width 50px
+    cursor pointer
+
+  .site-info
+    .name
+      font-weight 450
+      font-size 1.05rem
       cursor pointer
 
-    .site-info
-      .name
-        font-weight 450
-        font-size 1.05rem
-        cursor pointer
-
-      .description
-        color darkgray
+    .description
+      color darkgray
 </style>

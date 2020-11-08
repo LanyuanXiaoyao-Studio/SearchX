@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Squirrel from '../utils/squirrel'
 
 Vue.use(Vuex)
 
@@ -30,8 +31,17 @@ export default new Vuex.Store({
     about: state => state.about,
   },
   mutations: {
-    updateSites: (state, sites) => (state.sites = sites),
-    updateCategories: (state, categories) => (state.categories = categories),
+    updateSitesAndCategories: (state) => {
+      let result = Squirrel.sites()
+      if (result.code === 0) state.sites = result.data
+      else state.sites = []
+      console.log('sites', result.message, result.timestamp)
+
+      result = Squirrel.categories()
+      if (result.code === 0) state.categories = result.data
+      else state.categories = {}
+      console.log('categories', result.message, result.timestamp)
+    },
     updateSettings: (state, settings) => (state.settings = settings),
     updateProxy: (state, proxy) => {
       if (state.settings.proxy) {
