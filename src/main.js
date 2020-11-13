@@ -8,7 +8,9 @@ Vue.config.productionTip = false
 import './plugins/ant'
 import './plugins/masonry'
 
-window.store = store
+if (window.squirrelInitialReady) {
+  window.squirrelInitialReady()
+}
 
 new Vue({
   router,

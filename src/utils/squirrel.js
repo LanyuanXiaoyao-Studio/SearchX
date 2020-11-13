@@ -1,7 +1,23 @@
-import store from '../store'
-import SquirrelUtools from './squirrel-utools-0.3.96-SNAPSHOT';
+import store from '@/store'
 
-const Squirrel = SquirrelUtools.com.lanyuanxiaoyao.squirrel.utools
+console.log(store)
+window.store = store
+console.log(window.store)
+
+const appMode = process.env.VUE_APP_MODE
+console.log(`Current Mode: ${appMode}`)
+
+let Squirrel
+if (appMode === 'utools') {
+  let SquirrelClient = require('@/utils/squirrel-utools-0.3.103-SNAPSHOT')
+  Squirrel = SquirrelClient.com.lanyuanxiaoyao.squirrel.utools
+}
+else if (appMode === 'electron') {
+  let SquirrelClient = require('@/utils/squirrel-electron-0.3.103-SNAPSHOT')
+  Squirrel = SquirrelClient.com.lanyuanxiaoyao.squirrel.electron
+}
+
+console.log(Squirrel.info())
 Squirrel.debug('true')
 
 window.squirrel = {

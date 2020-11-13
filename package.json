@@ -3,9 +3,16 @@
   "version": "0.2.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "serve": "vue-cli-service serve --mode web",
+    "build": "vue-cli-service build --mode web",
+    "electron:serve": "node scripts/pre-build-electron.js && vue-cli-service electron:serve --mode electron",
+    "electron:build": "node scripts/pre-build-electron.js && vue-cli-service electron:build --mode electron",
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps",
+    "utools:serve": "vue-cli-service serve --mode utools && node scripts/pre-build-utools.js",
+    "utools:build": "vue-cli-service build --mode utools && node scripts/pre-build-utools.js"
   },
+  "main": "background.js",
   "dependencies": {
     "ant-design-vue": "^1.6.5",
     "core-js": "^3.6.4",
@@ -23,8 +30,11 @@
     "babel-plugin-import": "^1.13.1",
     "copy-webpack-plugin": "^6.2.1",
     "deepmerge": "^4.2.2",
+    "electron": "^9.0.0",
+    "electron-devtools-installer": "^3.1.0",
     "stylus": "^0.54.8",
     "stylus-loader": "^3.0.2",
+    "vue-cli-plugin-electron-builder": "~2.0.0-rc.5",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [

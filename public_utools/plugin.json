@@ -7,10 +7,6 @@
   "logo": "logo.png",
   "main": "index.html",
   "preload": "preload.js",
-  "development": {
-    "main": "http://127.0.0.1:8080/index.html",
-    "preload": "/Users/lanyuanxiaoyao/Project/WebstormProjects/utools-torrent/public/preload.js"
-  },
   "pluginSetting": {
     "single": true
   },

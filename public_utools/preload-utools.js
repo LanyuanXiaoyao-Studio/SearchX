@@ -101,6 +101,8 @@ utools.onPluginReady(() => {
     window.squirrel.load(window.get())
     window.squirrel.imports(JSON.stringify(sites))
 
+    console.log(window.store)
+
     // 插件信息放在 gitee 上可以保证国内的访问速度, github 在国内访问不稳定
     window.nodeDownload('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/common.json', '{}', '', 'utf8')
           .then(result => {
