@@ -15,6 +15,7 @@ import {
   List,
   message,
   Modal,
+  PageHeader,
   Popover,
   Row,
   Select,
@@ -47,5 +48,6 @@ Vue.use(Modal)
 Vue.use(Spin)
 Vue.use(BackTop)
 Vue.use(Tabs)
+Vue.use(PageHeader)
 
 Vue.prototype.$message = message

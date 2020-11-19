@@ -100,35 +100,6 @@ utools.onPluginReady(() => {
   if (window.squirrel) {
     window.squirrel.load(window.get())
     window.squirrel.imports(JSON.stringify(sites))
-
-    console.log(window.store)
-
-    // 插件信息放在 gitee 上可以保证国内的访问速度, github 在国内访问不稳定
-    window.nodeDownload('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/common.json', '{}', '', 'utf8')
-          .then(result => {
-            let data = JSON.parse(result)
-            window.store.commit('updateAuthor', data['author'])
-            window.store.commit('updateDisclaimer', data['disclaimer'])
-          })
-          .catch(error => {
-            console.log(error)
-          })
-    window.nodeDownload('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/common.json', '{}', '', 'utf8')
-          .then(result => {
-            let data = JSON.parse(result)
-            window.store.commit('updatePublish', data['publish'])
-          })
-          .catch(error => {
-            console.log(error)
-          })
-    window.nodeDownload('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/plugins.json', '{}', '', 'utf8')
-          .then(result => {
-            let data = JSON.parse(result)
-            window.store.commit('updatePlugins', data)
-          })
-          .catch(error => {
-            console.log(error)
-          })
   }
 })
 

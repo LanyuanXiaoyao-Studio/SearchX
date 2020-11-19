@@ -1,3 +1,5 @@
+import isEmpty from 'licia/isEmpty'
+
 export default {
   generateTagList(item) {
     let tagList = []
@@ -18,5 +20,8 @@ export default {
       icon: iconName,
       content: content,
     }
+  },
+  generateErrorMessage(error) {
+    return `${!isEmpty(error) ? 'Unknown Error' : (!isEmpty(error.extra) && !isEmpty(error.extra.nativeExceptionMessage)) ? error.extra.nativeExceptionMessage : error.message}`
   },
 }

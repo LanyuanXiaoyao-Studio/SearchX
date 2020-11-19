@@ -16,10 +16,13 @@ async function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    center: true,
+    titleBarStyle: 'hidden',
+    fullscreenWindowTitle: true,
     webPreferences: {
       enableRemoteModule: true,
       preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION
+      nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
     }
   })
 

@@ -26,7 +26,7 @@ const {BrowserWindow} = require('electron').remote
 let browser = new BrowserWindow({
   width: 800,
   height: 600,
-  show: true,
+  show: false,
   webPreferences: {
     images: false,
     nodeIntegration: false,

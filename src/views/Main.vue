@@ -97,6 +97,7 @@ import Squirrel from '../utils/squirrel'
 import isEmpty from 'licia/isEmpty'
 import isNil from 'licia/isNil'
 import contain from 'licia/contain'
+import Utils from '../utils/utils'
 
 export default {
   name: 'Main',
@@ -174,7 +175,7 @@ export default {
       })
       if (result.code !== 0) {
         console.log(result)
-        this.$message.error(result.message)
+        this.$message.error(Utils.generateErrorMessage(result.message))
         this.loading = false
         return
       }
@@ -202,7 +203,7 @@ export default {
         })
         console.log(result)
         if (result.code !== 0) {
-          this.$message.error(result.message)
+          this.$message.error(Utils.generateErrorMessage(result.message))
           this.loading = false
           return
         }
@@ -228,7 +229,7 @@ export default {
         })
         console.log(supplementResult)
         if (supplementResult.code !== 0) {
-          this.$message.error(supplementResult.message)
+          this.$message.error(Utils.generateErrorMessage(supplementResult.message))
           this.loading = false
           return
         }
