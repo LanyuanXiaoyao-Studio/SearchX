@@ -172,8 +172,8 @@ export default {
         code: code,
         url: url,
       })
-      console.log(result)
       if (result.code !== 0) {
+        console.log(result)
         this.$message.error(result.message)
         this.loading = false
         return

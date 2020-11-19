@@ -26,15 +26,24 @@ const {BrowserWindow} = require('electron').remote
 let browser = new BrowserWindow({
   width: 800,
   height: 600,
-  show: false,
+  show: true,
+  webPreferences: {
+    images: false,
+    nodeIntegration: false,
+    nodeIntegrationInWorker: false,
+    sandbox: true,
+  }
 })
 window.browserDownload = async (url, headers, proxy, charset) => {
+  console.log(url, headers, proxy, charset)
   if (proxy && proxy !== '') {
     await browser.webContents.session.setProxy({
       proxyRules: proxy
     })
   }
-  await browser.loadURL(url)
+  await browser.loadURL(url, {
+    extraHeaders: headers
+  })
   return await browser.webContents.executeJavaScript('function page() {return `<html>${document.documentElement.innerHTML}</html>`};page()')
 }
 

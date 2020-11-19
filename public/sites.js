@@ -1348,7 +1348,7 @@ const sites = [
             'expression': '.im-description',
             'script': 'let regex = /(.*?)\\s*Last Release on\\s*(.*?)$/m\nlet result = text.match(regex)\nif (result && result.length > 1) {\n    return result[1]\n}\nreturn \'\''
           },
-          'image': {
+          'avatar': {
             'expression': 'img.im-logo',
             'attribute': 'src',
             'prefix': '{home}'
