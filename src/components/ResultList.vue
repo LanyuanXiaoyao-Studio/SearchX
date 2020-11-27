@@ -3,6 +3,7 @@
     <a-list
         :data-source="data"
         item-layout="vertical"
+        :style="`height: ${resultListHeight}px`"
     >
       <div slot="header">
         <b>搜索结果</b>
@@ -92,6 +93,22 @@ export default {
     loading: Boolean,
     showLoadMore: Boolean,
   },
+  data() {
+    return {
+      clientHeight: 0
+    }
+  },
+  mounted() {
+    this.clientHeight = document.documentElement.clientHeight
+    window.onresize = () => {
+      this.clientHeight = document.documentElement.clientHeight
+    }
+  },
+  computed: {
+    resultListHeight() {
+      return this.clientHeight - 125
+    }
+  },
   methods: {
     more() {
       this.$emit('more')
@@ -114,11 +131,11 @@ export default {
     scoped
 >
 .result-list
-  height 100%
   padding 5px
 
   .ant-list
-    height 100%
+    overflow scroll
+    scroll overflow-y
 
     .item-image
       max-height 150px

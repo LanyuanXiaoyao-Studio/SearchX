@@ -1,7 +1,19 @@
 <template>
   <div class="main">
     <div class="search">
-      <a-back-top :target="resultDom"/>
+      <div class="app-title">
+        <a-page-header
+            sub-title="跨平台一站式搜索工具"
+            title="SearchX"
+        >
+          <template slot="tags">
+            <img
+                alt="GitHub release (latest by date)"
+                src="https://img.shields.io/badge/-0.2.0-lightgrey"
+            >
+          </template>
+        </a-page-header>
+      </div>
       <a-input-search
           v-model="search"
           :loading="loading"
@@ -50,6 +62,9 @@
         ref="result"
         class="result"
     >
+      <a-back-top
+          :visibilityHeight="10"
+      />
       <ResultList
           :data="result"
           :loading="loading"
@@ -89,15 +104,13 @@
 
 <script>
 import {mapGetters} from 'vuex'
-import ResultList from '../components/ResultList'
-import SiteList from '../components/SiteList'
-import Settings from '../components/Settings'
-import Detail from '../components/Detail'
-import Squirrel from '../utils/squirrel'
-import isEmpty from 'licia/isEmpty'
-import isNil from 'licia/isNil'
-import contain from 'licia/contain'
-import Utils from '../utils/utils'
+import ResultList from '@/components/ResultList'
+import SiteList from '@/components/SiteList'
+import Settings from '@/components/Settings'
+import Detail from '@/components/Detail'
+import squirrel from '@/squirrel'
+import {contain, isEmpty, isNil} from 'licia'
+import utils from '@/utils/utils'
 
 export default {
   name: 'Main',
@@ -169,13 +182,12 @@ export default {
       if (isNil(code) || isEmpty(code) || isNil(url) || isEmpty(url)) {
         throw new Error(`URL 或 CODE 不能为空`)
       }
-      let result = await Squirrel.page({
+      let result = await squirrel.page({
         code: code,
         url: url,
       })
       if (result.code !== 0) {
-        console.log(result)
-        this.$message.error(Utils.generateErrorMessage(result.message))
+        this.$message.error(utils.generateErrorMessage(result))
         this.loading = false
         return
       }
@@ -197,13 +209,13 @@ export default {
       const hide = this.$message.loading(`加载中...`, 0);
       this.detailDialog.show = true
       try {
-        let result = await Squirrel.page({
+        let result = await squirrel.page({
           code: this.site.code,
           url: url
         })
         console.log(result)
         if (result.code !== 0) {
-          this.$message.error(Utils.generateErrorMessage(result.message))
+          this.$message.error(utils.generateErrorMessage(result))
           this.loading = false
           return
         }
@@ -223,13 +235,13 @@ export default {
       // 如果有 supplement 字段, 就处理补充信息
       if (!isNil(this.detailDialog.data.text) && !isNil(this.detailDialog.data.text.supplement) && !isEmpty(this.detailDialog.data.text.supplement)) {
         let supplementUrl = this.detailDialog.data.text.supplement
-        let supplementResult = await Squirrel.page({
+        let supplementResult = await squirrel.page({
           code: this.site.code,
           url: supplementUrl
         })
         console.log(supplementResult)
         if (supplementResult.code !== 0) {
-          this.$message.error(Utils.generateErrorMessage(supplementResult.message))
+          this.$message.error(utils.generateErrorMessage(supplementResult))
           this.loading = false
           return
         }
@@ -268,19 +280,25 @@ export default {
 >
 .main
   display grid
-  height 100%
   padding 10px
-  grid-template-rows 40px auto
 
   .search
     width 100%
     text-align center
+    height 90px
+
+    .app-title
+      padding-top 10px
+
+      .ant-page-header
+        padding 5px 0 8px 3px
 
     .search-input
       width 100%
 
   .result
     height 100%
+    margin-top 5px
 </style>
 
 <style lang="stylus">

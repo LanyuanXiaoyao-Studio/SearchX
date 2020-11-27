@@ -14,11 +14,12 @@ protocol.registerSchemesAsPrivileged([
 
 async function createWindow() {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1080,
+    height: 720,
     center: true,
     titleBarStyle: 'hidden',
     fullscreenWindowTitle: true,
+    alwaysOnTop: false,
     webPreferences: {
       enableRemoteModule: true,
       preload: path.join(__dirname, 'preload.js'),

@@ -4,11 +4,14 @@ import {
   BackTop,
   Button,
   Card,
+  Checkbox,
   Col,
   ConfigProvider,
   Descriptions,
+  Divider,
   Drawer,
   Empty,
+  FormModel,
   Icon,
   Input,
   Layout,
@@ -17,6 +20,7 @@ import {
   Modal,
   PageHeader,
   Popover,
+  Radio,
   Row,
   Select,
   Spin,
@@ -49,5 +53,9 @@ Vue.use(Spin)
 Vue.use(BackTop)
 Vue.use(Tabs)
 Vue.use(PageHeader)
+Vue.use(FormModel)
+Vue.use(Checkbox)
+Vue.use(Radio)
+Vue.use(Divider)
 
 Vue.prototype.$message = message

@@ -25,7 +25,7 @@
 
 <script>
 import {mapGetters} from 'vuex'
-import Squirrel from '../../utils/squirrel'
+import squirrel from '@/squirrel'
 
 export default {
   name: 'SettingsProxy',
@@ -40,7 +40,7 @@ export default {
     ]),
   },
   mounted() {
-    this.fetchData()
+    this.$store.commit('updateSettings')
     if (this.settings.proxy) {
       let hostname = this.settings.proxy.hostname
       let port = this.settings.proxy.port
@@ -50,15 +50,6 @@ export default {
     }
   },
   methods: {
-    fetchData() {
-      let result = Squirrel.fetch()
-      if (result.code === 0) {
-        this.$store.commit('updateSettings', result.data)
-      }
-      else {
-        this.$message.error('获取配置数据失败')
-      }
-    },
     change() {
       try {
         let valueSplit = this.proxyUrl.split(':')
@@ -69,7 +60,6 @@ export default {
             hostname: hostname,
             port: port,
           })
-          Squirrel.save(this.settings)
           this.$message.success('设置成功')
         }
         else {
@@ -84,7 +74,7 @@ export default {
         hostname: '',
         port: -1
       })
-      Squirrel.save(this.settings)
+      squirrel.save(this.settings)
       this.proxyUrl = ''
       this.$message.success('设置成功')
     }

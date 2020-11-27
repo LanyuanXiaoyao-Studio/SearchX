@@ -2,7 +2,7 @@
   <div class="settings">
     <a-card
         size="small"
-        title="基本设置"
+        title="代理设置"
     >
       <Proxy/>
     </a-card>
@@ -20,13 +20,14 @@
     </a-card>
     <a-card
         size="small"
-        title="关于插件"
+        title="支持一下"
     >
       <Donate/>
     </a-card>
     <a-card
         size="small"
-        title="关于插件"
+        title="其他作品"
+        v-if="appMode === 'utools'"
     >
       <Extra/>
     </a-card>
@@ -41,6 +42,8 @@ import Donate from './settings/Donate'
 import Extra from './settings/Extra'
 import isEmpty from 'licia/isEmpty'
 
+const appMode = process.env.VUE_APP_MODE
+
 export default {
   name: 'Settings',
   components: {
@@ -50,12 +53,18 @@ export default {
     Donate,
     Extra,
   },
+  data() {
+    return {
+      appMode: appMode
+    }
+  },
   async created() {
     // 插件信息放在 gitee 上可以保证国内的访问速度, github 在国内访问不稳定
     if (isEmpty(this.$store.getters.about.author) || isEmpty(this.$store.getters.about.disclaimer)) {
       window.nodeDownload('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/common.json', '{}', '', 'utf8')
             .then(result => {
               let data = JSON.parse(result)
+              console.log(data)
               this.$store.commit('updateAuthor', data['author'])
               this.$store.commit('updateDisclaimer', data['disclaimer'])
             })
@@ -67,16 +76,18 @@ export default {
       window.nodeDownload('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/common.json', '{}', '', 'utf8')
             .then(result => {
               let data = JSON.parse(result)
+              console.log(data)
               this.$store.commit('updatePublish', data['publish'])
             })
             .catch(error => {
               console.log(error)
             })
     }
-    if (isEmpty(this.$store.getters.about.plugins)) {
+    if (appMode === 'utools' && isEmpty(this.$store.getters.about.plugins)) {
       window.nodeDownload('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/plugins.json', '{}', '', 'utf8')
             .then(result => {
               let data = JSON.parse(result)
+              console.log(data)
               this.$store.commit('updatePlugins', data)
             })
             .catch(error => {
@@ -98,4 +109,11 @@ export default {
 
   .ant-btn + .ant-btn
     margin-left 5px
+
+  .ant-btn-success
+    color white
+    background-color #3869cb
+
+  .ant-table-small
+    border 0
 </style>

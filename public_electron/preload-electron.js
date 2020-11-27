@@ -85,7 +85,31 @@ window.put = data => {
   }
 }
 
-const sites = require('./sites')
 window.squirrelInitialReady = () => {
-  window.squirrel.imports(JSON.stringify(sites))
+  let result = squirrel.fetch()
+  if (result.code === 0) {
+    let settings = result.data
+    console.log(settings)
+    squirrel.imports(settings.sites)
+  }
+}
+
+window.isFileExists = path => fs.existsSync(path)
+
+const dialog = require('electron').remote.dialog
+window.singleFileSelect = () => {
+  let paths = dialog.showOpenDialogSync({
+    properties: ['openFile'],
+    filters: [
+      {name: 'JSON File', extensions: ['json']}
+    ]
+  })
+  if (paths && paths.length > 0) {
+    return paths[0]
+  }
+  return ''
+}
+
+window.readAllFile = path => {
+  return fs.readFileSync(path, {encoding: 'utf8'})
 }

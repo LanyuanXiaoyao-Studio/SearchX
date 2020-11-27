@@ -1,11 +1,293 @@
 <template>
   <div class="settings-rules">
-    hello
+    <div class="setting-buttons">
+      <a-button
+          size="small"
+          type="primary"
+          @click="addModal.visible = true"
+      >
+        新增订阅
+      </a-button>
+      <a-button
+          size="small"
+          type="default"
+          @click="importAllSubscriptions"
+      >
+        全部更新
+      </a-button>
+      <a-button
+          size="small"
+          type="danger"
+          @click="removeAllSites"
+      >
+        清空全部站点
+      </a-button>
+    </div>
+    <a-table
+        :columns="columns"
+        :data-source="subscriptionsWrapper"
+        :pagination="false"
+        :rowKey="'path'"
+        :showHeader="false"
+        class="rules-table"
+        size="small"
+    >
+      <span
+          slot="status"
+          slot-scope="{status}"
+      >
+        <a-tag
+            v-if="status"
+            color="green"
+        >可用</a-tag>
+        <a-tag
+            v-else
+            color="red"
+        >不可用</a-tag>
+      </span>
+      <span
+          slot="action"
+          slot-scope="subscription"
+      >
+        <a-button
+            :loading="subscription.loading"
+            class="table-action-button"
+            icon="reload"
+            shape="circle"
+            size="small"
+            type="link"
+            @click="importSubscription(subscription)"
+        />
+        <a-button
+            class="table-action-button"
+            icon="delete"
+            shape="circle"
+            size="small"
+            style="color: red"
+            type="link"
+            @click="removeSubscription(subscription)"
+        />
+      </span>
+    </a-table>
+    <a-modal
+        :confirm-loading="addModal.loading"
+        :visible="addModal.visible"
+        title="新增订阅"
+        @cancel="onAddModalCancel"
+        @ok="onAddModalOk"
+    >
+      <a-form-model :modal="addModal.form">
+        <a-form-model-item label="订阅类型">
+          <a-radio-group v-model="addModal.form.type">
+            <a-radio
+                name="type"
+                value="FILE"
+            >
+              本地文件
+            </a-radio>
+            <a-radio
+                name="type"
+                value="URL"
+            >
+              网络链接
+            </a-radio>
+          </a-radio-group>
+        </a-form-model-item>
+        <a-form-model-item label="订阅地址">
+          <a-input
+              v-if="addModal.form.type === 'URL'"
+              v-model="addModal.form.url"
+          />
+          <a-input
+              v-if="addModal.form.type === 'FILE'"
+              v-model="addModal.form.file"
+              disabled
+          >
+            <a-icon
+                slot="addonAfter"
+                type="folder-open"
+                @click="selectSingleFile"
+            />
+          </a-input>
+        </a-form-model-item>
+      </a-form-model>
+    </a-modal>
   </div>
 </template>
 
 <script>
+import {contain, isEmpty, isNil, isUrl, parallel} from 'licia'
+import {mapGetters} from 'vuex'
+import squirrel from '@/squirrel'
+import utils from '@/utils/utils'
+
 export default {
   name: 'SettingsRules',
+  data() {
+    return {
+      addModal: {
+        visible: false,
+        loading: false,
+        form: {
+          type: 'FILE',
+          file: '',
+          url: '',
+        }
+      },
+      columns: [
+        {
+          title: '地址',
+          dataIndex: 'path',
+          key: 'path',
+        },
+        {
+          title: '操作',
+          key: 'action',
+          scopedSlots: {customRender: 'action'},
+          fixed: 'right',
+          width: 70,
+        }
+      ],
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'settings',
+      'subscriptions'
+    ]),
+    paths() {
+      return this.subscriptions.map(i => i.path)
+    },
+    subscriptionsWrapper() {
+      return this.subscriptions.map(s => {
+        this.$set(s, 'loading', false)
+        return s
+      })
+    },
+  },
+  mounted() {
+    this.$store.commit('updateSettings')
+    console.log('subscriptionsWrapper', this.subscriptionsWrapper)
+  },
+  methods: {
+    onAddModalOk() {
+      this.addModal.loading = true
+      let form = this.addModal.form
+      switch (form.type) {
+        case 'FILE':
+          if (isEmpty(form.file)) {
+            this.$message.error('文件路径不能为空')
+            break
+          }
+          if (!window.isFileExists(form.file)) {
+            this.$message.error('文件不存在')
+            break
+          }
+          if (contain(this.paths, form.file)) {
+            this.$message.error('文件已在订阅列表中')
+            break
+          }
+          this.$store.commit('updateSubscription', {
+            type: form.type,
+            path: form.file
+          })
+          this.$message.success('添加成功')
+          this.onAddModalCancel()
+          break
+        case 'URL':
+          if (isEmpty(form.url)) {
+            this.$message.error('链接不能为空')
+            break
+          }
+          if (!isUrl(form.url)) {
+            this.$message.error('链接格式不正确')
+            break
+          }
+          if (contain(this.paths, form.url)) {
+            this.$message.error('链接已在订阅列表中')
+            break
+          }
+          this.$store.commit('updateSubscription', {
+            type: form.type,
+            path: form.url
+          })
+          this.$message.success('添加成功')
+          this.onAddModalCancel()
+          break
+        default:
+          this.$message.error('不能没有类型')
+          break
+      }
+      this.addModal.loading = false
+    },
+    onAddModalCancel() {
+      this.addModal.form = {
+        type: 'FILE',
+        file: '',
+        url: '',
+      }
+      this.addModal.visible = false
+    },
+    importAllSubscriptions() {
+      parallel(this.subscriptionsWrapper.map(s => {
+        return () => {
+          this.importSubscription(s)
+        }
+      }))
+    },
+    importSubscription(subscription) {
+      subscription.loading = true
+      try {
+        let result = squirrel.services.mergeSitesFromFile(subscription.path)
+        console.log(result)
+        if (result.code === 0) {
+          let data = result.data
+          this.$message.success(`新增 ${data.new} 个站点\n更新 ${data.cover} 个站点`)
+        }
+        else {
+          this.$message.error(utils.generateErrorMessage(result))
+        }
+      } catch (e) {
+        console.log(e)
+        this.$message.error(`更新失败: ${e.message}`)
+      }
+      subscription.loading = false
+    },
+    removeSubscription(subscription) {
+      if (!isNil(subscription)) {
+        this.$store.commit('removeSubscription', subscription)
+        this.$message.success('删除订阅成功')
+      }
+      else {
+        this.$message.error('无法找到被删除的订阅')
+      }
+    },
+    removeAllSites() {
+      this.$store.commit('removeAllSites')
+      this.$message.success('已清空')
+    },
+    selectSingleFile() {
+      let path = window.singleFileSelect()
+      if (!isEmpty(path)) {
+        this.addModal.form.file = path
+      }
+      else {
+        this.$message.error('未选择任何文件')
+      }
+    }
+  }
 }
 </script>
+
+<style
+    lang="stylus"
+    scoped
+>
+.settings-rules
+  .rules-table
+    margin-top 5px
+
+    .table-action-button
+      margin-top 0
+      padding 1px
+</style>
