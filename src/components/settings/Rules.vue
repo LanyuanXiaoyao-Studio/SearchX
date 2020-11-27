@@ -233,15 +233,17 @@ export default {
     },
     importAllSubscriptions() {
       parallel(this.subscriptionsWrapper.map(s => {
-        return () => {
-          this.importSubscription(s)
+        return async () => {
+          await this.importSubscription(s)
         }
       }))
     },
-    importSubscription(subscription) {
+    async importSubscription(subscription) {
       subscription.loading = true
       try {
-        let result = squirrel.services.mergeSitesFromFile(subscription.path)
+        let result = subscription.type === 'FILE' ?
+            await squirrel.services.mergeSitesFromFile(subscription.path) :
+            await squirrel.services.mergeSitesFromUrl(subscription.path)
         console.log(result)
         if (result.code === 0) {
           let data = result.data

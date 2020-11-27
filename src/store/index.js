@@ -80,6 +80,7 @@ const store = new Vuex.Store({
     },
     removeAllSites: (state) => {
       state.settings.sites = []
+      squirrel.imports(state.settings.sites)
       squirrel.save(state.settings)
       store.commit('updateSitesAndCategories')
     },

@@ -48,9 +48,9 @@ window.squirrel = squirrelWrapper
 export default {
   ...squirrelWrapper,
   services: {
-    mergeSitesFromFile(path) {
+    async mergeSitesFromFile(path) {
       console.log('path', path)
-      let source = window.readAllFile(path)
+      let source = await window.readTextFromFile(path)
       // console.log('source', source)
       let sites = eval(`(${source})`)
       // console.log('sites waited import', sites)
@@ -60,7 +60,17 @@ export default {
       }
       return result
     },
-    mergeSitesFromUrl(url) {
+    async mergeSitesFromUrl(url) {
+      console.log('url', url)
+      let source = await window.readTextFromUrl(url)
+      // console.log('source', source)
+      let sites = eval(`(${source})`)
+      // console.log('sites waited import', sites)
+      let result = squirrelWrapper.merge(sites)
+      if (result.code === 0) {
+        store.commit('saveSites')
+      }
+      return result
     },
   }
 }

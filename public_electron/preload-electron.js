@@ -110,6 +110,17 @@ window.singleFileSelect = () => {
   return ''
 }
 
-window.readAllFile = path => {
-  return fs.readFileSync(path, {encoding: 'utf8'})
+window.readTextFromFile = path => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(path, {encoding: 'utf8'}, (error, data) => {
+      if (error) {
+        reject(error)
+      }
+      resolve(data)
+    })
+  })
+}
+
+window.readTextFromUrl = async url => {
+  return (await phin(url)).body.toString()
 }
