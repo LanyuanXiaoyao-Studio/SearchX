@@ -52513,7 +52513,7 @@ exports.isNCNameChar = isNCNameChar;
   }
   function removeAll_1(_this_, elements) {
     var tmp0_removeAll_0 = convertToSetForSetOperationWith(elements, _this_);
-    return (isInterface(_this_, MutableCollection) ? _this_ : THROW_CCE()).removeAll_9(tmp0_removeAll_0);
+    return (isInterface(_this_, MutableCollection) ? _this_ : THROW_CCE()).removeAll_10(tmp0_removeAll_0);
   }
   function Sequence() {
   }
@@ -54751,7 +54751,7 @@ exports.isNCNameChar = isNCNameChar;
     }
     return modified;
   };
-  AbstractMutableCollection.prototype.removeAll_9 = function (elements) {
+  AbstractMutableCollection.prototype.removeAll_10 = function (elements) {
     this.checkIsMutable_11();
     var tmp = isInterface(this, MutableIterable) ? this : THROW_CCE();
     return removeAll_0(tmp, _no_name_provided_$factory_6(elements));
@@ -54800,7 +54800,7 @@ exports.isNCNameChar = isNCNameChar;
     this.add_9(this._get_size__34(), element);
     return true;
   };
-  AbstractMutableList.prototype.removeAll_9 = function (elements) {
+  AbstractMutableList.prototype.removeAll_10 = function (elements) {
     this.checkIsMutable_11();
     return removeAll(this, _no_name_provided_$factory_7(elements));
   };
@@ -74258,6 +74258,8 @@ exports.isNCNameChar = isNCNameChar;
     log(this, '' + 'coverList: ' + coverList);
     var cover = sites_1._get_size__34() - new_0 | 0;
     var siteSet = toMutableSet(this._siteList);
+    siteSet.removeAll_10(sites_1);
+    Unit_getInstance();
     siteSet.addAll_11(sites_1);
     Unit_getInstance();
     this._siteList = siteSet;
@@ -79145,7 +79147,7 @@ exports.isNCNameChar = isNCNameChar;
   AbstractMutableMap.prototype._get_entries__5 = MutableMap.prototype._get_entries__5;
   AbstractMutableSet.prototype.add_18 = AbstractMutableCollection.prototype.add_18;
   AbstractMutableSet.prototype.addAll_11 = AbstractMutableCollection.prototype.addAll_11;
-  AbstractMutableSet.prototype.removeAll_9 = AbstractMutableCollection.prototype.removeAll_9;
+  AbstractMutableSet.prototype.removeAll_10 = AbstractMutableCollection.prototype.removeAll_10;
   AbstractMutableSet.prototype.toJSON = AbstractMutableCollection.prototype.toJSON;
   AbstractMutableSet.prototype.checkIsMutable_11 = AbstractMutableCollection.prototype.checkIsMutable_11;
   AbstractMutableSet.prototype._get_size__34 = AbstractCollection.prototype._get_size__34;
@@ -79158,7 +79160,7 @@ exports.isNCNameChar = isNCNameChar;
   _no_name_provided__18.prototype.toArray = AbstractCollection.prototype.toArray;
   _no_name_provided__18.prototype.toJSON = AbstractMutableCollection.prototype.toJSON;
   _no_name_provided__18.prototype.addAll_11 = AbstractMutableCollection.prototype.addAll_11;
-  _no_name_provided__18.prototype.removeAll_9 = AbstractMutableCollection.prototype.removeAll_9;
+  _no_name_provided__18.prototype.removeAll_10 = AbstractMutableCollection.prototype.removeAll_10;
   _no_name_provided__18.prototype.containsAll_29 = AbstractCollection.prototype.containsAll_29;
   _no_name_provided__18.prototype.equals = AbstractMutableSet.prototype.equals;
   _no_name_provided__18.prototype.hashCode = AbstractMutableSet.prototype.hashCode;
@@ -79167,13 +79169,13 @@ exports.isNCNameChar = isNCNameChar;
   _no_name_provided__19.prototype.toArray = AbstractCollection.prototype.toArray;
   _no_name_provided__19.prototype.toJSON = AbstractMutableCollection.prototype.toJSON;
   _no_name_provided__19.prototype.addAll_11 = AbstractMutableCollection.prototype.addAll_11;
-  _no_name_provided__19.prototype.removeAll_9 = AbstractMutableCollection.prototype.removeAll_9;
+  _no_name_provided__19.prototype.removeAll_10 = AbstractMutableCollection.prototype.removeAll_10;
   _no_name_provided__19.prototype.containsAll_29 = AbstractCollection.prototype.containsAll_29;
   _no_name_provided__19.prototype.isEmpty_38 = AbstractCollection.prototype.isEmpty_38;
   _no_name_provided__19.prototype.toString = AbstractCollection.prototype.toString;
   ArrayList.prototype._set_modCount__0 = AbstractMutableList.prototype._set_modCount__0;
   ArrayList.prototype._get_modCount__0 = AbstractMutableList.prototype._get_modCount__0;
-  ArrayList.prototype.removeAll_9 = AbstractMutableList.prototype.removeAll_9;
+  ArrayList.prototype.removeAll_10 = AbstractMutableList.prototype.removeAll_10;
   ArrayList.prototype.iterator_56 = AbstractMutableList.prototype.iterator_56;
   ArrayList.prototype.contains_41 = AbstractMutableList.prototype.contains_41;
   ArrayList.prototype.listIterator_6 = AbstractMutableList.prototype.listIterator_6;
@@ -79195,7 +79197,7 @@ exports.isNCNameChar = isNCNameChar;
   EntrySet.prototype.toJSON = AbstractMutableCollection.prototype.toJSON;
   EntrySet.prototype.checkIsMutable_11 = AbstractMutableCollection.prototype.checkIsMutable_11;
   EntrySet.prototype.addAll_11 = AbstractMutableCollection.prototype.addAll_11;
-  EntrySet.prototype.removeAll_9 = AbstractMutableCollection.prototype.removeAll_9;
+  EntrySet.prototype.removeAll_10 = AbstractMutableCollection.prototype.removeAll_10;
   EntrySet.prototype.containsAll_29 = AbstractCollection.prototype.containsAll_29;
   EntrySet.prototype.equals = AbstractMutableSet.prototype.equals;
   EntrySet.prototype.hashCode = AbstractMutableSet.prototype.hashCode;
@@ -79204,7 +79206,7 @@ exports.isNCNameChar = isNCNameChar;
   HashSet.prototype.equals = AbstractMutableSet.prototype.equals;
   HashSet.prototype.hashCode = AbstractMutableSet.prototype.hashCode;
   HashSet.prototype.addAll_11 = AbstractMutableCollection.prototype.addAll_11;
-  HashSet.prototype.removeAll_9 = AbstractMutableCollection.prototype.removeAll_9;
+  HashSet.prototype.removeAll_10 = AbstractMutableCollection.prototype.removeAll_10;
   HashSet.prototype.toJSON = AbstractMutableCollection.prototype.toJSON;
   HashSet.prototype.checkIsMutable_11 = AbstractMutableCollection.prototype.checkIsMutable_11;
   HashSet.prototype.containsAll_29 = AbstractCollection.prototype.containsAll_29;
@@ -79228,7 +79230,7 @@ exports.isNCNameChar = isNCNameChar;
   EntrySet_0.prototype.toArray = AbstractCollection.prototype.toArray;
   EntrySet_0.prototype.toJSON = AbstractMutableCollection.prototype.toJSON;
   EntrySet_0.prototype.addAll_11 = AbstractMutableCollection.prototype.addAll_11;
-  EntrySet_0.prototype.removeAll_9 = AbstractMutableCollection.prototype.removeAll_9;
+  EntrySet_0.prototype.removeAll_10 = AbstractMutableCollection.prototype.removeAll_10;
   EntrySet_0.prototype.containsAll_29 = AbstractCollection.prototype.containsAll_29;
   EntrySet_0.prototype.equals = AbstractMutableSet.prototype.equals;
   EntrySet_0.prototype.hashCode = AbstractMutableSet.prototype.hashCode;
@@ -79243,7 +79245,7 @@ exports.isNCNameChar = isNCNameChar;
   LinkedHashSet.prototype.equals = AbstractMutableSet.prototype.equals;
   LinkedHashSet.prototype.hashCode = AbstractMutableSet.prototype.hashCode;
   LinkedHashSet.prototype.addAll_11 = AbstractMutableCollection.prototype.addAll_11;
-  LinkedHashSet.prototype.removeAll_9 = AbstractMutableCollection.prototype.removeAll_9;
+  LinkedHashSet.prototype.removeAll_10 = AbstractMutableCollection.prototype.removeAll_10;
   LinkedHashSet.prototype.toJSON = AbstractMutableCollection.prototype.toJSON;
   LinkedHashSet.prototype.containsAll_29 = AbstractCollection.prototype.containsAll_29;
   LinkedHashSet.prototype.toString = AbstractCollection.prototype.toString;

@@ -1,6 +1,11 @@
 <template>
   <div class="site-list">
+    <a-empty
+        v-if="!sites || sites.length === 0"
+        description="请在设置中更新订阅"
+    />
     <a-tabs
+        v-else
         :default-active-key="0"
         tab-position="left"
     >

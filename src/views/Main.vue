@@ -179,6 +179,7 @@ export default {
       }
     },
     async fetch(code, url) {
+      console.log(code, url)
       if (isNil(code) || isEmpty(code) || isNil(url) || isEmpty(url)) {
         throw new Error(`URL 或 CODE 不能为空`)
       }
@@ -186,6 +187,7 @@ export default {
         code: code,
         url: url,
       })
+      console.log(result)
       if (result.code !== 0) {
         this.$message.error(utils.generateErrorMessage(result))
         this.loading = false
@@ -217,6 +219,9 @@ export default {
         if (result.code !== 0) {
           this.$message.error(utils.generateErrorMessage(result))
           this.loading = false
+          this.detailDialog.loading = false
+          this.detailDialog.show = false
+          hide()
           return
         }
         let data = result.data

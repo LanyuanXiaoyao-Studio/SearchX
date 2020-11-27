@@ -90,7 +90,7 @@ export default {
         this.$message.error('复制失败')
         return
       }
-      utools.copyText(url)
+      window.copyText(url)
       this.$message.success('复制成功')
     },
     open(url) {
@@ -98,7 +98,7 @@ export default {
         this.$message.error('打开失败')
         return
       }
-      utools.shellOpenExternal(url)
+      window.openInBrowser(url)
     },
     generateTagList(item) {
       return utils.generateTagList(item)

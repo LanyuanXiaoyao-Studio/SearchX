@@ -121,6 +121,12 @@ window.readTextFromFile = path => {
   })
 }
 
-window.readTextFromUrl = async url => {
-  return (await phin(url)).body.toString()
-}
+window.readTextFromUrl = async url => (await phin(url)).body.toString()
+
+const shell = require('electron').remote.shell
+
+window.openInBrowser = url => shell.openExternal(url)
+
+const clipboard = require('electron').remote.clipboard
+
+window.copyText = text => clipboard.writeText(text)

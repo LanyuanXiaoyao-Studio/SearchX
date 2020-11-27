@@ -117,7 +117,7 @@ export default {
       this.$emit('detail', url)
     },
     openInBrowser(url) {
-      utools.shellOpenExternal(url)
+      window.openInBrowser(url)
     },
     generateTagList(item) {
       return utils.generateTagList(item)
