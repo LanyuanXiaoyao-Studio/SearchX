@@ -1,27 +1,29 @@
 <template>
   <div class="settings-rules">
     <div class="setting-buttons">
-      <a-button
-          size="small"
-          type="primary"
-          @click="addModal.visible = true"
-      >
-        新增订阅
-      </a-button>
-      <a-button
-          size="small"
-          type="default"
-          @click="importAllSubscriptions"
-      >
-        全部更新
-      </a-button>
-      <a-button
-          size="small"
-          type="danger"
-          @click="removeAllSites"
-      >
-        清空全部站点
-      </a-button>
+      <a-space :size="constants.spaceSize">
+        <a-button
+            size="small"
+            type="primary"
+            @click="addModal.visible = true"
+        >
+          新增订阅
+        </a-button>
+        <a-button
+            size="small"
+            type="default"
+            @click="importAllSubscriptions"
+        >
+          全部更新
+        </a-button>
+        <a-button
+            size="small"
+            type="danger"
+            @click="removeAllSites"
+        >
+          清空全部站点
+        </a-button>
+      </a-space>
     </div>
     <a-table
         :columns="columns"
@@ -50,24 +52,26 @@
           slot="action"
           slot-scope="subscription"
       >
-        <a-button
-            :loading="subscription.loading"
-            class="table-action-button"
-            icon="reload"
-            shape="circle"
-            size="small"
-            type="link"
-            @click="importSubscription(subscription)"
-        />
-        <a-button
-            class="table-action-button"
-            icon="delete"
-            shape="circle"
-            size="small"
-            style="color: red"
-            type="link"
-            @click="removeSubscription(subscription)"
-        />
+        <a-space :size="constants.spaceSize">
+          <a-button
+              :loading="subscription.loading"
+              class="table-action-button"
+              icon="reload"
+              shape="circle"
+              size="small"
+              type="link"
+              @click="importSubscription(subscription)"
+          />
+          <a-button
+              class="table-action-button"
+              icon="delete"
+              shape="circle"
+              size="small"
+              theme="filled"
+              type="link"
+              @click="removeSubscription(subscription)"
+          />
+        </a-space>
       </span>
     </a-table>
     <a-modal
@@ -154,7 +158,8 @@ export default {
   computed: {
     ...mapGetters([
       'settings',
-      'subscriptions'
+      'subscriptions',
+      'constants',
     ]),
     paths() {
       return this.subscriptions.map(i => i.path)

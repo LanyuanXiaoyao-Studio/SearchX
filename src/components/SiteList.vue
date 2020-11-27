@@ -10,8 +10,8 @@
           :tab="name"
       >
         <a-list
-            class="site-list-panel"
             :data-source="list"
+            class="site-list-panel"
             item-layout="horizontal"
         >
           <a-list-item
@@ -47,6 +47,7 @@
                       @click="selectSite(site)"
                   >
                     {{ site.name }}
+                    <span class="author">@{{ site.author }}</span>
                   </div>
                 </a-tooltip>
                 <div class="description">
@@ -121,6 +122,14 @@ export default {
       font-size 1.05rem
       cursor pointer
 
+    .author
+      color darkgrey
+      font-weight normal
+      font-size smaller
+      font-style italic
+      float right
+      padding-right 10px
+
     .description
-      color darkgray
+      color #8c8c8c
 </style>

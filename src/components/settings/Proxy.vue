@@ -5,20 +5,22 @@
         placeholder="代理地址: IP:PORT (无需协议名, 仅支持 HTTP 协议)"
     />
     <div class="setting-buttons">
-      <a-button
-          size="small"
-          type="primary"
-          @click="change"
-      >
-        更改代理地址
-      </a-button>
-      <a-button
-          size="small"
-          type="danger"
-          @click="clear"
-      >
-        清空代理
-      </a-button>
+      <a-space :size="constants.spaceSize">
+        <a-button
+            size="small"
+            type="primary"
+            @click="change"
+        >
+          更改代理地址
+        </a-button>
+        <a-button
+            size="small"
+            type="danger"
+            @click="clear"
+        >
+          清空代理
+        </a-button>
+      </a-space>
     </div>
   </div>
 </template>
@@ -36,7 +38,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'settings'
+      'settings',
+      'constants',
     ]),
   },
   mounted() {

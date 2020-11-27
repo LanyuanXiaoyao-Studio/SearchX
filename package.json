@@ -14,7 +14,7 @@
   },
   "main": "background.js",
   "dependencies": {
-    "ant-design-vue": "^1.6.5",
+    "ant-design-vue": "^1.7.2",
     "core-js": "^3.6.4",
     "licia": "^1.27.0",
     "vue": "^2.6.12",

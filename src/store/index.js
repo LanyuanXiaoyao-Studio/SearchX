@@ -16,6 +16,9 @@ const store = new Vuex.Store({
       publish: '',
       plugins: [],
     },
+    constants: {
+      spaceSize: 5
+    }
   },
   getters: {
     sites: state => state.sites,
@@ -32,6 +35,7 @@ const store = new Vuex.Store({
     subscriptions: state => (isEmpty(state.settings) || isNil(state.settings.subscriptions)) ? [] : state.settings.subscriptions,
     proxy: state => (isEmpty(state.settings) || isNil(state.settings.subscriptions)) ? {} : state.settings.proxy,
     about: state => state.about,
+    constants: state => state.constants,
   },
   mutations: {
     updateSitesAndCategories: (state) => {

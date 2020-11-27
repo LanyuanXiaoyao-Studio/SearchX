@@ -23,6 +23,7 @@ import {
   Radio,
   Row,
   Select,
+  Space,
   Spin,
   Table,
   Tabs,
@@ -57,5 +58,6 @@ Vue.use(FormModel)
 Vue.use(Checkbox)
 Vue.use(Radio)
 Vue.use(Divider)
+Vue.use(Space)
 
 Vue.prototype.$message = message
