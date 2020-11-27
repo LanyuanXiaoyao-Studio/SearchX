@@ -28,22 +28,23 @@
         :data-source="subscriptionsWrapper"
         :pagination="false"
         :rowKey="'path'"
+        :scroll="{y: 240}"
         :showHeader="false"
-        class="rules-table"
+        class="rules-table ant-card-bordered"
         size="small"
     >
       <span
-          slot="status"
-          slot-scope="{status}"
+          slot="path"
+          slot-scope="subscription"
       >
-        <a-tag
-            v-if="status"
-            color="green"
-        >可用</a-tag>
-        <a-tag
-            v-else
-            color="red"
-        >不可用</a-tag>
+        <span :style="`color: ${subscription.available ? '': 'red'}`">{{ subscription.path }}</span>
+        <a-tooltip :title="subscription.error">
+          <a-icon
+              v-if="!subscription.available"
+              style="color: red; margin-left: 5px"
+              type="exclamation-circle"
+          />
+        </a-tooltip>
       </span>
       <span
           slot="action"
@@ -137,8 +138,8 @@ export default {
       columns: [
         {
           title: '地址',
-          dataIndex: 'path',
           key: 'path',
+          scopedSlots: {customRender: 'path'},
         },
         {
           title: '操作',
@@ -161,6 +162,8 @@ export default {
     subscriptionsWrapper() {
       return this.subscriptions.map(s => {
         this.$set(s, 'loading', false)
+        this.$set(s, 'available', true)
+        this.$set(s, 'error', '')
         return s
       })
     },
@@ -242,13 +245,19 @@ export default {
         console.log(result)
         if (result.code === 0) {
           let data = result.data
+          subscription.available = true
           this.$message.success(`新增 ${data.new} 个站点\n更新 ${data.cover} 个站点`)
         }
         else {
-          this.$message.error(utils.generateErrorMessage(result))
+          subscription.available = false
+          let error = utils.generateErrorMessage(result)
+          subscription.error = error
+          this.$message.error(error)
         }
       } catch (e) {
         console.log(e)
+        subscription.available = false
+        subscription.error = e.message
         this.$message.error(`更新失败: ${e.message}`)
       }
       subscription.loading = false
@@ -286,6 +295,7 @@ export default {
 .settings-rules
   .rules-table
     margin-top 5px
+    min-height 240px
 
     .table-action-button
       margin-top 0
