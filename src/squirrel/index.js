@@ -1,9 +1,7 @@
 import store from '@/store'
 import {cmpVersion} from 'licia'
 
-console.log(store)
 window.store = store
-console.log(window.store)
 
 const appMode = process.env.VUE_APP_MODE
 console.log(`Current Mode: ${appMode}`)
@@ -19,7 +17,7 @@ else if (appMode === 'electron') {
 console.log(squirrel)
 
 console.log(squirrel.info())
-squirrel.debug('true')
+squirrel.debug('false')
 
 let squirrelWrapper = {
   info: () => JSON.parse(squirrel.info('default')),

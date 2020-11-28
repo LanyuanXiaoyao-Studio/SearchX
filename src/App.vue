@@ -46,6 +46,9 @@ export default {
                 })
               }
             })
+            .catch(error => {
+              this.$message.error(`无法检查更新: ${error}`)
+            })
   }
 }
 </script>

@@ -58,14 +58,26 @@ export default {
       appMode: appMode
     }
   },
-  async created() {
+  async mounted() {
+    const appMode = process.env.VUE_APP_MODE
     // 插件信息放在 gitee 上可以保证国内的访问速度, github 在国内访问不稳定
-    if (isEmpty(this.$store.getters.about.author) || isEmpty(this.$store.getters.about.disclaimer)) {
+    if (isEmpty(this.$store.getters.about.author)) {
       window.nodeDownload('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/common.json', '{}', '', 'utf8')
             .then(result => {
               let data = JSON.parse(result)
               console.log(data)
               this.$store.commit('updateAuthor', data['author'])
+            })
+            .catch(error => {
+              console.log(error)
+            })
+    }
+    console.log(appMode)
+    if (isEmpty(this.$store.getters.about.disclaimer)) {
+      window.nodeDownload(`https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/disclaimer/${appMode}.json`, '{}', '', 'utf8')
+            .then(result => {
+              let data = JSON.parse(result)
+              console.log(data)
               this.$store.commit('updateDisclaimer', data['disclaimer'])
             })
             .catch(error => {
@@ -73,7 +85,7 @@ export default {
             })
     }
     if (isEmpty(this.$store.getters.about.publish)) {
-      window.nodeDownload('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/common.json', '{}', '', 'utf8')
+      window.nodeDownload(`https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/disclaimer/${appMode}.json`, '{}', '', 'utf8')
             .then(result => {
               let data = JSON.parse(result)
               console.log(data)

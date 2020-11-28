@@ -7,5 +7,5 @@
 基于规则的跨平台一站式聚合搜索工具.
 
 # 开源
-[Github](https://github.com/LanyuanXiaoyao-Studio/SearchX)
+[Github](https://github.com/LanyuanXiaoyao-Studio/SearchX)  
 [Gitee](https://gitee.com/LanyuanXiaoyao-Studio/SearchX)

@@ -6,7 +6,7 @@
               @click="openPublish"
               type="link"
       >
-        插件发布页
+        发布页
       </a-button>
     </div>
   </div>
@@ -26,7 +26,7 @@
       openPublish() {
         let url = this.about.publish
         if (url && url !== '') {
-          utools.shellOpenExternal(url)
+          window.openInBrowser(url)
         }
       }
     }
@@ -39,4 +39,7 @@
 >
   .settings-about p
     font-family serif
+
+  .ant-btn
+    padding 0
 </style>
