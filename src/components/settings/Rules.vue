@@ -302,7 +302,7 @@ export default {
 .settings-rules
   .rules-table
     margin-top 5px
-    min-height 240px
+    max-height 240px
 
     .table-action-button
       margin-top 0

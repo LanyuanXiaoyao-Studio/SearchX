@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
+    version: '0.2.0',
     sites: [],
     categories: {},
     settings: {},
@@ -21,6 +22,7 @@ const store = new Vuex.Store({
     }
   },
   getters: {
+    version: state => state.version,
     sites: state => state.sites,
     site: state => code => {
       for (let i = 0, length = state.sites.length; i < length; i++) {

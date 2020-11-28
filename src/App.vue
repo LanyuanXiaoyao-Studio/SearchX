@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import squirrel from '@/squirrel'
 import zh from 'ant-design-vue/es/locale/zh_CN'
 
 export default {
@@ -15,6 +16,36 @@ export default {
     return {
       zh,
     }
+  },
+  mounted() {
+    squirrel.services.checkUpdate()
+            .then(result => {
+              console.log(result)
+              if (result.cmp < 0) {
+                this.$notification['warning']({
+                  duration: null,
+                  message: '发现新版本',
+                  description: `当前版本: ${result.current} → 最新版本: ${result.remote}`,
+                  btn: h => {
+                    return h(
+                        'a-button',
+                        {
+                          props: {
+                            type: 'link',
+                            size: 'small',
+                          },
+                          on: {
+                            click: () => {
+                              alert('hello')
+                            }
+                          }
+                        },
+                        '前往下载'
+                    )
+                  }
+                })
+              }
+            })
   }
 }
 </script>

@@ -18,6 +18,7 @@ import {
   List,
   message,
   Modal,
+  Notification,
   PageHeader,
   Popover,
   Radio,
@@ -59,5 +60,7 @@ Vue.use(Checkbox)
 Vue.use(Radio)
 Vue.use(Divider)
 Vue.use(Space)
+Vue.use(Notification)
 
 Vue.prototype.$message = message
+Vue.prototype.$notification = Notification

@@ -1,4 +1,5 @@
 import store from '@/store'
+import {cmpVersion} from 'licia'
 
 console.log(store)
 window.store = store
@@ -72,5 +73,16 @@ export default {
       }
       return result
     },
+    async checkUpdate() {
+      let versionText = await window.nodeDownload('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/version.json', '{}', '', 'utf8')
+      let remoteVersion = JSON.parse(versionText).version
+      let currentVersion = store.getters.version
+      console.log('version', remoteVersion, currentVersion, cmpVersion(currentVersion, remoteVersion))
+      return {
+        current: currentVersion,
+        remote: remoteVersion,
+        cmp: cmpVersion(currentVersion, remoteVersion)
+      }
+    }
   }
 }
