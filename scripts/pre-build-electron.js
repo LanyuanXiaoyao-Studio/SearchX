@@ -7,12 +7,15 @@ if (!fs.existsSync(electronDist)) {
   fs.mkdirSync(electronDist)
 }
 
-let nodeModules = path.join(electronDist, 'node_modules')
+let publicPath = path.join(__dirname, '..', 'public')
+let nodeModules = path.join(publicPath, 'node_modules')
 if (!fs.existsSync(nodeModules)) {
   fs.mkdirSync(nodeModules)
 }
 child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public_utools', 'node_modules')}/* ${nodeModules}`)
 child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public_electron', 'node_modules')}/* ${nodeModules}`)
 
+child_process.execSync(`cp -r ${nodeModules} ${electronDist}`)
+
+child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public_electron', 'preload-electron.js')} ${publicPath}/preload.js`)
 child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public_electron', 'preload-electron.js')} ${electronDist}/preload.js`)
-child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public', 'sites.js')} ${electronDist}`)

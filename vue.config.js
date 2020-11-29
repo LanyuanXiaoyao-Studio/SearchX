@@ -25,4 +25,25 @@ module.exports = {
             }
           ])
   },
+  pluginOptions: {
+    electronBuilder: {
+      builderOptions: {
+        appId: 'com.lanyuanxiaoyao.searchx',
+        files: [
+          '**/*',
+          {
+            from: 'node_modules',
+            to: 'node_modules',
+            filter: [
+              '**/*'
+            ]
+          }
+        ],
+        mac: {
+          icon: 'icons/icon.icns',
+          target: ['dmg', 'pkg', '7z', 'zip']
+        }
+      }
+    }
+  }
 }

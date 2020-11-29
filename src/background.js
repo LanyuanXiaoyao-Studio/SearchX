@@ -1,5 +1,5 @@
 'use strict'
-
+console.log('__dirname', __dirname)
 import {app, BrowserWindow, protocol} from 'electron'
 import {createProtocol} from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, {VUEJS_DEVTOOLS} from 'electron-devtools-installer'
@@ -20,12 +20,14 @@ async function createWindow() {
     titleBarStyle: 'hidden',
     fullscreenWindowTitle: true,
     alwaysOnTop: false,
+    autoHideMenuBar: true,
     webPreferences: {
       enableRemoteModule: true,
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.resolve(__dirname, 'preload.js'),
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
     }
   })
+  win.setMenu(null)
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -37,6 +39,10 @@ async function createWindow() {
     // Load the index.html when not in development
     win.loadURL('app://./index.html')
   }
+
+  // win.webContents.on('devtools-opened', () => {
+  //   process.env.IS_TEST || win.webContents.closeDevTools()
+  // })
 }
 
 // Quit when all windows are closed.

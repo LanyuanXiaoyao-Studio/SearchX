@@ -1,6 +1,11 @@
 {
   "name": "searchx",
   "version": "0.2.0",
+  "author": {
+    "name": "lanyuanxiaoyao",
+    "email": "lanyuanxiaoyao@gmail.com"
+  },
+  "description": "Search Anything",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --mode web",

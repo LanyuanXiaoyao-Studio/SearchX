@@ -5,6 +5,10 @@ node_modules
 !public*/node_modules
 /test
 
+public/node_modules
+public/preload.js
+public/plugin.js
+
 # local env files
 .env.local
 .env.*.local

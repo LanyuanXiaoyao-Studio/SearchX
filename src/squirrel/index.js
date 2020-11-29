@@ -14,8 +14,6 @@ else if (appMode === 'electron') {
   squirrel = require('@/squirrel/squirrel-electron-0.3.113-SNAPSHOT').com.lanyuanxiaoyao.squirrel.electron
 }
 
-console.log(squirrel)
-
 console.log(squirrel.info())
 squirrel.debug('false')
 
