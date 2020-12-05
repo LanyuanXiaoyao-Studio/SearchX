@@ -42,6 +42,16 @@ module.exports = {
         mac: {
           icon: 'icons/icon.icns',
           target: ['dmg', 'pkg', '7z', 'zip']
+        },
+        win: {
+          icon: 'icons/icon.ico',
+          target: ['nsis', 'portable', 'msi', '7z', 'zip']
+        },
+        nsis: {
+          oneClick: false,
+          perMachine: false,
+          allowToChangeInstallationDirectory: true,
+          installerIcon: 'icons/icon.ico',
         }
       }
     }
