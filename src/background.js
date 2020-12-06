@@ -12,8 +12,10 @@ protocol.registerSchemesAsPrivileged([
   {scheme: 'app', privileges: {secure: true, standard: true}}
 ])
 
+let win
+
 async function createWindow() {
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 1080,
     height: 720,
     center: true,

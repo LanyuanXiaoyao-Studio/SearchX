@@ -113,7 +113,8 @@ export default {
     scoped
 >
 .site-list
-  margin-left: -15px
+  //margin-left: -50px
+  width auto
 
   .site-icon
     width 50px
