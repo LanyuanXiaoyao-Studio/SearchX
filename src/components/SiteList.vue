@@ -113,10 +113,6 @@ export default {
     scoped
 >
 .site-list
-  .site-list-panel
-    height 400px
-    overflow auto
-
   .site-icon
     width 50px
     cursor pointer
