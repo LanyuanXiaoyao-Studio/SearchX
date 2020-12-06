@@ -133,7 +133,11 @@ export default {
 .result-list
   padding 5px
 
-  .ant-list
+  .site-list-panel
+    height 400px
+    overflow auto
+
+.ant-list
     overflow scroll
     scroll overflow-y
 
