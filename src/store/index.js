@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import squirrel from '@/squirrel'
-import {isEmpty, isNil, remove} from 'licia'
+import {isEmpty, isNil, remove, findIdx} from 'licia'
 
 Vue.use(Vuex)
 
@@ -72,7 +72,7 @@ const store = new Vuex.Store({
     },
     removeSubscription: (state, subscription) => {
       if (!isNil(state.settings.subscriptions)) {
-        remove(state.settings.subscriptions, s => s.path === subscription.path)
+        state.settings.subscriptions = state.settings.subscriptions.filter(s => s.path !== subscription.path)
       }
       squirrel.save(state.settings)
     },
