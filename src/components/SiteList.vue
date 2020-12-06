@@ -113,6 +113,8 @@ export default {
     scoped
 >
 .site-list
+  margin-left: -15px
+
   .site-icon
     width 50px
     cursor pointer
