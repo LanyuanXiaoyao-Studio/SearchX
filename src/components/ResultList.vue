@@ -138,8 +138,7 @@ export default {
     overflow auto
 
 .ant-list
-    overflow scroll
-    scroll overflow-y
+    overflow-y auto
 
     .item-image
       max-height 150px

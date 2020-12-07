@@ -121,7 +121,7 @@
 </template>
 
 <script>
-import {contain, isEmpty, isNil, isUrl, parallel} from 'licia'
+import {contain, isAbsoluteUrl, isEmpty, isNil, parallel, splitPath} from 'licia'
 import {mapGetters} from 'vuex'
 import squirrel from '@/squirrel'
 import utils from '@/utils/utils'
@@ -207,7 +207,7 @@ export default {
             this.$message.error('链接不能为空')
             break
           }
-          if (!isUrl(form.url)) {
+          if (!isAbsoluteUrl(form.url)) {
             this.$message.error('链接格式不正确')
             break
           }
@@ -249,11 +249,11 @@ export default {
         let result = subscription.type === 'FILE' ?
             await squirrel.services.mergeSitesFromFile(subscription.path) :
             await squirrel.services.mergeSitesFromUrl(subscription.path)
-        console.log(result)
         if (result.code === 0) {
           let data = result.data
           subscription.available = true
-          this.$message.success(`新增 ${data.new} 个站点\n更新 ${data.cover} 个站点`)
+          let path = splitPath(subscription.path)
+          this.$message.success(`从 ${decodeURI(path.name)} 新增 ${data.new} 个站点\n更新 ${data.cover} 个站点`)
         }
         else {
           subscription.available = false

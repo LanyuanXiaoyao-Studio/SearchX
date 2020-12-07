@@ -294,6 +294,7 @@ export default {
 
     .app-title
       padding-top 10px
+      -webkit-app-region: drag
 
       .ant-page-header
         padding 5px 0 8px 3px
