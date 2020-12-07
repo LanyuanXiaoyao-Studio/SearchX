@@ -16,7 +16,20 @@
 [中文]()
 
 # 注意
-**上述两个开源仓库的地址为本项目唯一发布途径, 由于项目属性, 请谨慎提防恶意的二次分发**.
+- 本项目**唯一发布途径**为上述两个开源仓库, 由于项目属性, **请谨慎提防恶意的二次分发**.
+- 本项目无任何官方账号和群聊, 唯一交流平台为 Github Issue, 由于项目属性, **请谨慎提防恶意的拉群行为**.
+- 本项目**开源免费**, 不内置任何广告, **无任何付费内容**.
+- 本项目所用技术**仅用于学习交流**, **请勿直接用于任何商业场合和非法用途**.
+- 本项目的**捐赠仅表示您对我代码交流分享上的认可**, **不代表您获得本项目以及其搜索结果的任何权利**.
+
+# 捐赠
+> 本项目的**捐赠仅表示您对我代码交流分享上的认可**, **不代表您获得本项目以及其搜索结果的任何权利**.
+
+如果我的代码能够对你有所帮助和启发不妨请我喝杯奶茶, 当然没钱的捧个人场, 点个 Star 也是心意.
+
+<img src="https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/donate.png" alt="捐赠" width="150px" />
 
 # 截图
-
+![](https://raw.githubusercontent.com/LanyuanXiaoyao-Studio/SearchX/master/screenshot/sites.png)
+![](https://raw.githubusercontent.com/LanyuanXiaoyao-Studio/SearchX/master/screenshot/index.png)
+![](https://raw.githubusercontent.com/LanyuanXiaoyao-Studio/SearchX/master/screenshot/detail.png)
