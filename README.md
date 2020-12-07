@@ -27,7 +27,7 @@
 
 如果我的代码能够对你有所帮助和启发不妨请我喝杯奶茶, 当然没钱的捧个人场, 点个 Star 也是心意.
 
-<img src="https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/donate.png" alt="捐赠" width="150px" />
+<a href="https://donate.lanyuanxiaoyao.com" target="_blank"><img src="https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/donate.png" alt="捐赠" width="150px" /></a>
 
 # 截图
 ![](https://raw.githubusercontent.com/LanyuanXiaoyao-Studio/SearchX/master/screenshot/sites.png)
