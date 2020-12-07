@@ -9,11 +9,21 @@
 # 下载
 [Github Release](https://github.com/LanyuanXiaoyao-Studio/SearchX/releases)
 
+项目支持平台为
+- Windows(仅在 Windows 10 系统测试, 低版本系统随缘)
+- macOS (仅在 macOS 10.15 系统测试, 其他版本系统随缘)
+- uTools (待适配)
+- docker&web (待适配)
+
+*Linux 理论上没有太大问题, 因为项目里并没用到与操作系统强绑定的本地库, 但由于开发者接触桌面 Linux 平台几乎为0, 所以不主动适配, 感兴趣的同学可以自行编译打包.*
+
+*PS: uTools 是一个很不错的跨平台类 Spotlight 启动器, 本项目起源于 uTools 的一个插件, 感兴趣的同学可以试试: [uTools 官网](https://u.tools/)*
+
 # 开源
-[Github](https://github.com/LanyuanXiaoyao-Studio/SearchX)  为主库, [Gitee](https://gitee.com/LanyuanXiaoyao-Studio/SearchX)  主要用作定期代码备份, 不实时更新.
+[Github](https://github.com/LanyuanXiaoyao-Studio/SearchX) 为主库, [Gitee](https://gitee.com/LanyuanXiaoyao-Studio/SearchX) 主要用作定期代码备份, 不实时更新.
 
 # 文档
-[中文]()
+- [中文]()
 
 # 注意
 - 本项目**唯一发布途径**为上述两个开源仓库, 由于项目属性, **请谨慎提防恶意的二次分发**.
