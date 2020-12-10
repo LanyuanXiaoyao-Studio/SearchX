@@ -52,7 +52,8 @@ module.exports = {
         ],
         mac: {
           icon: 'icons/icon.icns',
-          target: ['dmg', 'pkg', '7z', 'zip']
+          target: ['dmg', 'pkg', '7z', 'zip'],
+          electronLanguages: ['en', 'zh_CN', 'zh_TW']
         },
         win: {
           icon: 'icons/icon.ico',

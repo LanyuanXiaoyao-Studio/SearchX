@@ -9,17 +9,17 @@ if (!fs.existsSync(electronDist)) {
 }
 
 let publicPath = path.join(__dirname, '..', 'public')
-let nodeModules = path.join(publicPath, 'node_modules')
-if (!fs.existsSync(nodeModules)) {
-  fs.mkdirSync(nodeModules)
-}
+// let nodeModules = path.join(publicPath, 'node_modules')
+// if (!fs.existsSync(nodeModules)) {
+//   fs.mkdirSync(nodeModules)
+// }
 // child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public_utools', 'node_modules')}/* ${nodeModules}`)
-copyFilesSync(path.join(__dirname, '..', 'public_utools', 'node_modules'), nodeModules)
+// copyFilesSync(path.join(__dirname, '..', 'public_utools', 'node_modules'), nodeModules)
 // child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public_electron', 'node_modules')}/* ${nodeModules}`)
-copyFilesSync(path.join(__dirname, '..', 'public_electron', 'node_modules'), nodeModules)
+// copyFilesSync(path.join(__dirname, '..', 'public_electron', 'node_modules'), nodeModules)
 
 // child_process.execSync(`cp -r ${nodeModules} ${electronDist}`)
-copyFilesSync(nodeModules, `${electronDist}/node_modules`)
+// copyFilesSync(nodeModules, `${electronDist}/node_modules`)
 
 // child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public_electron', 'preload-electron.js')} ${publicPath}/preload.js`)
 copyFilesSync(path.join(__dirname, '..', 'public_electron', 'preload.js'), `${publicPath}/preload.js`)
