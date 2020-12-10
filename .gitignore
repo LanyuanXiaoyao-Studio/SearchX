@@ -8,6 +8,7 @@ node_modules
 public/node_modules
 public/preload.js
 public/plugin.js
+public/squirrel
 
 # local env files
 .env.local

@@ -85,6 +85,9 @@ window.put = data => {
   }
 }
 
+const squirrelLib = require('./squirrel/squirrel-electron-0.3.113-SNAPSHOT')
+window.squirrelLib = squirrelLib
+
 window.squirrelInitialReady = () => {
   let result = squirrel.fetch()
   if (result.code === 0) {

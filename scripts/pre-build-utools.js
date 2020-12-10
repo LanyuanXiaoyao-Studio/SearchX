@@ -13,6 +13,6 @@ if (!fs.existsSync(nodeModules)) {
 }
 child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public_utools', 'node_modules')}/* ${nodeModules}`)
 
-child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public_utools', 'preload-utools.js')} ${electronDist}/preload.js`)
+child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public_utools', 'preload.js')} ${electronDist}/preload.js`)
 child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public_utools', 'plugin.json')} ${electronDist}/plugin.json`)
 child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public', 'sites.js')} ${electronDist}`)

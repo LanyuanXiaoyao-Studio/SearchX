@@ -8,10 +8,10 @@ console.log(`Current Mode: ${appMode}`)
 
 let squirrel
 if (appMode === 'utools') {
-  squirrel = require('@/squirrel/squirrel-utools-0.3.103-SNAPSHOT').com.lanyuanxiaoyao.squirrel.utools
+  squirrel = window.squirrelLib.com.lanyuanxiaoyao.squirrel.utools
 }
 else if (appMode === 'electron') {
-  squirrel = require('@/squirrel/squirrel-electron-0.3.113-SNAPSHOT').com.lanyuanxiaoyao.squirrel.electron
+  squirrel = window.squirrelLib.com.lanyuanxiaoyao.squirrel.electron
 }
 
 console.log(squirrel.info())

@@ -22,6 +22,9 @@ copyFilesSync(path.join(__dirname, '..', 'public_electron', 'node_modules'), nod
 copyFilesSync(nodeModules, `${electronDist}/node_modules`)
 
 // child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public_electron', 'preload-electron.js')} ${publicPath}/preload.js`)
-copyFilesSync(path.join(__dirname, '..', 'public_electron', 'preload-electron.js'), `${publicPath}/preload.js`)
+copyFilesSync(path.join(__dirname, '..', 'public_electron', 'preload.js'), `${publicPath}/preload.js`)
 // child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public_electron', 'preload-electron.js')} ${electronDist}/preload.js`)
-copyFilesSync(path.join(__dirname, '..', 'public_electron', 'preload-electron.js'), `${electronDist}/preload.js`)
+copyFilesSync(path.join(__dirname, '..', 'public_electron', 'preload.js'), `${electronDist}/preload.js`)
+
+copyFilesSync(path.join(__dirname, '..', 'public_electron', 'squirrel'), `${publicPath}/squirrel`)
+copyFilesSync(path.join(__dirname, '..', 'public_electron', 'squirrel'), `${electronDist}/squirrel`)
