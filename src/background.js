@@ -46,12 +46,9 @@ async function createWindow() {
   // win.webContents.on('devtools-opened', () => {
   //   process.env.IS_TEST || win.webContents.closeDevTools()
   // })
+  // 关闭主窗口直接退出程序
+  win.on('closed', () => app.quit())
 }
-
-app.on('window-all-closed', () => console.log('window-all-closed') && app.quit())
-app.on('before-quit', () => console.log('before-quit'))
-app.on('quit', () => console.log('quit'))
-app.on('will-quit', () => console.log('will-quit'))
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
