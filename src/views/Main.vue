@@ -3,8 +3,8 @@
     <div class="search">
       <div class="app-title">
         <a-page-header
-            sub-title="跨平台一站式搜索工具"
-            title="SearchX"
+            :sub-title="slogan"
+            :title="title"
         >
           <template slot="tags">
             <img
@@ -147,6 +147,14 @@ export default {
     showLoadMore() {
       return !isEmpty(this.result)
     },
+    title() {
+      let title = process.env.VUE_APP_TITLE
+      return isEmpty(title) ? 'SearchX' : title
+    },
+    slogan() {
+      let slogan = process.env.VUE_APP_SLOGAN
+      return isEmpty(slogan) ? '' : slogan
+    }
   },
   methods: {
     async query() {
