@@ -1,6 +1,6 @@
 'use strict'
 console.log('__dirname', __dirname)
-import {app, BrowserWindow, protocol} from 'electron'
+import {app, BrowserWindow, Menu, protocol} from 'electron'
 import {createProtocol} from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, {VUEJS_DEVTOOLS} from 'electron-devtools-installer'
 import path from 'path'
@@ -11,6 +11,8 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 protocol.registerSchemesAsPrivileged([
   {scheme: 'app', privileges: {secure: true, standard: true}}
 ])
+
+app.setName(process.env.VUE_APP_TITLE)
 
 let win
 
@@ -63,6 +65,49 @@ app.on('ready', async () => {
       console.error('Vue Devtools failed to install:', e.toString())
     }
   }
+
+  // 菜单
+  let appMenuTemplate = []
+  if (process.platform === 'darwin') {
+    appMenuTemplate.unshift({
+      label: app.getName(),
+      submenu: [
+        {
+          label: `关于 ${app.getName()}`,
+          role: 'about'
+        },
+        {
+          type: 'separator'
+        },
+        {
+          label: '服务',
+          role: 'services',
+          submenu: []
+        },
+        {
+          type: 'separator'
+        },
+        {
+          label: `隐藏 ${app.getName()}`,
+          accelerator: 'cmd+H',
+          role: 'hide'
+        },
+        {
+          type: 'separator'
+        },
+        {
+          label: '退出',
+          accelerator: 'cmd+Q',
+          click() {
+            app.quit()
+          }
+        }
+      ]
+    })
+  }
+  let appMenus = Menu.buildFromTemplate(appMenuTemplate)
+  Menu.setApplicationMenu(appMenus)
+
   createWindow()
 })
 
