@@ -48,7 +48,7 @@ async function createWindow() {
   // })
 }
 
-app.on('window-all-closed', () => console.log('window-all-closed'))
+app.on('window-all-closed', () => console.log('window-all-closed') && app.quit())
 app.on('before-quit', () => console.log('before-quit'))
 app.on('quit', () => console.log('quit'))
 app.on('will-quit', () => console.log('will-quit'))
