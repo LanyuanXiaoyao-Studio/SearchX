@@ -34,7 +34,8 @@ async function createWindow() {
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
-    if (!process.env.IS_TEST) win.webContents.openDevTools()
+    // 自动打开调试界面
+    // if (!process.env.IS_TEST) win.webContents.openDevTools()
   }
   else {
     createProtocol('app')
@@ -47,7 +48,7 @@ async function createWindow() {
   // })
 }
 
-// app.on('window-all-closed', () => console.log('window-all-closed'))
+app.on('window-all-closed', () => console.log('window-all-closed'))
 app.on('before-quit', () => console.log('before-quit'))
 app.on('quit', () => console.log('quit'))
 app.on('will-quit', () => console.log('will-quit'))
