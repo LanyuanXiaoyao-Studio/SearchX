@@ -30,8 +30,8 @@ async function createWindow() {
     autoHideMenuBar: true,
     webPreferences: {
       enableRemoteModule: true,
+      contextIsolation: false,
       preload: path.resolve(__dirname, 'preload.js'),
-      nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
     }
   })
   win.setMenu(null)
