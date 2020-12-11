@@ -76,8 +76,9 @@ module.exports = {
         },
         linux: {
           icon: 'icons/icon.png',
-          target: ['AppImage', 'deb', 'rpm', '7z', 'zip', 'tar.gz']
-        }
+          target: ['AppImage', 'deb', 'rpm', '7z', 'zip', 'tar.gz'],
+          category: 'Network'
+        },
       }
     }
   }
