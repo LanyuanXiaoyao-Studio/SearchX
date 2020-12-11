@@ -73,6 +73,10 @@ module.exports = {
           perMachine: false,
           allowToChangeInstallationDirectory: true,
           installerIcon: 'icons/icon.ico',
+        },
+        linux: {
+          icon: 'icons/icon.png',
+          target: ['AppImage', 'deb', 'rpm', '7z', 'zip', 'tar.gz']
         }
       }
     }

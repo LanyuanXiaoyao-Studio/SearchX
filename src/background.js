@@ -13,6 +13,9 @@ protocol.registerSchemesAsPrivileged([
 ])
 
 app.setName(process.env.VUE_APP_TITLE)
+if (process.platform === 'linux') {
+  app.disableHardwareAcceleration()
+}
 
 let win
 
