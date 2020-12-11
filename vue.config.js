@@ -60,6 +60,7 @@ module.exports = {
           }
         ],
         mac: {
+          category: 'public.app-category.utilities',
           icon: 'icons/icon.icns',
           target: ['dmg', 'pkg', '7z', 'zip'],
           electronLanguages: ['en', 'zh_CN', 'zh_TW']
