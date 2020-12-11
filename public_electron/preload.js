@@ -26,6 +26,18 @@ window.readTextFromFile = path => {
       })
   )
 }
-window.readTextFromUrl = async url => (await phin(url)).body.toString()
+const http = url => url.indexOf('https') === 0 ? require('https') : require('http')
+window.readTextFromUrl = url => {
+  return new Promise((resolve, reject) => {
+    console.log(url, url.indexOf('https'), http(url))
+    let request = http(url)
+        .get(url, response => {
+          let result = ''
+          response.on('data', data => result += data)
+          response.on('end', () => resolve(result))
+        })
+    request.on('error', e => reject(e))
+  })
+}
 window.openInBrowser = url => shell.openExternal(url)
 window.copyText = text => clipboard.writeText(text)

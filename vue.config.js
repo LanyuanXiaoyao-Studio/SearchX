@@ -1,5 +1,6 @@
 const CopyPlugin = require('copy-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+const MangleJsClassPlugin = require('mangle-js-webpack-plugin')
 const path = require('path')
 
 const appMode = process.env.VUE_APP_MODE
@@ -32,6 +33,14 @@ module.exports = {
                 compress: {
                   pure_funcs: ['console.log']
                 }
+              }
+            }])
+      config.plugin('mangle-plugin')
+            .use(MangleJsClassPlugin, [{
+              algorithm: 'obfuscator',
+              algorithmConfig: {
+                prefix: 'focus',
+                log: false
               }
             }])
     }

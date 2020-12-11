@@ -37,6 +37,7 @@
     "deepmerge": "^4.2.2",
     "electron": "^11.0.4",
     "electron-devtools-installer": "^3.1.0",
+    "mangle-js-webpack-plugin": "^0.1.4",
     "stylus": "^0.54.8",
     "stylus-loader": "^3.0.2",
     "vue-cli-plugin-electron-builder": "~2.0.0-rc.5",
