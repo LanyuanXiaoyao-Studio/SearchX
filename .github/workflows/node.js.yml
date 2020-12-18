@@ -10,6 +10,31 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
+  release:
+    strategy:
+      matrix:
+        node-version: [ 14.x ]
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{matrix.node-version}}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{matrix.node-version}}
+      - name: Detect project version
+        id: project_version
+        run: echo "::set-output name=project_version::$(node -p "require('./package.json').version")"
+        shell: bash
+      - name: Current project version
+        run: echo ${{ steps.project_version.outputs.project_version}}
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ steps.project_version.outputs.project_version}}
+          release_name: SearchX ${{ steps.project_version.outputs.project_version}}
+          draft: true
+          prerelease: false
   build:
     strategy:
       matrix:
@@ -17,32 +42,18 @@ jobs:
         node-version: [14.x]
     runs-on: ${{matrix.os}}
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{matrix.node-version}}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{matrix.node-version}}
-    - name: Detect project version
-      id: project_version
-      run: echo "::set-output name=project_version::$(node -p "require('./package.json').version")"
-      shell: bash
-    - name: Current project version
-      run: echo ${{ steps.project_version.outputs.project_version}}
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      with:
-        tag_name: ${{ steps.project_version.outputs.project_version}}
-        release_name: SearchX ${{ steps.project_version.outputs.project_version}}
-        draft: true
-        prerelease: false
-    - name: Decrypt sign file
-      run: ./.github/scripts/decrypt.sh
-      env:
-        CSC_LINK_GPG_PASSWORD: ${{ secrets.CSC_LINK_GPG_PASSWORD }}
-    - name: Download packages
-      run: npm install
-    - name: Build project
-      env:
-        CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
-      run: npm run electron:build
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{matrix.node-version}} in ${{matrix.os}}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{matrix.node-version}}
+      - name: Decrypt sign file
+        run: ./.github/scripts/decrypt.sh
+        env:
+          CSC_LINK_GPG_PASSWORD: ${{ secrets.CSC_LINK_GPG_PASSWORD }}
+      - name: Download packages
+        run: npm install
+      - name: Build project
+        env:
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+        run: npm run electron:build
