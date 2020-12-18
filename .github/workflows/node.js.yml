@@ -21,10 +21,12 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Project version
+    - name: Detect project version
       id: project_version
       run: echo "::set-output name=project_version::$(node -p "require('./package.json').version")"
       shell: bash
+    - name: Current project version
+      run: echo ${{ steps.project_version.outputs.project_version}}
     - name: Decrypt sign file
       run: ./.github/scripts/decrypt.sh
       env:
@@ -49,3 +51,4 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./dist_electron/searchx-0.2.0-mac.7z
         asset_name: searchx-0.2.0-mac.zip
+        asset_content_type: application/x-7z-compressed
