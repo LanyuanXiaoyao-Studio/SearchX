@@ -11,16 +11,17 @@ env:
 
 jobs:
   build:
-    runs-on: macos-10.15
     strategy:
       matrix:
+        os: [macos-10.15, windows-2019]
         node-version: [14.x]
+    runs-on: ${{matrix.os}}
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js ${{matrix.node-version}}
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: ${{matrix.node-version}}
     - name: Detect project version
       id: project_version
       run: echo "::set-output name=project_version::$(node -p "require('./package.json').version")"
@@ -45,31 +46,67 @@ jobs:
         release_name: SearchX ${{ steps.project_version.outputs.project_version}}
         draft: true
         prerelease: false
-    - name: Upload Release mac 7z
+    - name: Upload Release macOS 7z
+      if: ${{runner.os == "macOS"}}
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./dist_electron/searchx-${{ steps.project_version.outputs.project_version}}-mac.7z
         asset_name: searchx-${{ steps.project_version.outputs.project_version}}-mac.7z
         asset_content_type: application/x-7z-compressed
-    - name: Upload Release mac zip
+    - name: Upload Release macOS zip
+      if: ${{runner.os == "macOS"}}
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./dist_electron/searchx-${{ steps.project_version.outputs.project_version}}-mac.zip
         asset_name: searchx-${{ steps.project_version.outputs.project_version}}-mac.zip
         asset_content_type: application/zip
-    - name: Upload Release mac dmg
+    - name: Upload Release macOS dmg
+      if: ${{runner.os == "macOS"}}
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./dist_electron/searchx-${{ steps.project_version.outputs.project_version}}.dmg
         asset_name: searchx-${{ steps.project_version.outputs.project_version}}.dmg
-        asset_content_type: application/zip
-    - name: Upload Release mac pkg
+        asset_content_type: application/octet-stream
+    - name: Upload Release macOS pkg
+      if: ${{runner.os == "macOS"}}
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./dist_electron/searchx-${{ steps.project_version.outputs.project_version}}.pkg
         asset_name: searchx-${{ steps.project_version.outputs.project_version}}.pkg
+        asset_content_type: application/x-newton-compatible-pkg
+    - name: Upload Release Windows 7z
+      if: ${{runner.os == "Windows"}}
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist_electron/searchx-${{ steps.project_version.outputs.project_version}}-win.7z
+        asset_name: searchx-${{ steps.project_version.outputs.project_version}}-win.7z
+        asset_content_type: application/x-7z-compressed
+    - name: Upload Release Windows zip
+      if: ${{runner.os == "Windows"}}
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist_electron/searchx-${{ steps.project_version.outputs.project_version}}-win.zip
+        asset_name: searchx-${{ steps.project_version.outputs.project_version}}-win.zip
         asset_content_type: application/zip
+    - name: Upload Release Windows exe
+      if: ${{runner.os == "Windows"}}
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist_electron/searchx ${{ steps.project_version.outputs.project_version}}.exe
+        asset_name: searchx ${{ steps.project_version.outputs.project_version}}.exe
+        asset_content_type: application/vnd.microsoft.portable-executable
+    - name: Upload Release Windows Setup exe
+      if: ${{runner.os == "Windows"}}
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist_electron/searchx Setup ${{ steps.project_version.outputs.project_version}}.exe
+        asset_name: searchx Setup ${{ steps.project_version.outputs.project_version}}.exe
+        asset_content_type: application/vnd.microsoft.portable-executable
