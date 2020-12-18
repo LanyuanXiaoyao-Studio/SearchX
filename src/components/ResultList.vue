@@ -40,10 +40,20 @@
             slot="actions"
             class="operation-btn"
             type="link"
-            @click="openInBrowser(item.link)"
+            @click="openInExternal(item.link)"
         >
           <a-icon type="eye"/>
           查看
+        </a-button>
+        <a-button
+            v-if="item.magnet"
+            slot="actions"
+            class="operation-btn"
+            type="link"
+            @click="openInExternal(item.magnet)"
+        >
+          <a-icon type="download" />
+          下载
         </a-button>
         <a-list-item-meta :description="item.author">
           <span slot="title">
@@ -116,8 +126,8 @@ export default {
     detail(url) {
       this.$emit('detail', url)
     },
-    openInBrowser(url) {
-      window.openInBrowser(url)
+    openInExternal(url) {
+      window.openInExternal(url)
     },
     generateTagList(item) {
       return utils.generateTagList(item)

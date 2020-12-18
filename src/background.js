@@ -109,7 +109,7 @@ app.on('ready', async () => {
     })
   }
   let appMenus = Menu.buildFromTemplate(appMenuTemplate)
-  Menu.setApplicationMenu(appMenus)
+  // Menu.setApplicationMenu(appMenus)
 
   createWindow()
 })

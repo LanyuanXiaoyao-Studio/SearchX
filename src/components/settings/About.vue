@@ -26,7 +26,7 @@
       openPublish() {
         let url = this.about.publish
         if (url && url !== '') {
-          window.openInBrowser(url)
+          window.openInExternal(url)
         }
       }
     }

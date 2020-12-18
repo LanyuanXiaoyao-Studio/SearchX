@@ -39,5 +39,5 @@ window.readTextFromUrl = url => {
     request.on('error', e => reject(e))
   })
 }
-window.openInBrowser = url => shell.openExternal(url)
+window.openInExternal = url =>  shell.openExternal(url)
 window.copyText = text => clipboard.writeText(text)

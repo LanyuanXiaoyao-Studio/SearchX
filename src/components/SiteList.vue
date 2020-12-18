@@ -36,6 +36,7 @@
                       :src="site.icon"
                       shape="square"
                       size="small"
+                      @click="openInExternal(site.home)"
                   />
                 </a-tooltip>
               </a-col>
@@ -103,6 +104,9 @@ export default {
     },
     selectSite(site) {
       this.$emit('select', site)
+    },
+    openInExternal(url) {
+      window.openInExternal(url)
     },
   },
 }

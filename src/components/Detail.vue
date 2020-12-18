@@ -98,7 +98,7 @@ export default {
         this.$message.error('打开失败')
         return
       }
-      window.openInBrowser(url)
+      window.openInExternal(url)
     },
     generateTagList(item) {
       return utils.generateTagList(item)
