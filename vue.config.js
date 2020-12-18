@@ -74,7 +74,7 @@ module.exports = {
           perMachine: false,
           allowToChangeInstallationDirectory: true,
           installerIcon: 'icons/icon.ico',
-          differentPackage: false,
+          differentialPackage: false,
         },
         dmg: {
           writeUpdateInfo: false
