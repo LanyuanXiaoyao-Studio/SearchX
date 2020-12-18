@@ -9,13 +9,10 @@ on:
 
 jobs:
   build:
-
     runs-on: macos-10.15
-
     strategy:
       matrix:
         node-version: [14.x]
-
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
@@ -23,7 +20,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: decrypt
-      run: ./cert/decrypt.sh
+      run: ./.github/scripts/decrypt.sh
       env:
         CSC_LINK_GPG_PASSWORD: ${{ secrets.CSC_LINK_GPG_PASSWORD }}
     - run: npm install
@@ -31,3 +28,22 @@ jobs:
       env:
         CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
       run: npm run electron:build
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: true
+        prerelease: false
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist_electron/searchx-0.2.0-mac.zip
+        asset_name: searchx-0.2.0-mac.zip
+        asset_content_type: application/zip
