@@ -23,7 +23,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Project version
       id: project_version
-      uses: martinbeentjes/npm-get-version-action@master
+      run: echo "::set-output name=project_version::$(node -p \"require('./package.json').version\")"
+      shell: bash
     - name: Decrypt sign file
       run: ./.github/scripts/decrypt.sh
       env:
@@ -38,8 +39,8 @@ jobs:
       id: create_release
       uses: actions/create-release@v1
       with:
-        tag_name: ${{ steps.project_version.outputs.current-version}}
-        release_name: SearchX ${{ steps.project_version.outputs.current-version}}
+        tag_name: ${{ steps.project_version.outputs.project_version}}
+        release_name: SearchX ${{ steps.project_version.outputs.project_version}}
         draft: true
         prerelease: false
     - name: Upload Release Asset
