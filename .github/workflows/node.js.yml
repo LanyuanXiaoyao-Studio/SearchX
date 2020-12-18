@@ -22,5 +22,12 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - name: decrypt
+      run: ./cert/decrypt.sh
+      env:
+        CSC_LINK_GPG_PASSWORD: ${{ secrets.CSC_LINK_GPG_PASSWORD }}
     - run: npm install
-    - run: npm run electron:build
+    - name: build
+      env:
+        CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+      run: npm run electron:build
