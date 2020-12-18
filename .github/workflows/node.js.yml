@@ -23,7 +23,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Project version
       id: project_version
-      run: echo "::set-output name=project_version::$(node -p \"require('./package.json').version\")"
+      run: echo "::set-output name=project_version::$(node -p "require('./package.json').version")"
       shell: bash
     - name: Decrypt sign file
       run: ./.github/scripts/decrypt.sh
