@@ -1,11 +1,13 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
 name: Node.js CI
 
 on:
   push:
     branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   build:
@@ -19,32 +21,30 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: decrypt
+    - name: Project version
+      id: project_version
+      uses: martinbeentjes/npm-get-version-action@master
+    - name: Decrypt sign file
       run: ./.github/scripts/decrypt.sh
       env:
         CSC_LINK_GPG_PASSWORD: ${{ secrets.CSC_LINK_GPG_PASSWORD }}
-    - run: npm install
-    - name: build
+    - name: Download packages
+      run: npm install
+    - name: Build project
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
       run: npm run electron:build
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        tag_name: ${{ steps.project_version.outputs.current-version}}
+        release_name: SearchX ${{ steps.project_version.outputs.current-version}}
         draft: true
         prerelease: false
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./dist_electron/searchx-0.2.0-mac.zip
+        asset_path: ./dist_electron/searchx-0.2.0-mac.7z
         asset_name: searchx-0.2.0-mac.zip
-        asset_content_type: application/zip
