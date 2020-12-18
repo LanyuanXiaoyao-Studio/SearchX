@@ -74,6 +74,10 @@ module.exports = {
           perMachine: false,
           allowToChangeInstallationDirectory: true,
           installerIcon: 'icons/icon.ico',
+          differentPackage: false,
+        },
+        dmg: {
+          writeUpdateInfo: false
         },
         linux: {
           icon: 'icons/icon.png',
