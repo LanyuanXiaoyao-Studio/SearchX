@@ -45,10 +45,31 @@ jobs:
         release_name: SearchX ${{ steps.project_version.outputs.project_version}}
         draft: true
         prerelease: false
-    - name: Upload Release Asset
+    - name: Upload Release mac 7z
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./dist_electron/searchx-0.2.0-mac.7z
-        asset_name: searchx-0.2.0-mac.zip
+        asset_path: ./dist_electron/searchx-${{ steps.project_version.outputs.project_version}}-mac.7z
+        asset_name: searchx-${{ steps.project_version.outputs.project_version}}-mac.7z
         asset_content_type: application/x-7z-compressed
+    - name: Upload Release mac zip
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist_electron/searchx-${{ steps.project_version.outputs.project_version}}-mac.zip
+        asset_name: searchx-${{ steps.project_version.outputs.project_version}}-mac.zip
+        asset_content_type: application/zip
+    - name: Upload Release mac dmg
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist_electron/searchx-${{ steps.project_version.outputs.project_version}}.dmg
+        asset_name: searchx-${{ steps.project_version.outputs.project_version}}.dmg
+        asset_content_type: application/zip
+    - name: Upload Release mac pkg
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist_electron/searchx-${{ steps.project_version.outputs.project_version}}.pkg
+        asset_name: searchx-${{ steps.project_version.outputs.project_version}}.pkg
+        asset_content_type: application/zip
