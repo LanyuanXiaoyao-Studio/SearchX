@@ -1,6 +1,7 @@
 require('./squirrel/squirrel-core-electron')
 
 const {dialog, shell, clipboard} = require('electron').remote
+const fs = require('fs')
 
 window.squirrelInitialReady = () => {
   let result = squirrel.fetch()
