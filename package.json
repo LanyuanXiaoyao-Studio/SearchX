@@ -6,7 +6,7 @@
     "name": "lanyuanxiaoyao",
     "email": "lanyuanxiaoyao@gmail.com"
   },
-  "description": "Search Anything",
+  "description": "基于 JSON 编写规则的跨平台一站式聚合搜索工具",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --mode web",
