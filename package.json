@@ -1,6 +1,7 @@
 {
   "name": "searchx",
-  "version": "0.2.1",
+  "productName": "SearchX",
+  "version": "0.2.0",
   "author": {
     "name": "lanyuanxiaoyao",
     "email": "lanyuanxiaoyao@gmail.com"
