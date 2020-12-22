@@ -225,24 +225,21 @@ export default {
         })
         console.log(result)
         if (result.code !== 0) {
-          this.$message.error(utils.generateErrorMessage(result))
-          this.loading = false
-          this.detailDialog.loading = false
-          this.detailDialog.show = false
-          hide()
-          return
+          throw new Error(utils.generateErrorMessage(result))
         }
         let data = result.data
-        console.log(data)
+        console.log('data', data)
         if (isNil(data) || isNil(data.list) || isEmpty(data.list)) {
-          this.$message.error(`获取数据失败`)
-          return
+          throw new Error('返回数据为空')
         }
         this.detailDialog.data = data
       } catch (e) {
         this.$message.error(`获取数据失败 ${e.message}`)
+        this.loading = false
         this.detailDialog.loading = false
         this.detailDialog.show = false
+        hide()
+        return
       }
 
       // 如果有 supplement 字段, 就处理补充信息
