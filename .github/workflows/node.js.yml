@@ -47,13 +47,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{matrix.node-version}}
-      - name: Decrypt sign file
-        run: ./.github/scripts/decrypt.sh
-        env:
-          CSC_LINK_GPG_PASSWORD: ${{ secrets.CSC_LINK_GPG_PASSWORD }}
       - name: Download packages
         run: npm install
       - name: Build project
         env:
-          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          CSC_IDENTITY_AUTO_DISCOVERY: false
         run: npm run electron:build
