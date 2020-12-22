@@ -62,12 +62,12 @@ module.exports = {
         mac: {
           category: 'public.app-category.utilities',
           icon: 'icons/icon.icns',
-          target: ['dmg', 'pkg', '7z', 'zip'],
+          target: ['dmg', '7z', 'zip'],
           electronLanguages: ['en', 'zh_CN', 'zh_TW']
         },
         win: {
           icon: 'icons/icon.ico',
-          target: ['nsis', 'portable', 'msi', '7z', 'zip']
+          target: ['nsis', 'portable']
         },
         nsis: {
           oneClick: false,
@@ -81,7 +81,7 @@ module.exports = {
         },
         linux: {
           icon: 'icons/icon.png',
-          target: ['AppImage', 'deb', 'rpm', '7z', 'zip', 'tar.gz'],
+          target: ['AppImage', 'deb', 'rpm'],
           category: 'Network'
         },
       }
