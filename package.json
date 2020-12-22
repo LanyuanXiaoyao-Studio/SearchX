@@ -40,7 +40,7 @@
     "mangle-js-webpack-plugin": "^0.1.4",
     "stylus": "^0.54.8",
     "stylus-loader": "^3.0.2",
-    "terser-webpack-plugin": "^5.0.3",
+    "terser-webpack-plugin": "^4.2.3",
     "vue-cli-plugin-electron-builder": "~2.0.0-rc.5",
     "vue-template-compiler": "^2.6.11"
   },
