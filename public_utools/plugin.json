@@ -8,7 +8,8 @@
   "main": "index.html",
   "preload": "preload.js",
   "pluginSetting": {
-    "single": true
+    "single": true,
+    "height": 580
   },
   "features": [
     {
