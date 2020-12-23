@@ -1,9 +1,9 @@
 {
   "pluginName": "资源搜索",
   "author": "lanyuanxiaoyao",
-  "homepage": "http://lanyuanxiaoyao.com",
+  "homepage": "https://github.com/LanyuanXiaoyao-Studio/SearchX",
   "description": "海纳百川, 搜遍天下",
-  "version": "0.1.4",
+  "version": "0.2.1",
   "logo": "logo.png",
   "main": "index.html",
   "preload": "preload.js",

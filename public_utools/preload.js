@@ -1,112 +1,43 @@
-// Node native http/https downloader
-const agent = require('https-proxy-agent')
-const phin = require('phin')
-const iconv = require('iconv-lite')
+require('./squirrel/squirr-core-utools')
 
-window.nodeDownload = async (url, headers, proxy, charset) => {
-  headers = JSON.parse(headers)
-  let options = {
-    url: url,
-    core: {
-      headers: headers
-    }
-  }
-  if (proxy && proxy !== '') {
-    options.core.agent = new agent(`${proxy}`)
-  }
-  let response = await phin(options)
-  if (response && response.body) {
-    return iconv.decode(response.body, charset)
-  }
-  return ''
-}
+const fs = require('fs')
 
-// uTools ubrowser downloader
-window.uBrowserDownload = async (url, proxy, charset) => {
-  if (proxy && proxy !== '') {
-    utools.setUBrowserProxy({
-      proxyRules: proxy
-    })
-  }
-  let browserRunOptions = {
-    show: false
-  }
-  let browser = utools.ubrowser.goto(url)
-                      .evaluate(() => {
-                        return `<html>${document.documentElement.innerHTML}</html>`
-                      })
-  let results = await browser.run(browserRunOptions)
-  if (results && results.length && results.length > 0) {
-    return results[0]
-  }
-  return ''
-}
-
-// uTools database
-let id = ''
-let defaultData = ''
-let rev = ''
-window.databaseInitial = (_id, _defaultData) => {
-  id = _id
-  defaultData = _defaultData
-}
-
-window.get = () => {
-  try {
-    let data = utools.db.get(id)
-    if (!data || data.error) {
-      return defaultData
-    }
-    rev = data._rev
-    return data.data
-  } catch (e) {
-    return defaultData
-  }
-}
-
-window.put = data => {
-  try {
-    let result
-    if (rev === '') {
-      result = utools.db.put({
-        _id: id,
-        data: data
-      })
-    }
-    else {
-      result = utools.db.put({
-        _id: id,
-        data: data,
-        _rev: rev
-      })
-    }
-    return !result.error;
-  } catch (e) {
-    return false
-  }
-}
-
-const sites = require('./sites')
-
-const groupBy = (arr, func) =>
-    arr.map(typeof func === 'function' ? func : val => val[func])
-       .reduce((acc, val, i) => {
-         acc[val] = (acc[val] || []).concat(arr[i]);
-         return acc;
-       }, {})
-
-// uTools life circle
 utools.onPluginReady(() => {
-  if (window.squirrel) {
-    window.squirrel.load(window.get())
-    window.squirrel.imports(JSON.stringify(sites))
+  let result = squirrel.fetch()
+  if (result.code === 0) {
+    console.log(result.data)
+    squirrel.imports(result.data.sites)
   }
 })
-
-// Executor for running script
-window.scriptExecutor = (script, text, paramsJson) => {
-  let params = JSON.parse(paramsJson);
-  let jsFunction = new Function('text', 'params', script);
-  let result = jsFunction(text, params);
-  return result ? JSON.stringify(result) : '';
-};
+window.isFileExists = path => fs.existsSync(path)
+window.singleFileSelect = () => {
+  let paths = utools.showOpenDialog({
+    properties: ['openFile'],
+    filters: [{name: 'JSON File', extensions: ['json']}]
+  })
+  if (paths && paths.length > 0) return paths[0]
+  return ''
+}
+window.readTextFromFile = path => {
+  return new Promise((resolve, reject) =>
+      fs.readFile(path, {encoding: 'utf8'}, (error, data) => {
+        if (error) reject(error)
+        resolve(data)
+      })
+  )
+}
+const http = url => url.indexOf('https') === 0 ? require('https') : require('http')
+window.readTextFromUrl = url => {
+  return new Promise((resolve, reject) => {
+    console.log(url, url.indexOf('https'), http(url))
+    let request = http(url)
+        .get(url, response => {
+          let result = ''
+          response.on('data', data => result += data)
+          response.on('end', () => resolve(result))
+        })
+    request.on('error', e => reject(e))
+  })
+}
+window.openInExternal = url =>  utools.shellOpenExternal(url)
+window.copyText = text => utools.copyText(text)

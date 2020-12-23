@@ -1,18 +1,9 @@
 const path = require('path')
-const fs = require('fs')
-const child_process = require('child_process')
+const {copyFilesSync} = require('./utils')
 
-let electronDist = path.join(__dirname, '..', 'dist_utools')
-if (!fs.existsSync(electronDist)) {
-  fs.mkdirSync(electronDist)
-}
+let publicPath = path.join(__dirname, '..', 'public')
+let publicSourcePath = path.join(__dirname, '..', 'public_utools')
 
-let nodeModules = path.join(electronDist, 'node_modules')
-if (!fs.existsSync(nodeModules)) {
-  fs.mkdirSync(nodeModules)
-}
-child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public_utools', 'node_modules')}/* ${nodeModules}`)
-
-child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public_utools', 'preload.js')} ${electronDist}/preload.js`)
-child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public_utools', 'plugin.json')} ${electronDist}/plugin.json`)
-child_process.execSync(`cp -r ${path.join(__dirname, '..', 'public', 'sites.js')} ${electronDist}`)
+copyFilesSync(path.join(publicSourcePath, 'preload.js'), `${publicPath}/preload.js`)
+copyFilesSync(path.join(publicSourcePath, 'plugin.json'), `${publicPath}/plugin.json`)
+copyFilesSync(path.join(publicSourcePath, 'squirrel'), `${publicPath}/squirrel`)
