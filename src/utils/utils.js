@@ -22,6 +22,6 @@ export default {
     }
   },
   generateErrorMessage(error) {
-    return `${!isEmpty(error) ? (!isEmpty(error.extra) && !isEmpty(error.extra.nativeExceptionMessage)) ? error.extra.nativeExceptionMessage : error.message : 'Unknown Error'}`
+    return `${!isEmpty(error) ? !isEmpty(error.data) ? error.data : error.message : 'Unknown Error'}`
   },
 }
