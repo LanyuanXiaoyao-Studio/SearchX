@@ -2,13 +2,13 @@ require('./squirrel/squirr-core-utools')
 
 const fs = require('fs')
 
-utools.onPluginReady(() => {
-  let result = squirrel.fetch()
+window.squirrelInitialReady = async () => {
+  let result = await squirrel.fetch()
   if (result.code === 0) {
-    console.log(result.data)
-    squirrel.imports(result.data.sites)
+    console.log('squirrelInitialReady', result)
+    await squirrel.imports(result.data.sites)
   }
-})
+}
 window.isFileExists = path => fs.existsSync(path)
 window.singleFileSelect = () => {
   let paths = utools.showOpenDialog({

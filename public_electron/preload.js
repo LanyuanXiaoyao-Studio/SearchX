@@ -3,11 +3,11 @@ require('./squirrel/squirrel-core-electron')
 const {dialog, shell, clipboard} = require('electron').remote
 const fs = require('fs')
 
-window.squirrelInitialReady = () => {
-  let result = squirrel.fetch()
+window.squirrelInitialReady = async () => {
+  let result = await squirrel.fetch()
   if (result.code === 0) {
-    console.log(result.data)
-    squirrel.imports(result.data.sites)
+    console.log('squirrelInitialReady', result)
+    await squirrel.imports(result.data.sites)
   }
 }
 window.isFileExists = path => fs.existsSync(path)

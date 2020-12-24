@@ -187,7 +187,7 @@ export default {
       }
     },
     async fetch(code, url) {
-      console.log(code, url)
+      // console.log(code, url)
       if (isNil(code) || isEmpty(code) || isNil(url) || isEmpty(url)) {
         throw new Error(`URL 或 CODE 不能为空`)
       }
@@ -195,7 +195,7 @@ export default {
         code: code,
         url: url,
       })
-      console.log(result)
+      // console.log(result)
       if (result.code !== 0) {
         this.$message.error(utils.generateErrorMessage(result))
         this.loading = false
@@ -223,12 +223,12 @@ export default {
           code: this.site.code,
           url: url
         })
-        console.log(result)
+        // console.log(result)
         if (result.code !== 0) {
           throw new Error(utils.generateErrorMessage(result))
         }
         let data = result.data
-        console.log('data', data)
+        // console.log('data', data)
         if (isNil(data) || isNil(data.list) || isEmpty(data.list)) {
           throw new Error('返回数据为空')
         }
@@ -249,7 +249,7 @@ export default {
           code: this.site.code,
           url: supplementUrl
         })
-        console.log(supplementResult)
+        // console.log(supplementResult)
         if (supplementResult.code !== 0) {
           this.$message.error(utils.generateErrorMessage(supplementResult))
           this.loading = false

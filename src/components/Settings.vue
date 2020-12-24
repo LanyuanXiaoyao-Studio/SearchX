@@ -65,7 +65,7 @@ export default {
       window.nodeDownload('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/common.json', '{}', '', 'utf8')
             .then(result => {
               let data = JSON.parse(result)
-              console.log(data)
+              // console.log(data)
               this.$store.commit('updateAuthor', data['author'])
             })
             .catch(error => {
@@ -77,7 +77,7 @@ export default {
       window.nodeDownload(`https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/disclaimer/${appMode}.json`, '{}', '', 'utf8')
             .then(result => {
               let data = JSON.parse(result)
-              console.log(data)
+              // console.log(data)
               this.$store.commit('updateDisclaimer', data['disclaimer'])
             })
             .catch(error => {
@@ -88,7 +88,7 @@ export default {
       window.nodeDownload(`https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/disclaimer/${appMode}.json`, '{}', '', 'utf8')
             .then(result => {
               let data = JSON.parse(result)
-              console.log(data)
+              // console.log(data)
               this.$store.commit('updatePublish', data['publish'])
             })
             .catch(error => {
@@ -99,7 +99,7 @@ export default {
       window.nodeDownload('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/plugins.json', '{}', '', 'utf8')
             .then(result => {
               let data = JSON.parse(result)
-              console.log(data)
+              // console.log(data)
               this.$store.commit('updatePlugins', data)
             })
             .catch(error => {

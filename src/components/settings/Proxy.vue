@@ -42,8 +42,8 @@ export default {
       'constants',
     ]),
   },
-  mounted() {
-    this.$store.commit('updateSettings')
+  async mounted() {
+    await this.$store.dispatch('updateSettings')
     if (this.settings.proxy) {
       let hostname = this.settings.proxy.hostname
       let port = this.settings.proxy.port
@@ -53,13 +53,13 @@ export default {
     }
   },
   methods: {
-    change() {
+    async change() {
       try {
         let valueSplit = this.proxyUrl.split(':')
         let hostname = valueSplit[0]
         let port = parseInt(valueSplit[1])
         if (hostname && port && hostname !== '' && port > 0) {
-          this.$store.commit('updateProxy', {
+          await this.$store.dispatch('updateProxy', {
             hostname: hostname,
             port: port,
           })
@@ -72,12 +72,12 @@ export default {
         this.$message.error('设置失败')
       }
     },
-    clear() {
-      this.$store.commit('updateProxy', {
+    async clear() {
+      await this.$store.dispatch('updateProxy', {
         hostname: '',
         port: -1
       })
-      squirrel.save(this.settings)
+      await squirrel.save(this.settings)
       this.proxyUrl = ''
       this.$message.success('设置成功')
     }

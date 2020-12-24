@@ -20,7 +20,6 @@ export default {
   mounted() {
     squirrel.services.checkUpdate()
             .then(result => {
-              console.log(result)
               if (result.cmp < 0) {
                 this.$notification['warning']({
                   duration: null,

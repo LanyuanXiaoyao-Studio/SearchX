@@ -14,30 +14,29 @@ else if (appMode === 'electron') {
   squirrel = window.squirrelLib.com.lanyuanxiaoyao.squirrel.electron
 }
 
-console.log(squirrel.info())
 squirrel.debug('false')
 
 let squirrelWrapper = {
-  info: () => JSON.parse(squirrel.info('default')),
-  sites: () => JSON.parse(squirrel.sites('SEARCH')),
-  categories: () => JSON.parse(squirrel.categories('SEARCH')),
-  downloader: () => JSON.parse(squirrel.downloader()),
+  info: async () => JSON.parse(squirrel.info('default')),
+  sites: async () => JSON.parse(squirrel.sites('SEARCH')),
+  categories: async () => JSON.parse(squirrel.categories('SEARCH')),
+  downloader: async () => JSON.parse(squirrel.downloader()),
   page: async request => eval(`(${await squirrel.page(JSON.stringify(request))})`),
-  change: request => JSON.parse(squirrel.change(request)),
-  save: information => squirrel.save(JSON.stringify(information)),
-  fetch: () => JSON.parse(squirrel.fetch()),
-  load: information => JSON.parse(squirrel.load(information)),
-  imports: sites => {
+  change: async request => JSON.parse(squirrel.change(request)),
+  save: async information => squirrel.save(JSON.stringify(information)),
+  fetch: async () => JSON.parse(squirrel.fetch()),
+  load: async information => JSON.parse(squirrel.load(information)),
+  imports: async sites => {
     JSON.parse(squirrel.imports(JSON.stringify(sites)))
-    store.commit('updateSitesAndCategories')
+    await store.dispatch('updateSitesAndCategories')
   },
-  merge: sites => {
+  merge: async sites => {
     let result = JSON.parse(squirrel.merge(JSON.stringify(sites)))
-    store.commit('updateSitesAndCategories')
+    await store.dispatch('updateSitesAndCategories')
     return result
   },
-  exports: () => JSON.parse(squirrel.exports()),
-  debug: enable => JSON.parse(squirrel.debug(enable)),
+  exports: async () => JSON.parse(squirrel.exports()),
+  debug: async enable => JSON.parse(squirrel.debug(enable)),
 }
 
 window.squirrel = squirrelWrapper
@@ -46,26 +45,20 @@ export default {
   ...squirrelWrapper,
   services: {
     async mergeSitesFromFile(path) {
-      console.log('path', path)
       let source = await window.readTextFromFile(path)
-      // console.log('source', source)
       let sites = eval(`(${source})`)
-      // console.log('sites waited import', sites)
-      let result = squirrelWrapper.merge(sites)
+      let result = await squirrelWrapper.merge(sites)
       if (result.code === 0) {
-        store.commit('saveSites')
+        await store.dispatch('saveSites')
       }
       return result
     },
     async mergeSitesFromUrl(url) {
-      console.log('url', url)
       let source = await window.readTextFromUrl(url)
-      // console.log('source', source)
       let sites = eval(`(${source})`)
-      // console.log('sites waited import', sites)
-      let result = squirrelWrapper.merge(sites)
+      let result = await squirrelWrapper.merge(sites)
       if (result.code === 0) {
-        store.commit('saveSites')
+        await store.dispatch('saveSites')
       }
       return result
     },
@@ -73,7 +66,6 @@ export default {
       let versionText = await window.nodeDownload('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/version.json', '{}', '', 'utf8')
       let remoteVersion = JSON.parse(versionText).version
       let currentVersion = store.getters.version
-      console.log('version', remoteVersion, currentVersion, cmpVersion(currentVersion, remoteVersion))
       return {
         current: currentVersion,
         remote: remoteVersion,

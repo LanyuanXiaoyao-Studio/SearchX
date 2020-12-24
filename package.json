@@ -23,6 +23,7 @@
     "ant-design-vue": "^1.7.2",
     "core-js": "^3.6.4",
     "licia": "^1.27.0",
+    "phin": "^3.5.1",
     "vue": "^2.6.12",
     "vue-masonry-css": "^1.0.3",
     "vue-router": "^3.4.6",

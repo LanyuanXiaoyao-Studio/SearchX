@@ -173,12 +173,12 @@ export default {
       })
     },
   },
-  mounted() {
-    this.$store.commit('updateSettings')
-    console.log('subscriptionsWrapper', this.subscriptionsWrapper)
+  async mounted() {
+    await this.$store.dispatch('updateSettings')
+    // console.log('subscriptionsWrapper', this.subscriptionsWrapper)
   },
   methods: {
-    onAddModalOk() {
+    async onAddModalOk() {
       this.addModal.loading = true
       let form = this.addModal.form
       switch (form.type) {
@@ -195,7 +195,7 @@ export default {
             this.$message.error('文件已在订阅列表中')
             break
           }
-          this.$store.commit('updateSubscription', {
+          await this.$store.dispatch('updateSubscription', {
             type: form.type,
             path: form.file
           })
@@ -215,7 +215,7 @@ export default {
             this.$message.error('链接已在订阅列表中')
             break
           }
-          this.$store.commit('updateSubscription', {
+          await this.$store.dispatch('updateSubscription', {
             type: form.type,
             path: form.url
           })
@@ -269,17 +269,17 @@ export default {
       }
       subscription.loading = false
     },
-    removeSubscription(subscription) {
+    async removeSubscription(subscription) {
       if (!isNil(subscription)) {
-        this.$store.commit('removeSubscription', subscription)
+        await this.$store.dispatch('removeSubscription', subscription)
         this.$message.success('删除订阅成功')
       }
       else {
         this.$message.error('无法找到被删除的订阅')
       }
     },
-    removeAllSites() {
-      this.$store.commit('removeAllSites')
+    async removeAllSites() {
+      await this.$store.dispatch('removeAllSites')
       this.$message.success('已清空')
     },
     selectSingleFile() {

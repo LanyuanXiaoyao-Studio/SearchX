@@ -83,7 +83,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.categories)
   },
   computed: {
     siteTags() {
