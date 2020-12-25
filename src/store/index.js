@@ -7,10 +7,16 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    version: '0.2.0',
+    version: '0.2.1',
     sites: [],
     categories: {},
-    settings: {},
+    settings: {
+      sites: [],
+      proxy: {
+        hostname: '',
+        port: -1
+      }
+    },
     about: {
       author: {},
       disclaimer: '',
@@ -45,6 +51,7 @@ const store = new Vuex.Store({
     updatePublish: (state, publish) => (state.about.publish = publish),
     updatePlugins: (state, plugins) => (state.about.plugins = plugins),
     setSites: (state, sites) => (state.sites = sites),
+    setSettingsSites: (state, sites) => (state.settings.sites = sites),
     setCategories: (state, categories) => (state.categories = categories),
     setSettings: (state, settings) => (state.settings = settings),
     setProxy: (state, proxy) => {
@@ -76,11 +83,11 @@ const store = new Vuex.Store({
       else commit('setCategories', {})
       // console.log('categories', result.message, result.timestamp)
     },
-    updateSettings: async ({commit}) => {
+    updateSettings: async ({getters, commit}) => {
       let result = await squirrel.fetch()
       if (result.code === 0) commit('setSettings', result.data)
       else commit('setSettings', {})
-      // console.log('settings', state.settings)
+      // console.log('settings', getters.settings)
     },
     updateProxy: async ({getters, commit}, proxy) => {
       commit('setProxy', proxy)
@@ -94,16 +101,16 @@ const store = new Vuex.Store({
       commit('deleteSubscription', subscription)
       await squirrel.save(getters.settings)
     },
-    saveSites: async ({getters}) => {
+    saveSites: async ({getters, commit}) => {
       let result = await squirrel.exports()
       if (result.code === 0) {
-        getters.settings.sites = result.data
+        commit('setSettingsSites', result.data)
+        await squirrel.save(getters.settings)
       }
-      // console.log('saveSites', state.settings.sites)
-      await squirrel.save(getters.settings)
+      else throw new Error('保存失败')
     },
-    removeAllSites: async ({getters}) => {
-      getters.settings.sites = []
+    removeAllSites: async ({getters, commit}) => {
+      commit('setSettingsSites', [])
       await squirrel.imports(getters.settings.sites)
       await squirrel.save(getters.settings)
       await store.dispatch('updateSitesAndCategories')

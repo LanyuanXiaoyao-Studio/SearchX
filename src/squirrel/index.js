@@ -14,30 +14,39 @@ else if (appMode === 'electron') {
   squirrel = window.squirrelLib.com.lanyuanxiaoyao.squirrel.electron
 }
 
-squirrel.debug('false')
-
-let squirrelWrapper = {
-  info: async () => JSON.parse(squirrel.info('default')),
-  sites: async () => JSON.parse(squirrel.sites('SEARCH')),
-  categories: async () => JSON.parse(squirrel.categories('SEARCH')),
-  downloader: async () => JSON.parse(squirrel.downloader()),
-  page: async request => eval(`(${await squirrel.page(JSON.stringify(request))})`),
-  change: async request => JSON.parse(squirrel.change(request)),
-  save: async information => squirrel.save(JSON.stringify(information)),
-  fetch: async () => JSON.parse(squirrel.fetch()),
-  load: async information => JSON.parse(squirrel.load(information)),
-  imports: async sites => {
-    JSON.parse(squirrel.imports(JSON.stringify(sites)))
-    await store.dispatch('updateSitesAndCategories')
-  },
-  merge: async sites => {
-    let result = JSON.parse(squirrel.merge(JSON.stringify(sites)))
-    await store.dispatch('updateSitesAndCategories')
-    return result
-  },
-  exports: async () => JSON.parse(squirrel.exports()),
-  debug: async enable => JSON.parse(squirrel.debug(enable)),
+let squirrelWrapper
+if (appMode === 'web') {
+  squirrelWrapper = require('./squirrel-web').default
 }
+else {
+  squirrelWrapper = {
+    info: async () => JSON.parse(squirrel.info('default')),
+    sites: async () => JSON.parse(squirrel.sites('SEARCH')),
+    categories: async () => JSON.parse(squirrel.categories('SEARCH')),
+    downloader: async () => JSON.parse(squirrel.downloader()),
+    page: async request => eval(`(${await squirrel.page(JSON.stringify(request))})`),
+    change: async request => JSON.parse(squirrel.change(request)),
+    save: async information => squirrel.save(JSON.stringify(information)),
+    fetch: async () => JSON.parse(squirrel.fetch()),
+    load: async information => JSON.parse(squirrel.load(information)),
+    imports: async sites => {
+      let result = JSON.parse(squirrel.imports(JSON.stringify(sites)))
+      await store.dispatch('updateSitesAndCategories')
+      return result
+    },
+    merge: async sites => {
+      let result = JSON.parse(squirrel.merge(JSON.stringify(sites)))
+      await store.dispatch('updateSitesAndCategories')
+      return result
+    },
+    exports: async () => JSON.parse(squirrel.exports()),
+    debug: async enable => JSON.parse(squirrel.debug(enable)),
+  }
+}
+
+squirrelWrapper.info()
+               .then(result => console.log(result))
+               .catch(error => console.log(error))
 
 window.squirrel = squirrelWrapper
 
@@ -63,7 +72,7 @@ export default {
       return result
     },
     async checkUpdate() {
-      let versionText = await window.nodeDownload('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/version.json', '{}', '', 'utf8')
+      let versionText = await window.download('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/version.json')
       let remoteVersion = JSON.parse(versionText).version
       let currentVersion = store.getters.version
       return {

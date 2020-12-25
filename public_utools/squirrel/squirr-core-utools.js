@@ -24,7 +24,7 @@ window.nodeDownload = async (url, headers, proxy, charset) => {
 
 // uTools ubrowser downloader
 window.uBrowserDownload = async (url, proxy, charset) => {
-  console.log(url, headers, proxy, charset)
+  // console.log(url, headers, proxy, charset)
   if (proxy && proxy !== '') {
     utools.setUBrowserProxy({
       proxyRules: proxy

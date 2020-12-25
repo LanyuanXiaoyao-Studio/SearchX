@@ -3,10 +3,13 @@ require('./squirrel/squirrel-core-electron')
 const {dialog, shell, clipboard} = require('electron').remote
 const fs = require('fs')
 
+window.download = async url => {
+  return await window.nodeDownload(url, '{}', '', 'utf8')
+}
 window.squirrelInitialReady = async () => {
   let result = await squirrel.fetch()
   if (result.code === 0) {
-    console.log('squirrelInitialReady', result)
+    // console.log('squirrelInitialReady', result)
     await squirrel.imports(result.data.sites)
   }
 }
@@ -30,7 +33,7 @@ window.readTextFromFile = path => {
 const http = url => url.indexOf('https') === 0 ? require('https') : require('http')
 window.readTextFromUrl = url => {
   return new Promise((resolve, reject) => {
-    console.log(url, url.indexOf('https'), http(url))
+    // console.log(url, url.indexOf('https'), http(url))
     let request = http(url)
         .get(url, response => {
           let result = ''
@@ -40,5 +43,5 @@ window.readTextFromUrl = url => {
     request.on('error', e => reject(e))
   })
 }
-window.openInExternal = url =>  shell.openExternal(url)
-window.copyText = text => clipboard.writeText(text)
+window.openInExternal = url => shell.openExternal(url)
+window.copyText = async text => clipboard.writeText(text)

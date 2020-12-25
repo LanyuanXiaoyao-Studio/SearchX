@@ -2,11 +2,14 @@ require('./squirrel/squirr-core-utools')
 
 const fs = require('fs')
 
+window.download = async url => {
+  return await window.nodeDownload(url, '{}', '', 'utf8')
+}
 window.squirrelInitialReady = async () => {
-  let result = await squirrel.fetch()
+  let result = await window.squirrel.fetch()
   if (result.code === 0) {
-    console.log('squirrelInitialReady', result)
-    await squirrel.imports(result.data.sites)
+    // console.log('squirrelInitialReady', result)
+    await window.squirrel.imports(result.data.sites)
   }
 }
 window.isFileExists = path => fs.existsSync(path)
@@ -29,7 +32,7 @@ window.readTextFromFile = path => {
 const http = url => url.indexOf('https') === 0 ? require('https') : require('http')
 window.readTextFromUrl = url => {
   return new Promise((resolve, reject) => {
-    console.log(url, url.indexOf('https'), http(url))
+    // console.log(url, url.indexOf('https'), http(url))
     let request = http(url)
         .get(url, response => {
           let result = ''
@@ -39,5 +42,5 @@ window.readTextFromUrl = url => {
     request.on('error', e => reject(e))
   })
 }
-window.openInExternal = url =>  utools.shellOpenExternal(url)
-window.copyText = text => utools.copyText(text)
+window.openInExternal = url => utools.shellOpenExternal(url)
+window.copyText = async text => utools.copyText(text)

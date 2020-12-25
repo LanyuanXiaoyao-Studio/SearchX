@@ -85,6 +85,7 @@
         <a-form-model-item label="订阅类型">
           <a-radio-group v-model="addModal.form.type">
             <a-radio
+                v-if="appMode !== 'web'"
                 name="type"
                 value="FILE"
             >
@@ -104,7 +105,7 @@
               v-model="addModal.form.url"
           />
           <a-input
-              v-if="addModal.form.type === 'FILE'"
+              v-if="addModal.form.type === 'FILE' && appMode !== 'web'"
               v-model="addModal.form.file"
               disabled
           >
@@ -126,6 +127,8 @@ import {mapGetters} from 'vuex'
 import squirrel from '@/squirrel'
 import utils from '@/utils/utils'
 
+const appMode = process.env.VUE_APP_MODE
+
 export default {
   name: 'SettingsRules',
   data() {
@@ -134,7 +137,7 @@ export default {
         visible: false,
         loading: false,
         form: {
-          type: 'FILE',
+          type: 'URL',
           file: '',
           url: '',
         }
@@ -172,6 +175,9 @@ export default {
         return s
       })
     },
+    appMode() {
+      return appMode
+    }
   },
   async mounted() {
     await this.$store.dispatch('updateSettings')

@@ -1,5 +1,4 @@
 'use strict'
-console.log('__dirname', __dirname)
 import {app, BrowserWindow, Menu, protocol} from 'electron'
 import {createProtocol} from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, {VUEJS_DEVTOOLS} from 'electron-devtools-installer'
@@ -59,7 +58,7 @@ async function createWindow() {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', async () => {
-  console.log('ready')
+  // console.log('ready')
   if (isDevelopment && !process.env.IS_TEST) {
     // Install Vue Devtools
     try {
