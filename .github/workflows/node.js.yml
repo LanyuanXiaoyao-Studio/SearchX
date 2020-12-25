@@ -4,11 +4,11 @@ on:
   push:
     branches: [ master ]
     tags:
-      - 'publish*'
+      - publish*
   pull_request:
     branches: [ master ]
     tags:
-      - 'publish*'
+      - publish*
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
