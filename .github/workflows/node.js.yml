@@ -3,6 +3,8 @@ name: SearchX Release
 on:
   push:
     branches: [ master ]
+    tags:
+      - build
   pull_request:
     branches: [ master ]
 
