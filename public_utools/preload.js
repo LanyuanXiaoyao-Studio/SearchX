@@ -5,13 +5,13 @@ const fs = require('fs')
 window.download = async url => {
   return await window.nodeDownload(url, '{}', '', 'utf8')
 }
-window.squirrelInitialReady = async () => {
-  let result = await window.squirrel.fetch()
+utools.onPluginReady(async () => {
+  let result = await squirrel.fetch()
   if (result.code === 0) {
-    // console.log('squirrelInitialReady', result)
-    await window.squirrel.imports(result.data.sites)
+    // console.log('squirrelInitialReady', result, squirrel)
+    await squirrel.imports(result.data.sites)
   }
-}
+})
 window.isFileExists = path => fs.existsSync(path)
 window.singleFileSelect = () => {
   let paths = utools.showOpenDialog({

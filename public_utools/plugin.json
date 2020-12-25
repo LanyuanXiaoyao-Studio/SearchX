@@ -1,5 +1,5 @@
 {
-  "pluginName": "资源搜索",
+  "pluginName": "SearchX",
   "author": "lanyuanxiaoyao",
   "homepage": "https://github.com/LanyuanXiaoyao-Studio/SearchX",
   "description": "海纳百川, 搜遍天下",
@@ -19,7 +19,8 @@
         "Torrent",
         "BT",
         "资源搜索",
-        "种子搜索"
+        "种子搜索",
+        "SearchX"
       ]
     }
   ]

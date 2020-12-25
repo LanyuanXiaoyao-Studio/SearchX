@@ -16,8 +16,8 @@
     "electron:build": "node scripts/pre-build-electron.js && vue-cli-service electron:build --mode electron",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
-    "utools:serve": "node scripts/pre-build-utools.js && vue-cli-service serve --mode utools && node scripts/pre-build-utools.js",
-    "utools:build": "node scripts/pre-build-utools.js && vue-cli-service build --mode utools && node scripts/pre-build-utools.js"
+    "utools:serve": "node scripts/pre-build-utools.js && vue-cli-service serve --mode utools",
+    "utools:build": "node scripts/pre-build-utools.js && vue-cli-service build --mode utools"
   },
   "main": "background.js",
   "dependencies": {

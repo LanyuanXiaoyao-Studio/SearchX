@@ -62,6 +62,7 @@ window.get = () => {
     rev = data._rev
     return data.data
   } catch (e) {
+    console.log(e)
     return defaultData
   }
 }
@@ -84,6 +85,7 @@ window.put = data => {
     }
     return !result.error;
   } catch (e) {
+    console.log(e)
     return false
   }
 }
