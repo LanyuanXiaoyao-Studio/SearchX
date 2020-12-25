@@ -1,7 +1,9 @@
 import superagent from 'superagent'
 import store from '@/store';
 
-const base = 'http://localhost:10086/management'
+const env = process.env.NODE_ENV
+
+const base = env === 'development' ? 'http://localhost:10086/management' : '/management'
 
 window.download = async url => (await superagent.get(`${base}/simpleGet?url=${encodeURIComponent(url)}`)).text
 window.squirrelInitialReady = async () => {
