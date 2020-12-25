@@ -2,11 +2,9 @@ name: SearchX Release
 
 on:
   push:
-    branches: [ master ]
     tags:
       - publish*
   pull_request:
-    branches: [ master ]
     tags:
       - publish*
 
