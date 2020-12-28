@@ -3,19 +3,19 @@ import {cmpVersion} from 'licia'
 
 window.store = store
 
-const appMode = process.env.VUE_APP_MODE
-console.log(`Current Mode: ${appMode}`)
+const mode = store.getters.mode
+console.log(`Current Mode: ${mode}`)
 
 let squirrel
-if (appMode === 'utools') {
+if (mode === 'utools') {
   squirrel = window.squirrelLib.com.lanyuanxiaoyao.squirrel.utools
 }
-else if (appMode === 'electron') {
+else if (mode === 'electron') {
   squirrel = window.squirrelLib.com.lanyuanxiaoyao.squirrel.electron
 }
 
 let squirrelWrapper
-if (appMode === 'web') {
+if (mode === 'web') {
   squirrelWrapper = require('./squirrel-web').default
 }
 else {
