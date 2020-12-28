@@ -2,13 +2,17 @@ const fs = require('fs')
 const path = require('path')
 
 const copyFilesSyncRecursive = (source, destination) => {
+  if (!fs.existsSync(source)) {
+    return
+  }
   let stat = fs.statSync(source)
   if (!stat.isDirectory()) {
     fs.mkdirSync(path.parse(destination).dir, {
       recursive: true
     })
     fs.copyFileSync(source, destination)
-  } else {
+  }
+  else {
     if (!fs.existsSync(destination)) {
       fs.mkdirSync(destination)
     }
@@ -18,10 +22,14 @@ const copyFilesSyncRecursive = (source, destination) => {
 }
 
 const deleteFilesSyncRecursive = source => {
+  if (!fs.existsSync(source)) {
+    return
+  }
   let stat = fs.statSync(source)
   if (!stat.isDirectory()) {
     fs.rmSync(source)
-  } else {
+  }
+  else {
     let names = fs.readdirSync(source)
     names.forEach(name => deleteFilesSyncRecursive(path.join(source, name)))
     fs.rmdirSync(source)
@@ -47,7 +55,8 @@ module.exports = {
   },
   listDirExcludeFiles: (source, names) => {
     let fileNames = fs.readdirSync(source)
-    return fileNames.filter(n => names.indexOf(n) < 0).map(n => path.join(source, n))
+    return fileNames.filter(n => names.indexOf(n) < 0)
+                    .map(n => path.join(source, n))
   }
 }
 
