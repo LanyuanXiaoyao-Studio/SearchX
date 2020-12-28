@@ -1,5 +1,7 @@
 import superagent from 'superagent'
-import store from '@/store';
+import store from '@/store'
+import Vue from 'vue'
+import {isNil} from 'licia'
 
 const env = process.env.NODE_ENV
 
@@ -46,6 +48,35 @@ window.copyText = async text => {
     return
   }
   await navigator.clipboard.writeText(text)
+}
+window.notify = (text, callback) => {
+  let notify = () => {
+    let notification = new Notification('SearchX', {
+      body: text,
+      requireInteraction: !isNil(callback)
+    })
+    if (!isNil(callback)) {
+      notification.onclick = callback
+      notification.close()
+    }
+  }
+  if (Notification.permission === 'granted') {
+    notify()
+  }
+  else if (Notification.permission === 'denied') {
+    Vue.prototype.$message.info(text)
+  }
+  else {
+    Notification.requestPermission()
+                .then(permission => {
+                  if (permission === 'granted') {
+                    notify()
+                  }
+                  else if (permission === 'denied') {
+                    Vue.prototype.$message.info(text)
+                  }
+                })
+  }
 }
 
 export default {

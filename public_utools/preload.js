@@ -44,3 +44,4 @@ window.readTextFromUrl = url => {
 }
 window.openInExternal = url => utools.shellOpenExternal(url)
 window.copyText = async text => utools.copyText(text)
+window.notify = (text, callback) => utools.showNotification(text)

@@ -135,6 +135,7 @@ export default {
     },
     openInExternal(url) {
       window.openInExternal(url)
+      window.notify(`打开 ${url}`, () => window.openInExternal(url))
     },
     generateTagList(item) {
       return utils.generateTagList(item)
