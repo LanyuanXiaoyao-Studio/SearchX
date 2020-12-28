@@ -23,6 +23,13 @@
         >
           清空全部站点
         </a-button>
+        <a-button
+            size="small"
+            type="link"
+            @click="openExampleRules"
+        >
+          示例
+        </a-button>
       </a-space>
     </div>
     <a-table
@@ -296,6 +303,9 @@ export default {
       else {
         this.$message.error('未选择任何文件')
       }
+    },
+    openExampleRules() {
+      window.openInExternal("https://github.com/LanyuanXiaoyao-Studio/SearchX/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E#%E8%AE%A2%E9%98%85%E7%A4%BA%E4%BE%8B")
     }
   }
 }
