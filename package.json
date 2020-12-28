@@ -1,7 +1,7 @@
 {
   "name": "searchx",
   "productName": "SearchX",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "author": {
     "name": "lanyuanxiaoyao",
     "email": "lanyuanxiaoyao@gmail.com"
@@ -17,7 +17,8 @@
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
     "utools:serve": "node scripts/pre-build-utools.js && vue-cli-service serve --mode utools",
-    "utools:build": "node scripts/pre-build-utools.js && vue-cli-service build --mode utools"
+    "utools:build": "node scripts/pre-build-utools.js && vue-cli-service build --mode utools",
+    "clear": "node scripts/clear.js"
   },
   "main": "background.js",
   "dependencies": {

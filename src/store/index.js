@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    version: '0.2.1',
+    version: '0.2.2',
     sites: [],
     categories: {},
     settings: {

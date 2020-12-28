@@ -3,7 +3,7 @@
   "author": "lanyuanxiaoyao",
   "homepage": "https://github.com/LanyuanXiaoyao-Studio/SearchX",
   "description": "海纳百川, 搜遍天下",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "logo": "logo.png",
   "main": "index.html",
   "preload": "preload.js",
