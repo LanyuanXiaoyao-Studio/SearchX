@@ -20,7 +20,7 @@ window.singleFileSelect = () => {
 window.readTextFromFile = path => {
 }
 window.readTextFromUrl = async url => (await superagent.get(`${base}/simpleGet?url=${encodeURIComponent(url)}`)).text
-window.openInExternal = url => window.location.href = url
+window.openInExternal = url => window.open(url)
 window.copyText = async text => {
   let fallback = text => {
     let textArea = document.createElement('textarea')
