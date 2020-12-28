@@ -116,7 +116,7 @@ export default {
   },
   computed: {
     resultListHeight() {
-      return this.clientHeight - 125
+      return this.clientHeight - 110
     }
   },
   methods: {

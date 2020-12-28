@@ -295,21 +295,21 @@ export default {
   .search
     width 100%
     text-align center
-    height 90px
+    height 80px
 
     .app-title
-      padding-top 10px
+      //padding-top 10px
       -webkit-app-region: drag
 
       .ant-page-header
-        padding 5px 0 8px 3px
+        padding 0 0 8px 3px
 
     .search-input
       width 100%
 
   .result
     height 100%
-    margin-top 5px
+    //margin-top 5px
 </style>
 
 <style lang="stylus">
