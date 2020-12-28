@@ -27,7 +27,7 @@
     <a-card
         size="small"
         title="其他作品"
-        v-if="appMode === 'utools'"
+        v-if="mode === 'utools'"
     >
       <Extra/>
     </a-card>
@@ -35,14 +35,13 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 import Proxy from './settings/Proxy'
 import Rules from './settings/Rules'
 import About from './settings/About'
 import Donate from './settings/Donate'
 import Extra from './settings/Extra'
 import isEmpty from 'licia/isEmpty'
-
-const appMode = process.env.VUE_APP_MODE
 
 export default {
   name: 'Settings',
@@ -53,13 +52,12 @@ export default {
     Donate,
     Extra,
   },
-  data() {
-    return {
-      appMode: appMode
-    }
+  computed: {
+    ...mapGetters([
+        'mode'
+    ])
   },
   async mounted() {
-    const appMode = process.env.VUE_APP_MODE
     // 插件信息放在 gitee 上可以保证国内的访问速度, github 在国内访问不稳定
     if (isEmpty(this.$store.getters.about.author)) {
       window.download('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/common.json', '{}', '', 'utf8')
@@ -72,9 +70,8 @@ export default {
               console.log(error)
             })
     }
-    // console.log(appMode)
     if (isEmpty(this.$store.getters.about.disclaimer)) {
-      window.download(`https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/disclaimer/${appMode}.json`, '{}', '', 'utf8')
+      window.download(`https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/disclaimer/${this.mode}.json`, '{}', '', 'utf8')
             .then(result => {
               let data = JSON.parse(result)
               // console.log(data)
@@ -85,7 +82,7 @@ export default {
             })
     }
     if (isEmpty(this.$store.getters.about.publish)) {
-      window.download(`https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/disclaimer/${appMode}.json`, '{}', '', 'utf8')
+      window.download(`https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/disclaimer/${this.mode}.json`, '{}', '', 'utf8')
             .then(result => {
               let data = JSON.parse(result)
               // console.log(data)
@@ -95,7 +92,7 @@ export default {
               console.log(error)
             })
     }
-    if (appMode === 'utools' && isEmpty(this.$store.getters.about.plugins)) {
+    if (this.mode === 'utools' && isEmpty(this.$store.getters.about.plugins)) {
       window.download('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/plugins.json', '{}', '', 'utf8')
             .then(result => {
               let data = JSON.parse(result)
