@@ -2,8 +2,8 @@
   <div class="result-list">
     <a-list
         :data-source="data"
-        item-layout="vertical"
         :style="`height: ${resultListHeight}px`"
+        item-layout="vertical"
     >
       <div slot="header">
         <b>搜索结果</b>
@@ -52,7 +52,7 @@
             type="link"
             @click="openInExternal(item.magnet)"
         >
-          <a-icon type="download" />
+          <a-icon type="download"/>
           下载
         </a-button>
         <a-list-item-meta :description="item.author">
@@ -93,6 +93,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 import utils from '@/utils/utils'
 
 export default {
@@ -115,8 +116,14 @@ export default {
     }
   },
   computed: {
+    ...mapGetters([
+      'mode'
+    ]),
+    listHeightOffset() {
+      return this.mode === 'electron' ? 125 : 110
+    },
     resultListHeight() {
-      return this.clientHeight - 110
+      return this.clientHeight - this.listHeightOffset
     }
   },
   methods: {
@@ -148,15 +155,15 @@ export default {
     overflow auto
 
 .ant-list
-    overflow-y auto
+  overflow-y auto
 
-    .item-image
-      max-height 150px
+  .item-image
+    max-height 150px
 
-    .item-tags
-      margin-top 10px
+  .item-tags
+    margin-top 10px
 
-    .operation-btn
-      margin 0
-      padding 0
+  .operation-btn
+    margin 0
+    padding 0
 </style>
