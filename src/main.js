@@ -4,15 +4,12 @@ import router from './router'
 import store from './store'
 import './plugins/ant'
 import './plugins/masonry'
+import Utils from './utils/utils'
 
 Vue.config.productionTip = false
 
 if (window.squirrelInitialReady) {
-  let key = 'updatable'
-  Vue.prototype.$message.loading({content: '加载数据...', key})
-  window.squirrelInitialReady()
-        .then(result => Vue.prototype.$message.success({content: '加载完成', key}))
-        .catch(error => Vue.prototype.$message.error({content: error, key}))
+  Utils.loadingMessage(window.squirrelInitialReady())
 }
 
 new Vue({
