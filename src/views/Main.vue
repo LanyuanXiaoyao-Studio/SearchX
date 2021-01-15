@@ -1,7 +1,10 @@
 <template>
   <div class="main">
     <div class="search">
-      <div class="app-title">
+      <div
+          :style="mode === 'electron' ? 'margin-top: 13px' : ''"
+          class="app-title"
+      >
         <a-page-header
             :sub-title="slogan"
             :title="title"
@@ -141,6 +144,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'mode',
       'sites',
       'categories',
     ]),
@@ -295,7 +299,7 @@ export default {
   .search
     width 100%
     text-align center
-    height 80px
+    //height 80px
 
     .app-title
       //padding-top 10px
@@ -309,7 +313,8 @@ export default {
 
   .result
     height 100%
-    //margin-top 5px
+
+//margin-top 5px
 </style>
 
 <style lang="stylus">

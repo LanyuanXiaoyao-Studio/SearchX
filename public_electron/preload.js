@@ -1,6 +1,6 @@
 require('./squirrel/squirrel-core-electron')
 
-const {dialog, shell, clipboard} = require('electron').remote
+const {dialog, shell, clipboard, Notification} = require('electron').remote
 const fs = require('fs')
 
 window.download = async url => {
@@ -45,3 +45,18 @@ window.readTextFromUrl = url => {
 }
 window.openInExternal = url => shell.openExternal(url)
 window.copyText = async text => clipboard.writeText(text)
+window.notify = (text, callback) => {
+  if (Notification.isSupported()) {
+    let notification = new Notification({
+      title: 'SearchX',
+      body: text,
+      silent: true,
+    })
+    notification.show()
+    notification.on('click', () => {
+      if (callback) {
+        callback()
+      }
+    })
+  }
+}

@@ -1,11 +1,13 @@
 import superagent from 'superagent'
-import store from '@/store';
+import store from '@/store'
+import Vue from 'vue'
+import {isNil, base64, strToBytes} from 'licia'
 
 const env = process.env.NODE_ENV
 
 const base = env === 'development' ? 'http://localhost:10086/management' : '/management'
 
-window.download = async url => (await superagent.get(`${base}/simpleGet?url=${encodeURIComponent(url)}`)).text
+window.download = async url => (await superagent.get(`${base}/simpleGet?url=${base64.encode(strToBytes(url))}`)).text
 window.squirrelInitialReady = async () => {
   let result = await squirrel.fetch()
   if (result.code === 0) {
@@ -19,7 +21,7 @@ window.singleFileSelect = () => {
 }
 window.readTextFromFile = path => {
 }
-window.readTextFromUrl = async url => (await superagent.get(`${base}/simpleGet?url=${encodeURIComponent(url)}`)).text
+window.readTextFromUrl = async url => (await superagent.get(`${base}/simpleGet?url=${base64.encode(strToBytes(url))}`)).text
 window.openInExternal = url => window.open(url)
 window.copyText = async text => {
   let fallback = text => {
@@ -46,6 +48,35 @@ window.copyText = async text => {
     return
   }
   await navigator.clipboard.writeText(text)
+}
+window.notify = (text, callback) => {
+  let notify = () => {
+    let notification = new Notification('SearchX', {
+      body: text,
+      requireInteraction: !isNil(callback)
+    })
+    if (!isNil(callback)) {
+      notification.onclick = callback
+      notification.close()
+    }
+  }
+  if (Notification.permission === 'granted') {
+    notify()
+  }
+  else if (Notification.permission === 'denied') {
+    Vue.prototype.$message.info(text)
+  }
+  else {
+    Notification.requestPermission()
+                .then(permission => {
+                  if (permission === 'granted') {
+                    notify()
+                  }
+                  else if (permission === 'denied') {
+                    Vue.prototype.$message.info(text)
+                  }
+                })
+  }
 }
 
 export default {

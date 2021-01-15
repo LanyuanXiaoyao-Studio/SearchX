@@ -92,7 +92,7 @@
         <a-form-model-item label="订阅类型">
           <a-radio-group v-model="addModal.form.type">
             <a-radio
-                v-if="appMode !== 'web'"
+                v-if="mode !== 'web'"
                 name="type"
                 value="FILE"
             >
@@ -112,7 +112,7 @@
               v-model="addModal.form.url"
           />
           <a-input
-              v-if="addModal.form.type === 'FILE' && appMode !== 'web'"
+              v-if="addModal.form.type === 'FILE' && mode !== 'web'"
               v-model="addModal.form.file"
               disabled
           >
@@ -133,8 +133,6 @@ import {contain, isAbsoluteUrl, isEmpty, isNil, parallel, splitPath} from 'licia
 import {mapGetters} from 'vuex'
 import squirrel from '@/squirrel'
 import utils from '@/utils/utils'
-
-const appMode = process.env.VUE_APP_MODE
 
 export default {
   name: 'SettingsRules',
@@ -167,6 +165,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'mode',
       'settings',
       'subscriptions',
       'constants',
@@ -182,9 +181,6 @@ export default {
         return s
       })
     },
-    appMode() {
-      return appMode
-    }
   },
   async mounted() {
     await this.$store.dispatch('updateSettings')
@@ -305,7 +301,7 @@ export default {
       }
     },
     openExampleRules() {
-      window.openInExternal("https://github.com/LanyuanXiaoyao-Studio/SearchX/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E#%E8%AE%A2%E9%98%85%E7%A4%BA%E4%BE%8B")
+      window.openInExternal('https://github.com/LanyuanXiaoyao-Studio/SearchX/wiki/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E#%E8%AE%A2%E9%98%85%E7%A4%BA%E4%BE%8B')
     }
   }
 }

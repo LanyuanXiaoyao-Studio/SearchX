@@ -5,9 +5,11 @@ import {isEmpty, isNil} from 'licia'
 
 Vue.use(Vuex)
 
+const appMode = process.env.VUE_APP_MODE
+
 const store = new Vuex.Store({
   state: {
-    version: '0.2.1',
+    version: '0.2.2',
     sites: [],
     categories: {},
     settings: {
@@ -28,6 +30,7 @@ const store = new Vuex.Store({
     }
   },
   getters: {
+    mode: state => appMode,
     version: state => state.version,
     sites: state => state.sites,
     site: state => code => {
