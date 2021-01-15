@@ -18,7 +18,7 @@
 - macOS (仅在 macOS 10.15 系统测试, 其他版本系统随缘)
 - Linux (随缘)
 - uTools (90%)
-- docker&web (90%)
+- docker&web ([使用说明](https://github.com/LanyuanXiaoyao-Studio/SearchX/wiki/%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E#%E7%BD%91%E9%A1%B5%E7%89%88-docker--web))
 
 > Linux 理论上没有太大问题, 因为项目里并没用到与操作系统强绑定的本地库, 但由于开发者接触桌面 Linux 平台几乎为0, 所以不主动适配, 感兴趣的同学可以自行编译打包, Github Release 中发布的 rpm 和 deb 包为工具自动打包生成, 并未测试, 已知问题: 图标无法显示.
 
@@ -29,6 +29,9 @@
 
 # 文档
 - [中文 (建设中)](https://github.com/LanyuanXiaoyao-Studio/SearchX/wiki)
+
+# 更新
+- [更新内容](https://github.com/LanyuanXiaoyao-Studio/SearchX/wiki/%E6%9B%B4%E6%96%B0%E8%AF%B4%E6%98%8E)
 
 # 注意
 - 本项目**唯一发布途径**为上述两个开源仓库, 由于项目属性, **请谨慎提防恶意的二次分发**.
