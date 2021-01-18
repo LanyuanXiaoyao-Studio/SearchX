@@ -90,5 +90,5 @@ window.put = data => {
   }
 }
 
-const squirrelLib = require('./squirrel-utools-0.3.120-SNAPSHOT')
+const squirrelLib = require('./squirrel-utools-0.3.129-SNAPSHOT')
 window.squirrelLib = squirrelLib
