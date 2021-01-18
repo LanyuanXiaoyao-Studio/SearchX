@@ -1,12 +1,9 @@
 name: SearchX Release
 
 on:
-  push:
-    tags:
-      - publish*
   pull_request:
-    tags:
-      - publish*
+    branches:
+      - master
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
