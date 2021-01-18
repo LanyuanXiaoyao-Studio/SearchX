@@ -9,9 +9,9 @@
   "description": "基于 JSON 编写规则的跨平台一站式聚合搜索工具",
   "private": true,
   "scripts": {
-    "web:serve": "vue-cli-service serve --mode webdev",
-    "web:build": "vue-cli-service build --mode web",
-    "web:image": "vue-cli-service build --mode web && /bin/bash scripts/suf-build-web.sh",
+    "web:serve": "node scripts/pre-build-web.js && vue-cli-service serve --mode webdev",
+    "web:build": "node scripts/pre-build-web.js && vue-cli-service build --mode web",
+    "web:image": "node scripts/pre-build-web.js && vue-cli-service build --mode web && /bin/bash scripts/suf-build-web.sh",
     "electron:serve": "node scripts/pre-build-electron.js && vue-cli-service electron:serve --mode electron",
     "electron:build": "node scripts/pre-build-electron.js && vue-cli-service electron:build --mode electron",
     "postinstall": "electron-builder install-app-deps",
