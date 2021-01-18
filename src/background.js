@@ -71,7 +71,7 @@ app.on('ready', async () => {
   // 菜单
   let appMenuTemplate = []
   if (process.platform === 'darwin') {
-    appMenuTemplate.unshift({
+    appMenuTemplate.push({
       label: app.getName(),
       submenu: [
         {
@@ -104,6 +104,20 @@ app.on('ready', async () => {
             app.quit()
           }
         }
+      ]
+    })
+    appMenuTemplate.push({
+      label: 'Edit',
+      submenu: [
+        {role: 'undo'},
+        {role: 'redo'},
+        {type: 'separator'},
+        {role: 'cut'},
+        {role: 'copy'},
+        {role: 'paste'},
+        {role: 'pasteandmatchstyle'},
+        {role: 'delete'},
+        {role: 'selectall'}
       ]
     })
   }
