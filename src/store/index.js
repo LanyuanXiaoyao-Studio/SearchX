@@ -9,7 +9,7 @@ const appMode = process.env.VUE_APP_MODE
 
 const store = new Vuex.Store({
   state: {
-    version: '0.2.2',
+    version: '0.2.3',
     sites: [],
     categories: {},
     settings: {

@@ -11,8 +11,8 @@
         >
           <template slot="tags">
             <img
+                :src="'https://img.shields.io/badge/-' + version +'-lightgrey'"
                 alt="GitHub release (latest by date)"
-                src="https://img.shields.io/badge/-0.2.0-lightgrey"
             >
           </template>
         </a-page-header>
@@ -145,6 +145,7 @@ export default {
   computed: {
     ...mapGetters([
       'mode',
+      'version',
       'sites',
       'categories',
     ]),
