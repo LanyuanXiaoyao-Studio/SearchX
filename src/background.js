@@ -107,17 +107,17 @@ app.on('ready', async () => {
       ]
     })
     appMenuTemplate.push({
-      label: 'Edit',
+      label: '编辑',
       submenu: [
-        {role: 'undo'},
-        {role: 'redo'},
+        {label: '撤销', role: 'undo'},
+        {label: '重做', role: 'redo'},
         {type: 'separator'},
-        {role: 'cut'},
-        {role: 'copy'},
-        {role: 'paste'},
-        {role: 'pasteandmatchstyle'},
-        {role: 'delete'},
-        {role: 'selectall'}
+        {label: '剪切', role: 'cut'},
+        {label: '复制', role: 'copy'},
+        {label: '粘贴', role: 'paste'},
+        {label: '粘贴并匹配样式', role: 'pasteandmatchstyle'},
+        {label: '删除', role: 'delete'},
+        {label: '全选', role: 'selectall'}
       ]
     })
   }
