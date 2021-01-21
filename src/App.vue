@@ -1,14 +1,82 @@
 <template>
   <div class="app">
-    <a-config-provider :locale="zh">
-      <router-view/>
-    </a-config-provider>
+    <a-layout style="height: 100%">
+      <a-layout-header class="app-title">
+        <a-row>
+          <a-col :span="10">
+            <a-page-header
+                :sub-title="slogan"
+                :title="title"
+            >
+              <template slot="tags">
+                <img
+                    :src="'https://img.shields.io/badge/-' + version +'-lightgrey'"
+                    alt="GitHub release (latest by date)"
+                >
+              </template>
+            </a-page-header>
+          </a-col>
+          <a-col :span="13">
+            <a-input-search
+                class="search-input"
+                placeholder="搜索内容"
+            />
+          </a-col>
+        </a-row>
+      </a-layout-header>
+      <a-layout :style="{marginTop: '64px'}">
+        <a-layout-sider>
+          <a-menu
+              class="sider-menu"
+              mode="inline"
+          >
+            <a-menu-item>
+              <a-icon type="home"/>
+              首页
+            </a-menu-item>
+            <a-menu-item>
+              <a-icon type="setting"/>
+              设置
+            </a-menu-item>
+            <a-menu-divider/>
+            <a-menu-item-group
+                v-for="(category, key) in categories"
+                :key="key"
+            >
+              <span slot="title">
+                {{ key }}
+              </span>
+              <a-menu-item
+                  v-for="site in category"
+                  :key="site.code"
+              >
+                <img
+                    :alt="site.name"
+                    :src="site.icon"
+                    class="site-icon"
+                />
+                {{ site.name }}
+              </a-menu-item>
+            </a-menu-item-group>
+          </a-menu>
+        </a-layout-sider>
+        <a-layout style="padding: 0 24px 24px">
+          <a-layout-content>
+            <a-config-provider :locale="zh">
+              <router-view/>
+            </a-config-provider>
+          </a-layout-content>
+        </a-layout>
+      </a-layout>
+    </a-layout>
   </div>
 </template>
 
 <script>
 import squirrel from '@/squirrel'
 import zh from 'ant-design-vue/es/locale/zh_CN'
+import {mapGetters} from 'vuex'
+import {isEmpty} from 'licia';
 
 export default {
   name: 'App',
@@ -48,6 +116,23 @@ export default {
             .catch(error => {
               this.$message.error(`无法检查更新: ${error}`)
             })
+    console.log(this.categories)
+  },
+  computed: {
+    ...mapGetters([
+      'mode',
+      'version',
+      'sites',
+      'categories',
+    ]),
+    title() {
+      let title = process.env.VUE_APP_TITLE
+      return isEmpty(title) ? 'SearchX' : title
+    },
+    slogan() {
+      let slogan = process.env.VUE_APP_SLOGAN
+      return isEmpty(slogan) ? '' : slogan
+    }
   }
 }
 </script>
@@ -58,4 +143,22 @@ export default {
 >
 .app
   height 100%
+
+  .app-title
+    -webkit-app-region: drag
+    background-color white
+    box-shadow: 0 0 5px #666666
+    position fixed
+    z-index 1
+    width 100%
+    height 64px
+    padding 0
+
+  .sider-menu
+    overflow-y auto
+    height 100%
+
+  .site-icon
+    width 20px
+    margin-right 5px
 </style>

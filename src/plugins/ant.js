@@ -16,6 +16,7 @@ import {
   Input,
   Layout,
   List,
+  Menu,
   message,
   Modal,
   Notification,
@@ -61,6 +62,7 @@ Vue.use(Radio)
 Vue.use(Divider)
 Vue.use(Space)
 Vue.use(Notification)
+Vue.use(Menu)
 
 Vue.prototype.$message = message
 Vue.prototype.$notification = Notification
