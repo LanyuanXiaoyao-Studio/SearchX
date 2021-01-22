@@ -4,13 +4,10 @@ import {
   BackTop,
   Button,
   Card,
-  Checkbox,
   Col,
   Collapse,
   ConfigProvider,
   Descriptions,
-  Divider,
-  Drawer,
   Dropdown,
   Empty,
   FormModel,
@@ -23,10 +20,8 @@ import {
   Modal,
   Notification,
   PageHeader,
-  Popover,
   Radio,
   Row,
-  Select,
   Space,
   Spin,
   Table,
@@ -37,12 +32,9 @@ import {
 
 Vue.use(Button)
 Vue.use(Input)
-Vue.use(Select)
 Vue.use(Icon)
-Vue.use(Drawer)
 Vue.use(Descriptions)
 Vue.use(Card)
-Vue.use(Popover)
 Vue.use(Table)
 Vue.use(List)
 Vue.use(Row)
@@ -59,9 +51,7 @@ Vue.use(BackTop)
 Vue.use(Tabs)
 Vue.use(PageHeader)
 Vue.use(FormModel)
-Vue.use(Checkbox)
 Vue.use(Radio)
-Vue.use(Divider)
 Vue.use(Space)
 Vue.use(Notification)
 Vue.use(Menu)
