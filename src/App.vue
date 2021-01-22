@@ -3,7 +3,7 @@
     <a-layout style="height: 100%">
       <a-layout-header class="app-title">
         <a-row>
-          <a-col :span="20">
+          <a-col :span="21">
             <a-page-header
                 :sub-title="slogan"
                 :title="title"
@@ -15,7 +15,7 @@
               </template>
             </a-page-header>
           </a-col>
-          <a-col :span="4">
+          <a-col :span="3">
             <a-space
                 :size="'middle'"
                 class="more"

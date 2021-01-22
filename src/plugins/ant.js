@@ -22,6 +22,7 @@ import {
   PageHeader,
   Radio,
   Row,
+  Skeleton,
   Space,
   Spin,
   Table,
@@ -57,6 +58,7 @@ Vue.use(Notification)
 Vue.use(Menu)
 Vue.use(Dropdown)
 Vue.use(Collapse)
+Vue.use(Skeleton)
 
 Vue.prototype.$message = message
 Vue.prototype.$notification = Notification
