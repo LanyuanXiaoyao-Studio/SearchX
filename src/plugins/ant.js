@@ -6,6 +6,7 @@ import {
   Card,
   Checkbox,
   Col,
+  Collapse,
   ConfigProvider,
   Descriptions,
   Divider,
@@ -65,6 +66,7 @@ Vue.use(Space)
 Vue.use(Notification)
 Vue.use(Menu)
 Vue.use(Dropdown)
+Vue.use(Collapse)
 
 Vue.prototype.$message = message
 Vue.prototype.$notification = Notification

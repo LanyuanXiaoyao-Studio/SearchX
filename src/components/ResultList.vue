@@ -131,7 +131,10 @@ export default {
     scoped
 >
 .result-list
-  padding 5px
+  padding 5px 10px 5px 10px
+  background-color white
+  border-radius 4px
+  border 1px solid #d9d9d9
 
   .site-list-panel
     height 400px

@@ -1,15 +1,28 @@
 <template>
   <div class="site">
     <a-space direction="vertical">
-      <div class="header">
-        <img
-            :alt="site.name"
-            :src="site.icon"
-            class="avatar"
-        />
-        <span class="title">{{ site.name }}</span>
-        <div class="description">{{ site.description }}</div>
-      </div>
+      <a-collapse
+          :bordered="false"
+          class="header"
+      >
+        <template #expandIcon="props">
+          <a-icon
+              :rotate="props.isActive ? 90 : 0"
+              type="caret-right"
+          />
+        </template>
+        <a-collapse-panel>
+          <template slot="header">
+            <img
+                :alt="site.name"
+                :src="site.icon"
+                class="avatar"
+            />
+            <span class="title">{{ site.name }}</span>
+          </template>
+          <div class="description">{{ site.description }}</div>
+        </a-collapse-panel>
+      </a-collapse>
       <a-input-search
           v-model="search"
           :loading="loading"
@@ -235,22 +248,14 @@ export default {
   height 100%
 
   .header
-    height 95px
-    padding 10px
-    background-color white
-    border 1px solid #e7e7e7
-    border-radius 5px
+    background-color #FFFFFF10
 
     .avatar
-      width 25px
-      height 25px
+      width 30px
+      height 30px
 
     .title
+      font-size 1rem
       font-weight 630
       margin 0 0 0 10px
-
-    .description
-      height 55%
-      overflow-y auto
-      margin 5px 0 0 0
 </style>
