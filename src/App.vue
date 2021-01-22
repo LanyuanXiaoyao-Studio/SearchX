@@ -24,18 +24,18 @@
                 />
               </a>
               <a-menu slot="overlay">
-                <a-menu-item>
+                <a-menu-item @click="openUrl('https://github.com/LanyuanXiaoyao-Studio/SearchX')">
                   <a-icon type="github"/>
                   开源
                 </a-menu-item>
-                <a-menu-item>
+                <a-menu-item @click="openUrl('mailto:lanyuanxiaoyao@email.com?subject=%E6%84%8F%E8%A7%81%E5%8F%8D%E9%A6%88&body=(%E8%AF%B7%E8%AF%A6%E7%BB%86%E6%8F%8F%E8%BF%B0%E4%BD%A0%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98)')">
                   <a-icon
                       theme="filled"
                       type="mail"
                   />
                   邮箱
                 </a-menu-item>
-                <a-menu-item>
+                <a-menu-item @click="openUrl('https://github.com/LanyuanXiaoyao-Studio/SearchX/issues')">
                   <a-icon
                       theme="filled"
                       type="question-circle"
@@ -85,9 +85,9 @@
         </a-layout-sider>
         <a-layout style="padding: 0 24px 24px">
           <a-layout-content>
-            <a-config-provider :locale="zh">
-              <router-view/>
-            </a-config-provider>
+<!--            <a-config-provider :locale="zh">-->
+<!--              <router-view/>-->
+<!--            </a-config-provider>-->
           </a-layout-content>
         </a-layout>
       </a-layout>
@@ -99,7 +99,7 @@
 import squirrel from '@/squirrel'
 import zh from 'ant-design-vue/es/locale/zh_CN'
 import {mapGetters} from 'vuex'
-import {isEmpty} from 'licia';
+import {isEmpty, isNil} from 'licia';
 
 export default {
   name: 'App',
@@ -155,6 +155,13 @@ export default {
     slogan() {
       let slogan = process.env.VUE_APP_SLOGAN
       return isEmpty(slogan) ? '' : slogan
+    }
+  },
+  methods: {
+    openUrl(url) {
+      if (!isNil(url) && !isEmpty(url)) {
+        window.openInExternal(url)
+      }
     }
   }
 }
