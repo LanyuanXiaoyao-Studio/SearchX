@@ -2,7 +2,6 @@
   <div class="result-list">
     <a-list
         :data-source="data"
-        :style="`height: ${resultListHeight}px`"
         item-layout="vertical"
     >
       <div slot="header">
@@ -104,27 +103,10 @@ export default {
     loading: Boolean,
     showLoadMore: Boolean,
   },
-  data() {
-    return {
-      clientHeight: 0
-    }
-  },
-  mounted() {
-    this.clientHeight = document.documentElement.clientHeight
-    window.onresize = () => {
-      this.clientHeight = document.documentElement.clientHeight
-    }
-  },
   computed: {
     ...mapGetters([
       'mode'
     ]),
-    listHeightOffset() {
-      return this.mode === 'electron' ? 125 : 110
-    },
-    resultListHeight() {
-      return this.clientHeight - this.listHeightOffset
-    }
   },
   methods: {
     more() {
@@ -153,11 +135,8 @@ export default {
 
   .site-list-panel
     height 400px
-    overflow auto
 
 .ant-list
-  overflow-y auto
-
   .item-image
     max-height 150px
 

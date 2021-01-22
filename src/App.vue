@@ -87,7 +87,11 @@
             </a-menu-item-group>
           </a-menu>
         </a-layout-sider>
-        <a-layout style="padding: 0 24px 24px">
+        <a-layout
+            id="view-content-layout"
+            class="content"
+        >
+          <a-back-top :target="layoutDom"/>
           <a-layout-content>
             <a-config-provider :locale="zh">
               <transition>
@@ -170,6 +174,9 @@ export default {
     },
     generateViewKey() {
       return this.$route.name ? `${this.$route.name}${new Date().getTime()}` : `${this.$route}${new Date().getTime()}`
+    },
+    layoutDom() {
+      return document.getElementById('view-content-layout')
     }
   }
 }
@@ -203,4 +210,11 @@ export default {
   .site-icon
     width 20px
     margin-right 5px
+
+  .content
+    padding 15px
+
+    .ant-back-top
+      bottom: 50px
+      right 45px
 </style>
