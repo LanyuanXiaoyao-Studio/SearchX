@@ -66,6 +66,13 @@
                 设置
               </router-link>
             </a-menu-item>
+            <a-menu-item>
+              <router-link :to="'/merge-search'">
+                <a-icon type="search"/>
+                大搜索
+                <span style="background-color: #ff000095;border-radius: 10px;color: white;padding: 1px 6px 1px 6px;font-size: 0.6rem">beta</span>
+              </router-link>
+            </a-menu-item>
             <a-menu-divider/>
             <a-menu-item-group
                 v-for="(category, key) in categories"

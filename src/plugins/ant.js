@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import {
+  Alert,
   Avatar,
   BackTop,
   Button,
@@ -59,6 +60,7 @@ Vue.use(Menu)
 Vue.use(Dropdown)
 Vue.use(Collapse)
 Vue.use(Skeleton)
+Vue.use(Alert)
 
 Vue.prototype.$message = message
 Vue.prototype.$notification = Notification

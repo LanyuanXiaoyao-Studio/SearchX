@@ -22,6 +22,11 @@ const routes = [
     component: () => import('@/views/Settings.vue')
   },
   {
+    path: '/merge-search',
+    name: 'MergeSearch',
+    component: () => import('@/views/MergeSearch.vue')
+  },
+  {
     path: '/site/:code',
     name: 'Site',
     component: () => import('@/views/Site.vue')
