@@ -54,8 +54,10 @@
               mode="inline"
           >
             <a-menu-item>
-              <a-icon type="home"/>
-              首页
+              <router-link :to="'/'">
+                <a-icon type="home"/>
+                首页
+              </router-link>
             </a-menu-item>
             <a-menu-item>
               <a-icon type="setting"/>
@@ -73,21 +75,25 @@
                   v-for="site in category"
                   :key="site.code"
               >
-                <img
-                    :alt="site.name"
-                    :src="site.icon"
-                    class="site-icon"
-                />
-                {{ site.name }}
+                <router-link :to="`/site/${site.code}`">
+                  <img
+                      :alt="site.name"
+                      :src="site.icon"
+                      class="site-icon"
+                  />
+                  {{ site.name }}
+                </router-link>
               </a-menu-item>
             </a-menu-item-group>
           </a-menu>
         </a-layout-sider>
         <a-layout style="padding: 0 24px 24px">
           <a-layout-content>
-<!--            <a-config-provider :locale="zh">-->
-<!--              <router-view/>-->
-<!--            </a-config-provider>-->
+            <a-config-provider :locale="zh">
+              <transition>
+                <router-view :key="generateViewKey()"/>
+              </transition>
+            </a-config-provider>
           </a-layout-content>
         </a-layout>
       </a-layout>
@@ -139,7 +145,6 @@ export default {
             .catch(error => {
               this.$message.error(`无法检查更新: ${error}`)
             })
-    console.log(this.categories)
   },
   computed: {
     ...mapGetters([
@@ -162,6 +167,9 @@ export default {
       if (!isNil(url) && !isEmpty(url)) {
         window.openInExternal(url)
       }
+    },
+    generateViewKey() {
+      return this.$route.name ? `${this.$route.name}${new Date().getTime()}` : `${this.$route}${new Date().getTime()}`
     }
   }
 }
