@@ -3,7 +3,7 @@
     <a-layout style="height: 100%">
       <a-layout-header class="app-title">
         <a-row>
-          <a-col :span="22">
+          <a-col :span="20">
             <a-page-header
                 :sub-title="slogan"
                 :title="title"
@@ -15,35 +15,36 @@
               </template>
             </a-page-header>
           </a-col>
-          <a-col :span="2">
-            <a-dropdown>
-              <a class="more">
+          <a-col :span="4">
+            <a-space
+                :size="'middle'"
+                class="more"
+            >
+              <a-tooltip title="开源">
+                <a-icon
+                    type="github"
+                    @click="openUrl('https://github.com/LanyuanXiaoyao-Studio/SearchX')"
+                />
+              </a-tooltip>
+              <a-tooltip
+                  title="邮箱"
+                  @click="openUrl('mailto:lanyuanxiaoyao@email.com?subject=%E6%84%8F%E8%A7%81%E5%8F%8D%E9%A6%88&body=(%E8%AF%B7%E8%AF%A6%E7%BB%86%E6%8F%8F%E8%BF%B0%E4%BD%A0%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98)')"
+              >
                 <a-icon
                     theme="filled"
-                    type="message"
+                    type="mail"
                 />
-              </a>
-              <a-menu slot="overlay">
-                <a-menu-item @click="openUrl('https://github.com/LanyuanXiaoyao-Studio/SearchX')">
-                  <a-icon type="github"/>
-                  开源
-                </a-menu-item>
-                <a-menu-item @click="openUrl('mailto:lanyuanxiaoyao@email.com?subject=%E6%84%8F%E8%A7%81%E5%8F%8D%E9%A6%88&body=(%E8%AF%B7%E8%AF%A6%E7%BB%86%E6%8F%8F%E8%BF%B0%E4%BD%A0%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98)')">
-                  <a-icon
-                      theme="filled"
-                      type="mail"
-                  />
-                  邮箱
-                </a-menu-item>
-                <a-menu-item @click="openUrl('https://github.com/LanyuanXiaoyao-Studio/SearchX/issues')">
-                  <a-icon
-                      theme="filled"
-                      type="question-circle"
-                  />
-                  反馈
-                </a-menu-item>
-              </a-menu>
-            </a-dropdown>
+              </a-tooltip>
+              <a-tooltip
+                  title="反馈"
+                  @click="openUrl('https://github.com/LanyuanXiaoyao-Studio/SearchX/issues')"
+              >
+                <a-icon
+                    theme="filled"
+                    type="question-circle"
+                />
+              </a-tooltip>
+            </a-space>
           </a-col>
         </a-row>
       </a-layout-header>
@@ -201,7 +202,8 @@ export default {
 
     .more
       color gray
-      font-size 1.5rem
+      font-size 1.3rem
+      cursor pointer
 
   .sider-menu
     overflow-y auto
