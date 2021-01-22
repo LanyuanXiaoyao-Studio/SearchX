@@ -9,10 +9,9 @@
                 :title="title"
             >
               <template slot="tags">
-                <img
-                    :src="'https://img.shields.io/badge/-' + version +'-lightgrey'"
-                    alt="GitHub release (latest by date)"
-                >
+                <a-tag color="gray">
+                  {{ version }}
+                </a-tag>
               </template>
             </a-page-header>
           </a-col>
@@ -21,18 +20,27 @@
               <a class="more">
                 <a-icon
                     theme="filled"
-                    type="github"
+                    type="message"
                 />
               </a>
               <a-menu slot="overlay">
                 <a-menu-item>
-                  <a href="javascript:;">Github</a>
+                  <a-icon type="github"/>
+                  开源
                 </a-menu-item>
                 <a-menu-item>
-                  <a href="javascript:;">2nd menu item</a>
+                  <a-icon
+                      theme="filled"
+                      type="mail"
+                  />
+                  邮箱
                 </a-menu-item>
                 <a-menu-item>
-                  <a href="javascript:;">3rd menu item</a>
+                  <a-icon
+                      theme="filled"
+                      type="question-circle"
+                  />
+                  反馈
                 </a-menu-item>
               </a-menu>
             </a-dropdown>
@@ -170,8 +178,8 @@ export default {
     padding 0
 
     .more
-      color black
-      font-size 1.4rem
+      color gray
+      font-size 1.5rem
 
   .sider-menu
     overflow-y auto
