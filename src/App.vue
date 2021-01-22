@@ -61,8 +61,10 @@
               </router-link>
             </a-menu-item>
             <a-menu-item>
-              <a-icon type="setting"/>
-              设置
+              <router-link :to="'/settings'">
+                <a-icon type="setting"/>
+                设置
+              </router-link>
             </a-menu-item>
             <a-menu-divider/>
             <a-menu-item-group

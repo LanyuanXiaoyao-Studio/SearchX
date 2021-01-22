@@ -12,6 +12,16 @@ VueRouter.prototype.push = function push(location) {
 
 const routes = [
   {
+    path: '/',
+    name: 'Home',
+    component: () => import('@/views/Home.vue')
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: () => import('@/views/Settings.vue')
+  },
+  {
     path: '/site/:code',
     name: 'Site',
     component: () => import('@/views/Site.vue')

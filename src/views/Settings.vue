@@ -36,11 +36,11 @@
 
 <script>
 import {mapGetters} from 'vuex'
-import Proxy from './settings/Proxy'
-import Rules from './settings/Rules'
-import About from './settings/About'
-import Donate from './settings/Donate'
-import Extra from './settings/Extra'
+import Proxy from '@/components/settings/Proxy'
+import Rules from '@/components/settings/Rules'
+import About from '@/components/settings/About'
+import Donate from '@/components/settings/Donate'
+import Extra from '@/components/settings/Extra'
 import isEmpty from 'licia/isEmpty'
 
 export default {
