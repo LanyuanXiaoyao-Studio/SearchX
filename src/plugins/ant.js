@@ -10,6 +10,7 @@ import {
   Descriptions,
   Divider,
   Drawer,
+  Dropdown,
   Empty,
   FormModel,
   Icon,
@@ -63,6 +64,7 @@ Vue.use(Divider)
 Vue.use(Space)
 Vue.use(Notification)
 Vue.use(Menu)
+Vue.use(Dropdown)
 
 Vue.prototype.$message = message
 Vue.prototype.$notification = Notification

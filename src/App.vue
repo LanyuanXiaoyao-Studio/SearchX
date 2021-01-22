@@ -3,7 +3,7 @@
     <a-layout style="height: 100%">
       <a-layout-header class="app-title">
         <a-row>
-          <a-col :span="10">
+          <a-col :span="22">
             <a-page-header
                 :sub-title="slogan"
                 :title="title"
@@ -16,11 +16,26 @@
               </template>
             </a-page-header>
           </a-col>
-          <a-col :span="13">
-            <a-input-search
-                class="search-input"
-                placeholder="搜索内容"
-            />
+          <a-col :span="2">
+            <a-dropdown>
+              <a class="more">
+                <a-icon
+                    theme="filled"
+                    type="github"
+                />
+              </a>
+              <a-menu slot="overlay">
+                <a-menu-item>
+                  <a href="javascript:;">Github</a>
+                </a-menu-item>
+                <a-menu-item>
+                  <a href="javascript:;">2nd menu item</a>
+                </a-menu-item>
+                <a-menu-item>
+                  <a href="javascript:;">3rd menu item</a>
+                </a-menu-item>
+              </a-menu>
+            </a-dropdown>
           </a-col>
         </a-row>
       </a-layout-header>
@@ -153,6 +168,10 @@ export default {
     width 100%
     height 64px
     padding 0
+
+    .more
+      color black
+      font-size 1.4rem
 
   .sider-menu
     overflow-y auto
