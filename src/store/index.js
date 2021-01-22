@@ -2,12 +2,16 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import squirrel from '@/squirrel'
 import {isEmpty, isNil} from 'licia'
+import UpdateInfoModule from '@/store/update-info'
 
 Vue.use(Vuex)
 
 const appMode = process.env.VUE_APP_MODE
 
 const store = new Vuex.Store({
+  modules: {
+    UpdateInfoModule
+  },
   state: {
     version: '1.0.0',
     sites: [],
@@ -28,7 +32,7 @@ const store = new Vuex.Store({
     },
     constants: {
       spaceSize: 5
-    }
+    },
   },
   getters: {
     mode: state => appMode,

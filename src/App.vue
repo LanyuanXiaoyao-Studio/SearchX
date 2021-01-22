@@ -2,20 +2,16 @@
   <div class="app">
     <a-layout style="height: 100%">
       <a-layout-header class="app-title">
-        <a-row>
-          <a-col :span="21">
-            <a-page-header
-                :sub-title="slogan"
-                :title="title"
-            >
-              <template slot="tags">
-                <a-tag color="gray">
-                  {{ version }}
-                </a-tag>
-              </template>
-            </a-page-header>
-          </a-col>
-          <a-col :span="3">
+        <a-page-header
+            :sub-title="slogan"
+            :title="title"
+        >
+          <template slot="tags">
+            <a-tag color="gray">
+              {{ version }}
+            </a-tag>
+          </template>
+          <template slot="extra">
             <a-space
                 :size="'middle'"
                 class="more"
@@ -45,8 +41,8 @@
                 />
               </a-tooltip>
             </a-space>
-          </a-col>
-        </a-row>
+          </template>
+        </a-page-header>
       </a-layout-header>
       <a-layout :style="{marginTop: '64px'}">
         <a-layout-sider>

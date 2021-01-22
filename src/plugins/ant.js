@@ -29,6 +29,7 @@ import {
   Table,
   Tabs,
   Tag,
+  Timeline,
   Tooltip,
 } from 'ant-design-vue'
 
@@ -61,6 +62,7 @@ Vue.use(Dropdown)
 Vue.use(Collapse)
 Vue.use(Skeleton)
 Vue.use(Alert)
+Vue.use(Timeline)
 
 Vue.prototype.$message = message
 Vue.prototype.$notification = Notification
