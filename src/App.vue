@@ -2,10 +2,13 @@
   <div class="app">
     <a-layout style="height: 100%">
       <a-layout-header class="app-title">
-        <a-page-header
-            :sub-title="slogan"
-            :title="title"
-        >
+        <a-page-header :sub-title="slogan">
+          <template slot="title">
+            <a-space>
+              <img src="/favicon.ico" />
+              {{ title }}
+            </a-space>
+          </template>
           <template slot="tags">
             <a-tag color="gray">
               {{ version }}
