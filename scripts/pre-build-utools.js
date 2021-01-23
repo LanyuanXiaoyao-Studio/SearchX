@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const {batchCopyFilesSync, batchDeleteFilesSync, listDirExcludeFiles} = require('./utils')
 
-batchDeleteFilesSync(listDirExcludeFiles(path.join(__dirname, '..', 'public'), ['index.html']))
+batchDeleteFilesSync(listDirExcludeFiles(path.join(__dirname, '..', 'public'), ['index.html', 'favicon.ico']))
 
 let publicPath = path.join(__dirname, '..', 'public')
 let publicSourcePath = path.join(__dirname, '..', 'public_utools')
