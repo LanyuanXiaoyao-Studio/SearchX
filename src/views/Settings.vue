@@ -13,21 +13,9 @@
       <Rules/>
     </a-card>
     <a-card
-        size="small"
-        title="关于插件"
-    >
-      <About/>
-    </a-card>
-    <a-card
-        size="small"
-        title="支持一下"
-    >
-      <Donate/>
-    </a-card>
-    <a-card
+        v-if="mode === 'utools'"
         size="small"
         title="其他作品"
-        v-if="mode === 'utools'"
     >
       <Extra/>
     </a-card>
@@ -38,72 +26,20 @@
 import {mapGetters} from 'vuex'
 import Proxy from '@/components/settings/Proxy'
 import Rules from '@/components/settings/Rules'
-import About from '@/components/settings/About'
-import Donate from '@/components/settings/Donate'
 import Extra from '@/components/settings/Extra'
-import isEmpty from 'licia/isEmpty'
 
 export default {
   name: 'Settings',
   components: {
     Proxy,
     Rules,
-    About,
-    Donate,
     Extra,
   },
   computed: {
     ...mapGetters([
-        'mode'
+      'mode'
     ])
   },
-  async mounted() {
-    // 插件信息放在 gitee 上可以保证国内的访问速度, github 在国内访问不稳定
-    if (isEmpty(this.$store.getters.about.author)) {
-      window.download('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/common.json', '{}', '', 'utf8')
-            .then(result => {
-              let data = JSON.parse(result)
-              // console.log(data)
-              this.$store.commit('updateAuthor', data['author'])
-            })
-            .catch(error => {
-              console.log(error)
-            })
-    }
-    if (isEmpty(this.$store.getters.about.disclaimer)) {
-      window.download(`https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/disclaimer/${this.mode}.json`, '{}', '', 'utf8')
-            .then(result => {
-              let data = JSON.parse(result)
-              // console.log(data)
-              this.$store.commit('updateDisclaimer', data['disclaimer'])
-            })
-            .catch(error => {
-              console.log(error)
-            })
-    }
-    if (isEmpty(this.$store.getters.about.publish)) {
-      window.download(`https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/disclaimer/${this.mode}.json`, '{}', '', 'utf8')
-            .then(result => {
-              let data = JSON.parse(result)
-              // console.log(data)
-              this.$store.commit('updatePublish', data['publish'])
-            })
-            .catch(error => {
-              console.log(error)
-            })
-    }
-    if (this.mode === 'utools' && isEmpty(this.$store.getters.about.plugins)) {
-      window.download('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/plugins.json', '{}', '', 'utf8')
-            .then(result => {
-              let data = JSON.parse(result)
-              // console.log(data)
-              this.$store.commit('updatePlugins', data)
-            })
-            .catch(error => {
-              console.log(error)
-            })
-    }
-  }
 }
 </script>
 

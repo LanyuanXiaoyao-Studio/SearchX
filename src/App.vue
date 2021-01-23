@@ -62,11 +62,11 @@
                 设置
               </router-link>
             </a-menu-item>
-            <a-menu-item>
+            <a-menu-item disabled>
               <router-link :to="'/merge-search'">
                 <a-icon type="search"/>
                 大搜索
-                <span style="background-color: #ff000095;border-radius: 10px;color: white;padding: 1px 6px 1px 6px;font-size: 0.6rem">beta</span>
+                <span style="background-color: #ff000095;border-radius: 10px;color: white;padding: 1px 6px 1px 6px;margin: 0 0 0 2px; font-size: 0.6rem">开发中</span>
               </router-link>
             </a-menu-item>
             <a-menu-divider/>
@@ -125,36 +125,38 @@ export default {
     }
   },
   mounted() {
-    squirrel.services.checkUpdate()
-            .then(result => {
-              if (result.cmp < 0) {
-                this.$notification['warning']({
-                  duration: null,
-                  message: '发现新版本',
-                  description: `当前版本: ${result.current} → 最新版本: ${result.remote}`,
-                  btn: h => {
-                    return h(
-                        'a-button',
-                        {
-                          props: {
-                            type: 'link',
-                            size: 'small',
-                          },
-                          on: {
-                            click: () => {
-                              alert('hello')
+    if (process.env.NODE_ENV !== 'development') {
+      squirrel.services.checkUpdate()
+              .then(result => {
+                if (result.cmp < 0) {
+                  this.$notification['warning']({
+                    duration: null,
+                    message: '发现新版本',
+                    description: `当前版本: ${result.current} → 最新版本: ${result.remote}`,
+                    btn: h => {
+                      return h(
+                          'a-button',
+                          {
+                            props: {
+                              type: 'link',
+                              size: 'small',
+                            },
+                            on: {
+                              click: () => {
+                                alert('hello')
+                              }
                             }
-                          }
-                        },
-                        '前往下载'
-                    )
-                  }
-                })
-              }
-            })
-            .catch(error => {
-              this.$message.error(`无法检查更新: ${error}`)
-            })
+                          },
+                          '前往下载'
+                      )
+                    }
+                  })
+                }
+              })
+              .catch(error => {
+                this.$message.error(`无法检查更新: ${error}`)
+              })
+    }
   },
   computed: {
     ...mapGetters([

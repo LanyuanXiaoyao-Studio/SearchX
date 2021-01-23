@@ -8,14 +8,6 @@
         v-show="!isLoading"
         v-html="about.disclaimer"
     />
-    <div>
-      <a-button
-          type="link"
-          @click="openPublish"
-      >
-        发布页
-      </a-button>
-    </div>
   </div>
 </template>
 
@@ -25,9 +17,6 @@ import {isEmpty, isNil} from 'licia';
 
 export default {
   name: 'SettingsAbout',
-  mounted() {
-    console.log(this.isLoading)
-  },
   computed: {
     ...mapGetters([
       'about',
@@ -36,14 +25,6 @@ export default {
       return isNil(this.about.disclaimer) || isEmpty(this.about.disclaimer)
     }
   },
-  methods: {
-    openPublish() {
-      let url = this.about.publish
-      if (url && url !== '') {
-        window.openInExternal(url)
-      }
-    }
-  }
 }
 </script>
 
