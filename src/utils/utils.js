@@ -1,5 +1,6 @@
 import {isEmpty, isFn, isPromise} from 'licia'
 import Vue from 'vue'
+import store from '@/store'
 
 export default {
   generateTagList(item) {
@@ -47,6 +48,54 @@ export default {
       } finally {
         hide()
       }
+    }
+  },
+  async loadAbout() {
+    let mode = store.getters.mode
+    // 插件信息放在 gitee 上可以保证国内的访问速度, github 在国内访问不稳定
+    if (isEmpty(store.getters.about.author)) {
+      window.download('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/common.json', '{}', '', 'utf8')
+            .then(result => {
+              let data = JSON.parse(result)
+              // console.log(data)
+              store.commit('updateAuthor', data['author'])
+            })
+            .catch(error => {
+              console.log(error)
+            })
+    }
+    if (isEmpty(store.getters.about.disclaimer)) {
+      window.download(`https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/disclaimer/${mode}.json`, '{}', '', 'utf8')
+            .then(result => {
+              let data = JSON.parse(result)
+              // console.log(data)
+              store.commit('updateDisclaimer', data['disclaimer'])
+            })
+            .catch(error => {
+              console.log(error)
+            })
+    }
+    if (isEmpty(store.getters.about.publish)) {
+      window.download(`https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/utools-torrent/disclaimer/${mode}.json`, '{}', '', 'utf8')
+            .then(result => {
+              let data = JSON.parse(result)
+              // console.log(data)
+              store.commit('updatePublish', data['publish'])
+            })
+            .catch(error => {
+              console.log(error)
+            })
+    }
+    if (mode === 'utools' && isEmpty(store.getters.about.plugins)) {
+      window.download('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/plugins.json', '{}', '', 'utf8')
+            .then(result => {
+              let data = JSON.parse(result)
+              // console.log(data)
+              store.commit('updatePlugins', data)
+            })
+            .catch(error => {
+              console.log(error)
+            })
     }
   }
 }

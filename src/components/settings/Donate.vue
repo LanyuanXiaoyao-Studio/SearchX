@@ -54,6 +54,8 @@ export default {
     scoped
 >
 .settings-donate
+  padding-bottom 20px
+
   .ant-card
     width 360px
 

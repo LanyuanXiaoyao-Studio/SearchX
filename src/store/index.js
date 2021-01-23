@@ -2,14 +2,18 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import squirrel from '@/squirrel'
 import {isEmpty, isNil} from 'licia'
+import UpdateInfoModule from '@/store/update-info'
 
 Vue.use(Vuex)
 
 const appMode = process.env.VUE_APP_MODE
 
 const store = new Vuex.Store({
+  modules: {
+    UpdateInfoModule
+  },
   state: {
-    version: '0.2.3',
+    version: '1.0.0',
     sites: [],
     categories: {},
     settings: {
@@ -19,6 +23,7 @@ const store = new Vuex.Store({
         port: -1
       }
     },
+    appSettings: {},
     about: {
       author: {},
       disclaimer: '',
@@ -27,7 +32,7 @@ const store = new Vuex.Store({
     },
     constants: {
       spaceSize: 5
-    }
+    },
   },
   getters: {
     mode: state => appMode,
@@ -43,6 +48,7 @@ const store = new Vuex.Store({
     },
     categories: state => state.categories,
     settings: state => state.settings,
+    appSettings: state => state.appSettings,
     subscriptions: state => (isEmpty(state.settings) || isNil(state.settings.subscriptions)) ? [] : state.settings.subscriptions,
     proxy: state => (isEmpty(state.settings) || isNil(state.settings.subscriptions)) ? {} : state.settings.proxy,
     about: state => state.about,
@@ -57,6 +63,7 @@ const store = new Vuex.Store({
     setSettingsSites: (state, sites) => (state.settings.sites = sites),
     setCategories: (state, categories) => (state.categories = categories),
     setSettings: (state, settings) => (state.settings = settings),
+    setAppSettings: (state, appSettings) => (state.appSettings = appSettings),
     setProxy: (state, proxy) => {
       if (!isNil(state.settings.proxy)) {
         state.settings.proxy.hostname = proxy.hostname

@@ -1,93 +1,49 @@
 <template>
-  <div class="main">
-    <div class="search">
-      <div
-          :style="mode === 'electron' ? 'margin-top: 13px' : ''"
-          class="app-title"
+  <div class="site">
+    <a-space direction="vertical">
+      <a-collapse
+          :bordered="false"
+          class="header"
       >
-        <a-page-header
-            :sub-title="slogan"
-            :title="title"
-        >
-          <template slot="tags">
+        <template #expandIcon="props">
+          <a-icon
+              :rotate="props.isActive ? 90 : 0"
+              type="caret-right"
+          />
+        </template>
+        <a-collapse-panel>
+          <template slot="header">
             <img
-                :src="'https://img.shields.io/badge/-' + version +'-lightgrey'"
-                alt="GitHub release (latest by date)"
-            >
+                :alt="site.name"
+                :src="site.icon"
+                class="avatar"
+            />
+            <span class="title">{{ site.name }}</span>
           </template>
-        </a-page-header>
-      </div>
+          <div class="description">{{ site.description }}</div>
+        </a-collapse-panel>
+      </a-collapse>
       <a-input-search
           v-model="search"
           :loading="loading"
           class="search-input"
           placeholder="搜索内容"
-          size="large"
           @search="query"
+      />
+      <div
+          id="result"
+          class="result"
       >
-        <a-popover
-            slot="addonBefore"
-            v-model="siteListVisible"
-            overlayClassName="site-list"
-            placement="bottomRight"
-            title="站点列表"
-            trigger="click"
-        >
-          <template slot="content">
-            <div style="height: 400px; overflow: auto">
-              <SiteList
-                  :categories="categories"
-                  :sites="sites"
-                  @select="selectSite"
-              />
-            </div>
-          </template>
-          <span style="cursor: pointer; display: inline-block; width: 150px; font-weight: 500">
-            <a-avatar
-                v-if="site.name"
-                :size="18"
-                :src="site.icon"
-                icon="bulb"
-                shape="square"
-                style="margin-right: 5px; top: -1px"
-            />
-            {{ site.name ? site.name : '选择站点' }}
-          </span>
-        </a-popover>
-        <a-icon
-            slot="addonAfter"
-            type="setting"
-            @click="settingDialog.show = true"
+        <ResultList
+            :data="result"
+            :loading="loading"
+            :open-directly="isOpenDirectly(options)"
+            :show-load-more="showLoadMore"
+            @detail="detail"
+            @more="load"
         />
-      </a-input-search>
-    </div>
-    <div
-        ref="result"
-        class="result"
-    >
-      <a-back-top
-          :visibilityHeight="10"
-      />
-      <ResultList
-          :data="result"
-          :loading="loading"
-          :open-directly="isOpenDirectly(options)"
-          :show-load-more="showLoadMore"
-          @detail="detail"
-          @more="load"
-      />
-    </div>
-    <a-modal
-        :dialogStyle="{top: '20px'}"
-        :footer="null"
-        :keyboard="false"
-        :visible="settingDialog.show"
-        title="设置"
-        width="80%"
-        @cancel="settingDialog.show = false"
-    >
-      <Settings/>
-    </a-modal>
+      </div>
+    </a-space>
     <a-modal
         :closable="!detailDialog.loading"
         :destroyOnClose="true"
@@ -106,21 +62,17 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
-import ResultList from '@/components/ResultList'
-import SiteList from '@/components/SiteList'
-import Settings from '@/components/Settings'
-import Detail from '@/components/Detail'
-import squirrel from '@/squirrel'
-import {contain, isEmpty, isNil} from 'licia'
-import utils from '@/utils/utils'
+import {contain, find, isEmpty, isNil} from 'licia';
+import {mapGetters} from 'vuex';
+import ResultList from '@/components/ResultList';
+import Detail from '@/components/Detail';
+import squirrel from '@/squirrel';
+import utils from '@/utils/utils';
 
 export default {
-  name: 'Main',
+  name: 'Site',
   components: {
     ResultList,
-    SiteList,
-    Settings,
     Detail,
   },
   data() {
@@ -131,10 +83,6 @@ export default {
       result: [],
       options: [],
       loading: false,
-      siteListVisible: false,
-      settingDialog: {
-        show: false,
-      },
       detailDialog: {
         show: false,
         data: {},
@@ -142,26 +90,34 @@ export default {
       },
     }
   },
+  mounted() {
+    let code = this.$route.params.code
+    if (isNil(code) || isEmpty(code)) {
+      this.$message.error('参数 code 不存在')
+      return
+    }
+    let site = this.findSite(code)
+    if (isNil(site)) {
+      this.$message.error('站点 code 不存在')
+      return
+    }
+    this.site = site
+    // console.log('site', this.site.name, this.site)
+  },
   computed: {
     ...mapGetters([
       'mode',
       'version',
       'sites',
-      'categories',
     ]),
     showLoadMore() {
       return !isEmpty(this.result)
     },
-    title() {
-      let title = process.env.VUE_APP_TITLE
-      return isEmpty(title) ? 'SearchX' : title
-    },
-    slogan() {
-      let slogan = process.env.VUE_APP_SLOGAN
-      return isEmpty(slogan) ? '' : slogan
-    }
   },
   methods: {
+    findSite(code) {
+      return find(this.sites, site => site.code === code)
+    },
     async query() {
       if (isEmpty(this.site)) {
         this.$message.warning(`站点未选择`)
@@ -278,14 +234,7 @@ export default {
       }
       return contain(options, 'OPEN_DIRECTLY')
     },
-    resultDom() {
-      return () => this.$refs.result
-    },
-    selectSite(site) {
-      this.site = site
-      this.siteListVisible = false
-    },
-  },
+  }
 }
 </script>
 
@@ -293,32 +242,20 @@ export default {
     lang="stylus"
     scoped
 >
-.main
-  display grid
-  padding 10px
+.site,
+.site .ant-space
+  width 100%
+  height 100%
 
-  .search
-    width 100%
-    text-align center
-    //height 80px
+  .header
+    background-color #FFFFFF10
 
-    .app-title
-      //padding-top 10px
-      -webkit-app-region: drag
+    .avatar
+      width 30px
+      height 30px
 
-      .ant-page-header
-        padding 0 0 8px 3px
-
-    .search-input
-      width 100%
-
-  .result
-    height 100%
-
-//margin-top 5px
-</style>
-
-<style lang="stylus">
-.site-list
-  width 600px
+    .title
+      font-size 1rem
+      font-weight 630
+      margin 0 0 0 10px
 </style>
