@@ -48,6 +48,7 @@
 <a href="https://donate.lanyuanxiaoyao.com" target="_blank"><img src="https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/donate.png" alt="捐赠" width="150px" /></a>
 
 # 截图
-![](https://raw.githubusercontent.com/LanyuanXiaoyao-Studio/SearchX/master/screenshot/sites.png)
 ![](https://raw.githubusercontent.com/LanyuanXiaoyao-Studio/SearchX/master/screenshot/index.png)
 ![](https://raw.githubusercontent.com/LanyuanXiaoyao-Studio/SearchX/master/screenshot/detail.png)
+![](https://raw.githubusercontent.com/LanyuanXiaoyao-Studio/SearchX/master/screenshot/search.png)
+![](https://raw.githubusercontent.com/LanyuanXiaoyao-Studio/SearchX/master/screenshot/search-2.png)
