@@ -1,45 +1,43 @@
 import Vue from 'vue'
 import {
+  Alert,
   Avatar,
   BackTop,
   Button,
   Card,
-  Checkbox,
   Col,
+  Collapse,
   ConfigProvider,
   Descriptions,
-  Divider,
-  Drawer,
+  Dropdown,
   Empty,
   FormModel,
   Icon,
   Input,
   Layout,
   List,
+  Menu,
   message,
   Modal,
   Notification,
   PageHeader,
-  Popover,
   Radio,
   Row,
-  Select,
+  Skeleton,
   Space,
   Spin,
   Table,
   Tabs,
   Tag,
+  Timeline,
   Tooltip,
 } from 'ant-design-vue'
 
 Vue.use(Button)
 Vue.use(Input)
-Vue.use(Select)
 Vue.use(Icon)
-Vue.use(Drawer)
 Vue.use(Descriptions)
 Vue.use(Card)
-Vue.use(Popover)
 Vue.use(Table)
 Vue.use(List)
 Vue.use(Row)
@@ -56,11 +54,15 @@ Vue.use(BackTop)
 Vue.use(Tabs)
 Vue.use(PageHeader)
 Vue.use(FormModel)
-Vue.use(Checkbox)
 Vue.use(Radio)
-Vue.use(Divider)
 Vue.use(Space)
 Vue.use(Notification)
+Vue.use(Menu)
+Vue.use(Dropdown)
+Vue.use(Collapse)
+Vue.use(Skeleton)
+Vue.use(Alert)
+Vue.use(Timeline)
 
 Vue.prototype.$message = message
 Vue.prototype.$notification = Notification

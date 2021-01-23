@@ -243,6 +243,9 @@ export default {
         file: '',
         url: '',
       }
+      if (this.mode === 'web') {
+        this.addModal.form.type = 'URL'
+      }
       this.addModal.visible = false
     },
     importAllSubscriptions() {
