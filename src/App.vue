@@ -146,7 +146,7 @@ export default {
                             },
                             on: {
                               click: () => {
-                                alert('hello')
+                                window.openInExternal('https://github.com/LanyuanXiaoyao-Studio/SearchX/releases/latest')
                               }
                             }
                           },
