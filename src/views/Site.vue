@@ -3,6 +3,7 @@
     <a-space direction="vertical">
       <a-collapse
           :bordered="false"
+          :defaultActiveKey="'site'"
           class="header"
       >
         <template #expandIcon="props">
@@ -11,7 +12,7 @@
               type="caret-right"
           />
         </template>
-        <a-collapse-panel>
+        <a-collapse-panel key="site">
           <template slot="header">
             <img
                 :alt="site.name"
@@ -20,7 +21,7 @@
             />
             <span class="title">{{ site.name }}</span>
           </template>
-          <div class="description">{{ site.description }}</div>
+          <SiteDescription :site="site"/>
         </a-collapse-panel>
       </a-collapse>
       <a-input-search
@@ -66,6 +67,7 @@ import {contain, find, isEmpty, isNil} from 'licia';
 import {mapGetters} from 'vuex';
 import ResultList from '@/components/ResultList';
 import Detail from '@/components/Detail';
+import SiteDescription from '@/components/SiteDescription';
 import squirrel from '@/squirrel';
 import utils from '@/utils/utils';
 
@@ -74,6 +76,7 @@ export default {
   components: {
     ResultList,
     Detail,
+    SiteDescription,
   },
   data() {
     return {

@@ -97,5 +97,13 @@ export default {
               console.log(error)
             })
     }
+  },
+  // 方便在各个地方使用 mixin 混入的方法
+  openUrl() {
+    return {
+      openUrl(url) {
+        window.openInExternal(url)
+      }
+    }
   }
 }
