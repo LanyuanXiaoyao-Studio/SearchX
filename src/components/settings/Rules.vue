@@ -59,10 +59,10 @@
           />
         </a-tooltip>
       </span>
-      <span
-          slot="action"
-          slot-scope="subscription"
-      >
+        <span
+            slot="action"
+            slot-scope="subscription"
+        >
         <a-space :size="constants.spaceSize">
           <a-button
               :loading="subscription.loading"
@@ -289,7 +289,6 @@ export default {
     async removeSubscription(subscription) {
       if (!isNil(subscription)) {
         await this.$store.dispatch('removeSubscription', subscription)
-        this.$message.success('删除订阅成功')
       }
       else {
         this.$message.error('无法找到被删除的订阅')
@@ -297,7 +296,6 @@ export default {
     },
     async removeAllSites() {
       await this.$store.dispatch('removeAllSites')
-      this.$message.success('已清空')
     },
     selectSingleFile() {
       let path = window.singleFileSelect()

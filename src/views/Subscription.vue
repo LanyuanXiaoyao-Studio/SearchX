@@ -11,7 +11,7 @@
       >
         <a-table
             :columns="columns"
-            :data-source="sites"
+            :data-source="sitesSource"
             :pagination="false"
             :rowKey="'path'"
             class="rules-table ant-card-bordered"
@@ -60,6 +60,7 @@
                   size="small"
                   theme="filled"
                   type="link"
+                  @click="deleteSite(site.code)"
               />
             </a-space>
           </span>
@@ -115,14 +116,21 @@ export default {
       ]
     }
   },
+  mounted() {
+    console.log(this.sites, this.sitesSource)
+  },
   computed: {
     ...mapGetters([
       'sites',
+      'sitesSource',
       'constants'
     ])
   },
   methods: {
-    ...Utils.openUrl()
+    ...Utils.openUrl(),
+    deleteSite(code) {
+      this.$store.dispatch('removeSites', [code])
+    }
   }
 }
 </script>

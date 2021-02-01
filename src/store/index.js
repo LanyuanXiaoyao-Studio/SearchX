@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import squirrel from '@/squirrel'
-import {isEmpty, isNil} from 'licia'
+import {findIdx, isEmpty, isNil} from 'licia'
 import UpdateInfoModule from '@/store/update-info'
 
 Vue.use(Vuex)
@@ -38,6 +38,7 @@ const store = new Vuex.Store({
     mode: state => appMode,
     version: state => state.version,
     sites: state => state.sites,
+    sitesSource: state => state.settings.sites,
     site: state => code => {
       for (let i = 0, length = state.sites.length; i < length; i++) {
         let site = state.sites[i]
@@ -60,6 +61,11 @@ const store = new Vuex.Store({
     updatePublish: (state, publish) => (state.about.publish = publish),
     updatePlugins: (state, plugins) => (state.about.plugins = plugins),
     setSites: (state, sites) => (state.sites = sites),
+    deleteSites: (state, codes) => {
+      if (!isNil(state.settings.sites)) {
+        state.settings.sites = state.settings.sites.filter(s => findIdx(codes, c => s.code === c) < 0)
+      }
+    },
     setSettingsSites: (state, sites) => (state.settings.sites = sites),
     setCategories: (state, categories) => (state.categories = categories),
     setSettings: (state, settings) => (state.settings = settings),
@@ -82,7 +88,7 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    updateSitesAndCategories: async ({commit}) => {
+    updateSitesAndCategories: async ({getters, commit}) => {
       let result = await squirrel.sites()
       if (result.code === 0) commit('setSites', result.data)
       else commit('setSites', [])
@@ -91,7 +97,7 @@ const store = new Vuex.Store({
       result = await squirrel.categories()
       if (result.code === 0) commit('setCategories', result.data)
       else commit('setCategories', {})
-      // console.log('categories', result.message, result.timestamp)
+      console.log('categories', getters.categories)
     },
     updateSettings: async ({getters, commit}) => {
       let result = await squirrel.fetch()
@@ -110,6 +116,7 @@ const store = new Vuex.Store({
     removeSubscription: async ({getters, commit}, subscription) => {
       commit('deleteSubscription', subscription)
       await squirrel.save(getters.settings)
+      Vue.prototype.$message.success('删除订阅成功')
     },
     saveSites: async ({getters, commit}) => {
       let result = await squirrel.exports()
@@ -119,11 +126,19 @@ const store = new Vuex.Store({
       }
       else throw new Error('保存失败')
     },
+    removeSites: async ({getters, commit, dispatch}, codes) => {
+      commit('deleteSites', codes)
+      await squirrel.imports(getters.settings.sites)
+      await squirrel.save(getters.settings)
+      await dispatch('updateSitesAndCategories')
+      Vue.prototype.$message.success('删除站点成功')
+    },
     removeAllSites: async ({getters, commit}) => {
       commit('setSettingsSites', [])
       await squirrel.imports(getters.settings.sites)
       await squirrel.save(getters.settings)
       await store.dispatch('updateSitesAndCategories')
+      Vue.prototype.$message.success('已清空全部站点')
     },
   }
 })
