@@ -30,20 +30,29 @@
               slot="name"
               slot-scope="site"
           >
-            <span class="site-name">{{ site.name }}</span>
+            <a-tooltip :title="site.home">
+              <span
+                  class="site-name"
+                  @click="openUrl(site.home)"
+              >
+                {{ site.name }}
+              </span>
+            </a-tooltip>
           </span>
           <span
               slot="action"
-              slot-scope="subscription"
+              slot-scope="site"
           >
             <a-space :size="constants.spaceSize">
-              <a-button
-                  class="table-action-button"
-                  icon="reload"
-                  shape="circle"
-                  size="small"
-                  type="link"
-              />
+              <a-tooltip title="查看规则">
+                <a-button
+                    class="table-action-button"
+                    icon="eye"
+                    shape="circle"
+                    size="small"
+                    type="link"
+                />
+              </a-tooltip>
               <a-button
                   class="table-action-button"
                   icon="delete"
@@ -63,11 +72,12 @@
 <script>
 import {mapGetters} from 'vuex'
 import Rules from '@/components/settings/Rules'
+import Utils from '@/utils/utils'
 
 export default {
   name: 'Subscription',
   components: {
-    Rules
+    Rules,
   },
   data() {
     return {
@@ -110,6 +120,9 @@ export default {
       'sites',
       'constants'
     ])
+  },
+  methods: {
+    ...Utils.openUrl()
   }
 }
 </script>
