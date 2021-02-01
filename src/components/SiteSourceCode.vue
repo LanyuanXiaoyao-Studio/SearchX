@@ -3,8 +3,9 @@
     <MonacoEditor
         v-model="siteSourceJsonText"
         :options="options"
-        language="json"
+        :style="{width: '100%', height: editorHeight}"
         class="editor"
+        language="json"
     />
   </div>
 </template>
@@ -22,14 +23,23 @@ export default {
   },
   data() {
     return {
+      clientHeight: 500,
       options: {
-        readOnly: true
+        readOnly: true,
+        scrollBeyondLastLine: false,
+        wordWrap: 'on',
       }
     }
+  },
+  mounted() {
+    this.clientHeight = document.documentElement.clientHeight
   },
   computed: {
     siteSourceJsonText() {
       return JSON.stringify(this.siteSource, null, 2)
+    },
+    editorHeight() {
+      return this.clientHeight * 0.85 + 'px'
     }
   }
 }
@@ -39,8 +49,4 @@ export default {
     lang="stylus"
     scoped
 >
-.site-source-code
-  .editor
-    width 100%
-    height 500px
 </style>
