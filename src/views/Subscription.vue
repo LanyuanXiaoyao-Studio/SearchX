@@ -51,6 +51,7 @@
                     shape="circle"
                     size="small"
                     type="link"
+                    @click="showSiteSource(site)"
                 />
               </a-tooltip>
               <a-button
@@ -67,18 +68,30 @@
         </a-table>
       </a-card>
     </a-space>
+    <a-modal
+        :destroyOnClose="true"
+        :dialogStyle="{top: '20px'}"
+        :footer="null"
+        :visible=" sourceDialog.show"
+        title="规则源码"
+        @cancel="sourceDialog.show = false"
+    >
+      <SiteSourceCode :site-source="sourceDialog.siteSource" />
+    </a-modal>
   </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
 import Rules from '@/components/settings/Rules'
+import SiteSourceCode from '@/components/SiteSourceCode'
 import Utils from '@/utils/utils'
 
 export default {
   name: 'Subscription',
   components: {
     Rules,
+    SiteSourceCode,
   },
   data() {
     return {
@@ -113,11 +126,14 @@ export default {
           fixed: 'right',
           width: 70,
         }
-      ]
+      ],
+      sourceDialog: {
+        show: false,
+        siteSource: {},
+      }
     }
   },
   mounted() {
-    console.log(this.sites, this.sitesSource)
   },
   computed: {
     ...mapGetters([
@@ -128,6 +144,10 @@ export default {
   },
   methods: {
     ...Utils.openUrl(),
+    showSiteSource(siteSource) {
+      this.sourceDialog.siteSource = siteSource
+      this.sourceDialog.show = true
+    },
     deleteSite(code) {
       this.$store.dispatch('removeSites', [code])
     }
