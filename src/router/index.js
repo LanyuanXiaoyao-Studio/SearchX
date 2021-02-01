@@ -22,6 +22,11 @@ const routes = [
     component: () => import('@/views/Settings.vue')
   },
   {
+    path: '/subscription',
+    name: 'Subscription',
+    component: () => import('@/views/Subscription')
+  },
+  {
     path: '/merge-search',
     name: 'MergeSearch',
     component: () => import('@/views/MergeSearch.vue')

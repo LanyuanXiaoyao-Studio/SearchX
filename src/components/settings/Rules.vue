@@ -1,47 +1,51 @@
 <template>
   <div class="settings-rules">
-    <div class="setting-buttons">
-      <a-space :size="constants.spaceSize">
-        <a-button
-            size="small"
-            type="primary"
-            @click="addModal.visible = true"
-        >
-          新增订阅
-        </a-button>
-        <a-button
-            size="small"
-            type="default"
-            @click="importAllSubscriptions"
-        >
-          全部更新
-        </a-button>
-        <a-button
-            size="small"
-            type="danger"
-            @click="removeAllSites"
-        >
-          清空全部站点
-        </a-button>
-        <a-button
-            size="small"
-            type="link"
-            @click="openExampleRules"
-        >
-          示例
-        </a-button>
-      </a-space>
-    </div>
-    <a-table
-        :columns="columns"
-        :data-source="subscriptionsWrapper"
-        :pagination="false"
-        :rowKey="'path'"
-        :scroll="{y: 240}"
-        :showHeader="false"
-        class="rules-table ant-card-bordered"
+    <a-card
         size="small"
+        title="规则订阅"
     >
+      <div class="setting-buttons">
+        <a-space :size="constants.spaceSize">
+          <a-button
+              size="small"
+              type="primary"
+              @click="addModal.visible = true"
+          >
+            新增订阅
+          </a-button>
+          <a-button
+              size="small"
+              type="default"
+              @click="importAllSubscriptions"
+          >
+            全部更新
+          </a-button>
+          <a-button
+              size="small"
+              type="danger"
+              @click="removeAllSites"
+          >
+            清空全部站点
+          </a-button>
+          <a-button
+              size="small"
+              type="link"
+              @click="openExampleRules"
+          >
+            示例
+          </a-button>
+        </a-space>
+      </div>
+      <a-table
+          :columns="columns"
+          :data-source="subscriptionsWrapper"
+          :pagination="false"
+          :rowKey="'path'"
+          :scroll="{y: 240}"
+          :showHeader="false"
+          class="rules-table ant-card-bordered"
+          size="small"
+      >
       <span
           slot="path"
           slot-scope="subscription"
@@ -55,10 +59,10 @@
           />
         </a-tooltip>
       </span>
-      <span
-          slot="action"
-          slot-scope="subscription"
-      >
+        <span
+            slot="action"
+            slot-scope="subscription"
+        >
         <a-space :size="constants.spaceSize">
           <a-button
               :loading="subscription.loading"
@@ -80,7 +84,8 @@
           />
         </a-space>
       </span>
-    </a-table>
+      </a-table>
+    </a-card>
     <a-modal
         :confirm-loading="addModal.loading"
         :visible="addModal.visible"

@@ -65,6 +65,12 @@
                 设置
               </router-link>
             </a-menu-item>
+            <a-menu-item>
+              <router-link :to="'/subscription'">
+                <a-icon type="cloud"/>
+                订阅
+              </router-link>
+            </a-menu-item>
             <a-menu-item disabled>
               <router-link :to="'/merge-search'">
                 <a-icon type="search"/>

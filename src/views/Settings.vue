@@ -6,12 +6,7 @@
     >
       <Proxy/>
     </a-card>
-    <a-card
-        size="small"
-        title="规则订阅"
-    >
-      <Rules/>
-    </a-card>
+    <Rules/>
     <a-card
         v-if="mode === 'utools'"
         size="small"
