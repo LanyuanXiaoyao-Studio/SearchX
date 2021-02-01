@@ -73,14 +73,14 @@
               <router-link :to="'/subscription'">
                 <a-icon type="cloud"/>
                 订阅
-                <DevelopmentTag />
+                <DevelopmentTag/>
               </router-link>
             </a-menu-item>
             <a-menu-item disabled>
               <router-link :to="'/merge-search'">
                 <a-icon type="search"/>
                 搜索
-                <DevelopmentTag />
+                <DevelopmentTag/>
               </router-link>
             </a-menu-item>
             <a-menu-divider/>
