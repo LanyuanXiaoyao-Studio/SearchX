@@ -13,7 +13,7 @@ const store = new Vuex.Store({
     UpdateInfoModule
   },
   state: {
-    version: '1.0.2',
+    version: '1.1.0',
     sites: [],
     categories: {},
     settings: {
