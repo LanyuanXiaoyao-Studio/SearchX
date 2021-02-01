@@ -59,10 +59,10 @@
           />
         </a-tooltip>
       </span>
-        <span
-            slot="action"
-            slot-scope="subscription"
-        >
+      <span
+          slot="action"
+          slot-scope="subscription"
+      >
         <a-space :size="constants.spaceSize">
           <a-button
               :loading="subscription.loading"
