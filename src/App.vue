@@ -4,7 +4,10 @@
       <a-layout-header class="app-title">
         <a-page-header :sub-title="slogan">
           <template slot="title">
-            <router-link to="/" style="color: black">
+            <router-link
+                style="color: black"
+                to="/"
+            >
               <a-space size="small">
                 <img
                     alt="title-icon"
@@ -56,28 +59,32 @@
       <a-layout :style="{marginTop: '64px'}">
         <a-layout-sider>
           <a-menu
+              v-model="defaultSelectedKeys"
               class="sider-menu"
               mode="inline"
           >
-            <a-menu-item>
+            <a-menu-item key="/">
               <router-link :to="'/'">
                 <a-icon type="home"/>
                 首页
               </router-link>
             </a-menu-item>
-            <a-menu-item>
+            <a-menu-item key="/settings">
               <router-link :to="'/settings'">
                 <a-icon type="setting"/>
                 设置
               </router-link>
             </a-menu-item>
-            <a-menu-item>
+            <a-menu-item key="/subscription">
               <router-link :to="'/subscription'">
                 <a-icon type="cloud"/>
                 订阅
               </router-link>
             </a-menu-item>
-            <a-menu-item disabled>
+            <a-menu-item
+                key="/merge-search"
+                disabled
+            >
               <router-link :to="'/merge-search'">
                 <a-icon type="search"/>
                 搜索
@@ -94,7 +101,7 @@
               </span>
               <a-menu-item
                   v-for="site in category"
-                  :key="site.code"
+                  :key="`/site/${site.code}`"
               >
                 <router-link :to="`/site/${site.code}`">
                   <img
@@ -140,7 +147,7 @@ export default {
   },
   data() {
     return {
-      zh,
+      zh
     }
   },
   mounted() {
@@ -179,11 +186,15 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'currentUrl',
       'mode',
       'version',
       'sites',
       'categories',
     ]),
+    defaultSelectedKeys() {
+      return [this.currentUrl]
+    },
     title() {
       let title = process.env.VUE_APP_TITLE
       return isEmpty(title) ? 'SearchX' : title

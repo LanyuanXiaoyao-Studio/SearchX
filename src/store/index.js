@@ -13,6 +13,7 @@ const store = new Vuex.Store({
     UpdateInfoModule
   },
   state: {
+    currentUrl: '/',
     version: '1.1.0',
     sites: [],
     categories: {},
@@ -35,6 +36,7 @@ const store = new Vuex.Store({
     },
   },
   getters: {
+    currentUrl: state => state.currentUrl,
     mode: state => appMode,
     version: state => state.version,
     sites: state => state.sites,
@@ -56,6 +58,7 @@ const store = new Vuex.Store({
     constants: state => state.constants,
   },
   mutations: {
+    updateCurrentUrl: (state, url) => (state.currentUrl = url),
     updateAuthor: (state, author) => (state.about.author = author),
     updateDisclaimer: (state, disclaimer) => (state.about.disclaimer = disclaimer),
     updatePublish: (state, publish) => (state.about.publish = publish),
