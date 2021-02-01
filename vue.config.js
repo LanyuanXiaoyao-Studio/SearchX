@@ -1,6 +1,7 @@
 const CopyPlugin = require('copy-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const MangleJsClassPlugin = require('mangle-js-webpack-plugin')
+const MonacoEditorPlugin = require('monaco-editor-webpack-plugin')
 const path = require('path')
 
 const appMode = process.env.VUE_APP_MODE
@@ -24,6 +25,11 @@ module.exports = {
                 to: path.join(distPath, 'README.md'),
               }
             ],
+          }])
+    config.plugin('monaco-editor-plugin')
+          .use(MonacoEditorPlugin, [{
+            features: ['!gotoSymbol'],
+            languages: ['json']
           }])
     if (process.env.NODE_ENV === 'production') {
       config.optimization

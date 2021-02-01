@@ -97,7 +97,6 @@ const store = new Vuex.Store({
       result = await squirrel.categories()
       if (result.code === 0) commit('setCategories', result.data)
       else commit('setCategories', {})
-      console.log('categories', getters.categories)
     },
     updateSettings: async ({getters, commit}) => {
       let result = await squirrel.fetch()

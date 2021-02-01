@@ -13,7 +13,7 @@
             :columns="columns"
             :data-source="sitesSource"
             :pagination="false"
-            :rowKey="'path'"
+            :rowKey="'code'"
             class="rules-table ant-card-bordered"
         >
           <span
@@ -74,9 +74,10 @@
         :footer="null"
         :visible=" sourceDialog.show"
         title="规则源码"
+        width="80%"
         @cancel="sourceDialog.show = false"
     >
-      <SiteSourceCode :site-source="sourceDialog.siteSource" />
+      <SiteSourceCode :site-source="sourceDialog.siteSource"/>
     </a-modal>
   </div>
 </template>

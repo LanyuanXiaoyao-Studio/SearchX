@@ -69,11 +69,10 @@
                 设置
               </router-link>
             </a-menu-item>
-            <a-menu-item disabled>
+            <a-menu-item>
               <router-link :to="'/subscription'">
                 <a-icon type="cloud"/>
                 订阅
-                <DevelopmentTag/>
               </router-link>
             </a-menu-item>
             <a-menu-item disabled>
