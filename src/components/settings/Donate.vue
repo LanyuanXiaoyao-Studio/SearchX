@@ -1,39 +1,16 @@
-<template>
-  <div class="settings-donate">
-    <p
-        style="font-family: serif"
-        v-html="about.author.lines"
-    />
-    <a-card>
-      <a-row :gutter="10">
-        <a-col :span="8">
-          <a-avatar
-              :size="110"
-              :src="about.author.donateCode"
-              shape="square"
-          />
-        </a-col>
-        <a-col :span="16">
-          <div class="business-card">
-            <a-avatar
-                :src="about.author.avatar"
-                class="avatar"
-                size="large"
-            />
-            <div class="name">
-                <span class="find-me">
-                  {{ about.author.name }}
-                </span>
-            </div>
-            <div
-                class="slogan"
-                v-html="about.author.slogan"
-            />
-          </div>
-        </a-col>
-      </a-row>
-    </a-card>
-  </div>
+<template lang="pug">
+  .settings-donate
+    p(style={fontFamily: 'serif'} v-html="about.author.lines")
+    a-card
+      a-row(:gutter="10")
+        a-col(:span="8")
+          a-avatar(:size="110" :src="about.author.donateCode" shape="square")
+        a-col(:span="16")
+          .business-card
+            a-avatar.avatar(:src="about.author.avatar" size="large")
+            .name
+              span.find-me {{ about.author.name }}
+            .slogan(v-html="about.author.slogan")
 </template>
 
 <script>

@@ -1,62 +1,14 @@
-<template>
-  <div class="detail">
-    <a-descriptions
-        :column="2"
-        size="small"
-    >
-      <a-descriptions-item
-          v-if="text.title"
-          :span="2"
-          label="名称"
-      >
-        {{ text.title }}
-      </a-descriptions-item>
-      <a-descriptions-item
-          v-for="tag in generateTagList(text)"
-          :key="tag.name"
-          :label="tag.name"
-      >
-        {{ tag.content }}
-      </a-descriptions-item>
-      <a-descriptions-item
-          v-if="text.description"
-          :span="2"
-          label="描述"
-      >
-        {{ text.description }}
-      </a-descriptions-item>
-    </a-descriptions>
-    <a-card
-        v-for="item in list"
-        :key="item.content"
-        :title="item.title ? item.title : ''"
-        size="small"
-    >
-          <span slot="extra">
-            <a-button
-                :disabled="!item.content"
-                size="small"
-                type="link"
-                @click="copy(item.content)"
-            >
-              复制
-            </a-button>
-            <a-button
-                :disabled="!item.content"
-                size="small"
-                type="link"
-                @click="open(item.content)"
-            >
-              打开
-            </a-button>
-          </span>
-      <a-textarea
-          :auto-size="{ minRows: 1, maxRows: 5 }"
-          :value="item.content ? item.content : ''"
-          readOnly
-      />
-    </a-card>
-  </div>
+<template lang="pug">
+  .detail
+    a-descriptions(:column="2" size="small")
+      a-descriptions-item(v-if="text.title" :span="2" label="名称") {{ text.title }}
+      a-descriptions-item(v-for="tag in generateTagList(text)" :key="tag.name" :label="tag.name") {{ tag.content }}
+      a-descriptions-item(v-if="text.description" :span="2" label="描述") {{ text.description }}
+    a-card(v-for="item in list" :key="item.content" :title="item.title ? item.title : ''" size="small")
+      span(slot="extra")
+        a-button(:disabled="!item.content" size="small" type="link" @click="copy(item.content)") 复制
+        a-button(:disabled="!item.content" size="small" type="link" @click="open(item.content)") 打开
+      a-textarea(:auto-size="{ minRows: 1, maxRows: 5 }" :value="item.content ? item.content : ''" readOnly)
 </template>
 
 <script>

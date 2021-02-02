@@ -1,33 +1,11 @@
-<template>
-  <div class="settings-proxy">
-    <a-card
-        size="small"
-        title="代理设置"
-    >
-      <a-input
-          v-model="proxyUrl"
-          placeholder="代理地址: IP:PORT (无需协议名, 仅支持 HTTP 协议)"
-      />
-      <div class="setting-buttons">
-        <a-space :size="constants.spaceSize">
-          <a-button
-              size="small"
-              type="primary"
-              @click="change"
-          >
-            更改代理地址
-          </a-button>
-          <a-button
-              size="small"
-              type="danger"
-              @click="clear"
-          >
-            清空代理
-          </a-button>
-        </a-space>
-      </div>
-    </a-card>
-  </div>
+<template lang="pug">
+  .settings-proxy
+    a-card(size="small" title="代理设置")
+      a-input(v-model="proxyUrl" placeholder="代理地址: IP:PORT (无需协议名, 仅支持 HTTP 协议)")
+      .setting-buttons
+        a-space(:size="constants.spaceSize")
+          a-button(size="small" type="primary" @click="change") 更改代理地址
+          a-button(size="small" type="danger" @click="clear") 清空代理
 </template>
 
 <script>

@@ -1,40 +1,19 @@
-<template>
-  <div
-      class="site-description"
-  >
-    <a-descriptions
-        :column="3"
-        size="small"
-    >
-      <template slot="title">
-        <div v-if="showHeader">
-          <img
-              :src="site.icon"
-              alt="site-icon"
-              class="site-icon"
-          >
-          {{ site.name }}
-        </div>
-      </template>
-      <a-descriptions-item>
-        <a-icon type="home"/>
-        <span
-            class="description-content site-home"
-            @click="openUrl(site.home)"
-        >
-          {{ site.home }}
-        </span>
-      </a-descriptions-item>
-      <a-descriptions-item :span="2">
-        <a-icon type="user"/>
-        <span class="description-content">{{ site.author }}</span>
-      </a-descriptions-item>
-      <a-descriptions-item :span="3">
-        <a-icon type="message"/>
-        <span class="description-content">{{ site.description }}</span>
-      </a-descriptions-item>
-    </a-descriptions>
-  </div>
+<template lang="pug">
+  .site-description
+    a-descriptions(:column="3" size="small")
+      template(slot="title")
+        div(v-if="showHeader")
+          img.site-icon(:src="site.icon" alt="site-icon")
+          | {{ site.name }}
+      a-descriptions-item
+        a-icon(type="home")
+        span.description-content.site-home(@click="openUrl(site.home)") {{ site.home }}
+      a-descriptions-item(:span="2")
+        a-icon(type="user")
+        span.description-content {{ site.author }}
+      a-descriptions-item(:span="3")
+        a-icon(type="message")
+        span.description-content {{ site.description }}
 </template>
 
 <script>
@@ -58,14 +37,14 @@ export default {
 >
 .site-description
   .site-icon
-    width 30px
     margin-right 5px
+    width 30px
 
   .description-content
     margin-left 5px
 
   .site-home
+    color #298DFA
     cursor pointer
     text-decoration underline
-    color #298DFA
 </style>

@@ -42,7 +42,7 @@
             a-menu-item-group(v-for="(category, key) in categories" :key="key")
               span(slot="title") {{ key }}
               a-menu-item(v-for="site in category" :key="`/site/${site.code}`")
-                router-link(to="`/site/${site.code}`")
+                router-link(:to="`/site/${site.code}`")
                   img.site-icon(:alt="site.name" :src="site.icon")
                   | {{ site.name }}
         a-layout#view-content-layout.content

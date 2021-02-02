@@ -1,136 +1,56 @@
-<template>
-  <div class="settings-rules">
-    <a-card
-        size="small"
-        title="规则订阅"
-    >
-      <div class="setting-buttons">
-        <a-space :size="constants.spaceSize">
-          <a-button
-              size="small"
-              type="primary"
-              @click="addModal.visible = true"
-          >
-            新增订阅
-          </a-button>
-          <a-button
-              size="small"
-              type="default"
-              @click="importAllSubscriptions"
-          >
-            全部更新
-          </a-button>
-          <a-button
-              size="small"
-              type="danger"
-              @click="removeAllSites"
-          >
-            清空全部站点
-          </a-button>
-          <a-button
-              size="small"
-              type="link"
-              @click="openExampleRules"
-          >
-            示例
-          </a-button>
-        </a-space>
-      </div>
-      <a-table
-          :columns="columns"
-          :data-source="subscriptionsWrapper"
-          :pagination="false"
-          :rowKey="'path'"
-          :scroll="{y: 240}"
-          :showHeader="false"
-          class="rules-table ant-card-bordered"
-          size="small"
-      >
-      <span
-          slot="path"
-          slot-scope="subscription"
-      >
-        <span :style="`color: ${subscription.available ? '': 'red'}`">{{ subscription.path }}</span>
-        <a-tooltip :title="subscription.error">
-          <a-icon
-              v-if="!subscription.available"
-              style="color: red; margin-left: 5px"
-              type="exclamation-circle"
-          />
-        </a-tooltip>
-      </span>
-        <span
-            slot="action"
-            slot-scope="subscription"
-        >
-        <a-space :size="constants.spaceSize">
-          <a-button
+<template lang="pug">
+  .settings-rules
+    a-card(size="small" title="规则订阅")
+      .setting-buttons
+        a-space(:size="constants.spaceSize")
+          a-button(size="small" type="primary" @click="addModal.visible = true") 新增订阅
+          a-button(size="small" type="default" @click="importAllSubscriptions") 全部更新
+          a-button(size="small" type="danger" @click="removeAllSites") 清空全部站点
+          a-button(size="small" type="link" @click="openExampleRules") 示例
+      a-table.rules-table.ant-card-bordered(
+        :columns="columns"
+        :data-source="subscriptionsWrapper"
+        :pagination="false"
+        :rowKey="'path'"
+        :scroll="{y: 240}"
+        :showHeader="false"
+        class="rules-table ant-card-bordered"
+        size="small")
+        span(slot="path" slot-scope="subscription")
+          span(:style="`color: ${subscription.available ? '': 'red'}`") {{ subscription.path }}
+          a-tooltip(:title="subscription.error")
+            a-icon(v-if="!subscription.available" style={color: 'red', marginLeft: '5px'} type="exclamation-circle")
+        span(slot="action" slot-scope="subscription")
+          a-space(:size="constants.spaceSize")
+            a-button.table-action-button(
               :loading="subscription.loading"
-              class="table-action-button"
               icon="reload"
               shape="circle"
               size="small"
               type="link"
-              @click="importSubscription(subscription)"
-          />
-          <a-button
-              class="table-action-button"
+              @click="importSubscription(subscription)")
+            a-button.table-action-button(
               icon="delete"
               shape="circle"
               size="small"
               theme="filled"
               type="link"
-              @click="removeSubscription(subscription)"
-          />
-        </a-space>
-      </span>
-      </a-table>
-    </a-card>
-    <a-modal
-        :confirm-loading="addModal.loading"
-        :visible="addModal.visible"
-        title="新增订阅"
-        @cancel="onAddModalCancel"
-        @ok="onAddModalOk"
-    >
-      <a-form-model :modal="addModal.form">
-        <a-form-model-item label="订阅类型">
-          <a-radio-group v-model="addModal.form.type">
-            <a-radio
-                v-if="mode !== 'web'"
-                name="type"
-                value="FILE"
-            >
-              本地文件
-            </a-radio>
-            <a-radio
-                name="type"
-                value="URL"
-            >
-              网络链接
-            </a-radio>
-          </a-radio-group>
-        </a-form-model-item>
-        <a-form-model-item label="订阅地址">
-          <a-input
-              v-if="addModal.form.type === 'URL'"
-              v-model="addModal.form.url"
-          />
-          <a-input
-              v-if="addModal.form.type === 'FILE' && mode !== 'web'"
-              v-model="addModal.form.file"
-              disabled
-          >
-            <a-icon
-                slot="addonAfter"
-                type="folder-open"
-                @click="selectSingleFile"
-            />
-          </a-input>
-        </a-form-model-item>
-      </a-form-model>
-    </a-modal>
-  </div>
+              @click="removeSubscription(subscription)")
+    a-modal(
+      :confirm-loading="addModal.loading"
+      :visible="addModal.visible"
+      title="新增订阅"
+      @cancel="onAddModalCancel"
+      @ok="onAddModalOk")
+      a-form-model(:modal="addModal.form")
+        a-form-model-item(label="订阅类型")
+          a-radio-group(v-model="addModal.form.type")
+            a-radio(v-if="mode !== 'web'" name="type" value="FILE") 本地文件
+            a-radio(name="type" value="URL") 网络链接
+        a-form-model-item(label="订阅地址")
+          a-input(v-if="addModal.form.type === 'URL'" v-model="addModal.form.url")
+          a-input(v-if="addModal.form.type === 'FILE' && mode !== 'web'" v-model="addModal.form.file" disabled)
+            a-icon(slot="addonAfter" type="folder-open" @click="selectSingleFile")
 </template>
 
 <script>
