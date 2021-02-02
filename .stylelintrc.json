@@ -1,0 +1,8 @@
+{
+  "extends": [
+    "stylelint-plugin-stylus/standard"
+  ],
+  "rules": {
+    "stylus/semicolon": "never"
+  }
+}

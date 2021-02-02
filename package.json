@@ -44,10 +44,13 @@
     "electron-devtools-installer": "^3.1.0",
     "mangle-js-webpack-plugin": "^0.1.4",
     "monaco-editor-webpack-plugin": "^1.9.1",
+    "stylelint": "^13.9.0",
+    "stylelint-plugin-stylus": "^0.10.0",
     "stylus": "^0.54.8",
     "stylus-loader": "^3.0.2",
     "terser-webpack-plugin": "^4.2.3",
     "vue-cli-plugin-electron-builder": "~2.0.0-rc.5",
+    "vue-cli-plugin-pug": "^2.0.0",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [
