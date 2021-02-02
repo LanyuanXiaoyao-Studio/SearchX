@@ -3,7 +3,7 @@
     MonacoEditor(
       v-model="siteSourceJsonText"
       :options="options"
-      :style={width: '100%', height: editorHeight}
+      :style="{width: '100%', height: editorHeight}"
       class="editor"
       language="json")
 </template>
