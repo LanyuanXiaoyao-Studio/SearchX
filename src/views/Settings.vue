@@ -1,14 +1,9 @@
-<template>
-  <div class="settings">
-    <a-space
-        :size="constants.spaceSize"
-        direction="vertical"
-    >
-      <Proxy/>
-      <Rules/>
-      <Extra v-if="mode === 'utools'"/>
-    </a-space>
-  </div>
+<template lang="pug">
+  .settings
+    a-space(:size="constants.spaceSize" direction="vertical")
+      Proxy
+      Rules
+      Extra(v-if="mode === 'utools'")
 </template>
 
 <script>

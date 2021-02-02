@@ -1,85 +1,39 @@
-<template>
-  <div class="subscription">
-    <a-space
-        :size="constants.spaceSize"
-        direction="vertical"
-    >
-      <Rules/>
-      <a-card
-          size="small"
-          title="站点管理"
-      >
-        <a-table
-            :columns="columns"
-            :data-source="sitesSource"
-            :pagination="false"
-            :rowKey="'code'"
-            class="rules-table ant-card-bordered"
-        >
-          <span
-              slot="icon"
-              slot-scope="site"
-          >
-            <img
-                :src="site.icon"
-                alt="site-icon"
-                class="site-icon"
-            />
-          </span>
-          <span
-              slot="name"
-              slot-scope="site"
-          >
-            <a-tooltip :title="site.home">
-              <span
-                  class="site-name"
-                  @click="openUrl(site.home)"
-              >
-                {{ site.name }}
-              </span>
-            </a-tooltip>
-          </span>
-          <span
-              slot="action"
-              slot-scope="site"
-          >
-            <a-space :size="constants.spaceSize">
-              <a-tooltip title="查看规则">
-                <a-button
-                    class="table-action-button"
-                    icon="eye"
-                    shape="circle"
-                    size="small"
-                    type="link"
-                    @click="showSiteSource(site)"
-                />
-              </a-tooltip>
-              <a-button
-                  class="table-action-button"
-                  icon="delete"
+<template lang="pug">
+  .subscription
+    a-space(:size="constants.spaceSize" direction="vertical")
+      Rules
+      a-card(size="small" title="站点管理")
+        a-table.rules-table.ant-card-bordered(:columns="columns" :data-source="sitesSource" :pagination="false" :rowKey="'code'" )
+          span(slot="icon" slot-scope="site")
+            img.site-icon(:src="site.icon" alt="site-icon")
+          span(slot="name" slot-scope="site")
+            a-tooltip(:title="site.home")
+              span.site-name(@click="openUrl(site.home)") {{ site.name }}
+          span(slot="action" slot-scope="site")
+            a-space(:size="constants.spaceSize")
+              a-tooltip(title="查看规则")
+                a-button.table-action-button(
+                  icon="eye"
                   shape="circle"
                   size="small"
-                  theme="filled"
                   type="link"
-                  @click="deleteSite(site.code)"
-              />
-            </a-space>
-          </span>
-        </a-table>
-      </a-card>
-    </a-space>
-    <a-modal
-        :destroyOnClose="true"
-        :dialogStyle="{top: '20px'}"
-        :footer="null"
-        :visible=" sourceDialog.show"
-        title="规则源码"
-        width="80%"
-        @cancel="sourceDialog.show = false"
-    >
-      <SiteSourceCode :site-source="sourceDialog.siteSource"/>
-    </a-modal>
-  </div>
+                  @click="showSiteSource(site)")
+              a-button.table-action-button(
+                icon="delete"
+                shape="circle"
+                size="small"
+                theme="filled"
+                type="link"
+                @click="deleteSite(site.code)")
+    a-modal(
+      :destroyOnClose="true"
+      :dialogStyle="{top: '20px'}"
+      :footer="null"
+      :visible=" sourceDialog.show"
+      title="规则源码"
+      width="80%"
+      @cancel="sourceDialog.show = false")
+      SiteSourceCode(:site-source="sourceDialog.siteSource")
 </template>
 
 <script>
@@ -164,8 +118,8 @@ export default {
     width 32px
 
   .site-name
-    cursor pointer
     color dodgerblue
+    cursor pointer
     text-decoration underline
 
   .ant-table-small
