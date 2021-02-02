@@ -1,94 +1,62 @@
-<template>
-  <div class="result-list">
-    <a-list
-        :data-source="data"
-        item-layout="vertical"
-    >
-      <div slot="header">
-        <b>搜索结果</b>
-      </div>
-      <div
-          v-if="showLoadMore"
-          slot="loadMore"
-          :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }"
-      >
-        <a-spin v-if="loading"/>
-        <a-button
-            v-else
-            type="link"
-            @click="more"
-        >
-          加载更多
-        </a-button>
-      </div>
-      <a-list-item
-          slot="renderItem"
-          slot-scope="item, index"
-      >
-        <a-button
-            v-if="!openDirectly"
-            slot="actions"
-            class="operation-btn"
-            type="link"
-            @click="detail(item.link)"
-        >
-          <a-icon type="file-text"/>
-          详情
-        </a-button>
-        <a-button
-            slot="actions"
-            class="operation-btn"
-            type="link"
-            @click="openInExternal(item.link)"
-        >
-          <a-icon type="eye"/>
-          查看
-        </a-button>
-        <a-button
-            v-if="item.magnet"
-            slot="actions"
-            class="operation-btn"
-            type="link"
-            @click="openInExternal(item.magnet)"
-        >
-          <a-icon type="download"/>
-          下载
-        </a-button>
-        <a-list-item-meta :description="item.author">
-          <span slot="title">
-            {{ item.title }}
-          </span>
-          <a-avatar
-              v-if="item.avatar && item.avatar !== ''"
-              slot="avatar"
-              :src="item.avatar"
-          />
-        </a-list-item-meta>
-        <div class="item-description">
-          {{ item.description ? item.description : '暂无简介' }}
-        </div>
-        <div class="item-tags">
-          <a-tag
-              v-for="tag in generateTagList(item)"
-              :key="tag.name"
-              effect="plain"
-              size="small"
-              type="info"
-          >
-            <a-icon :type="tag.icon"/>
-            {{ tag.content }}
-          </a-tag>
-        </div>
-        <img
-            v-if="item.image && item.image !== ''"
-            slot="extra"
-            :src="item.image"
-            alt="image"
-            class="item-image"
-        />
-      </a-list-item>
-    </a-list>
-  </div>
+<template lang="pug">
+  .result-list
+    a-list(:data-source="data" item-layout="vertical")
+      div(slot="header")
+        b 搜索结果
+      div(
+        v-if="showLoadMore"
+        slot="loadMore"
+        style={
+          textAlign: 'center',
+          marginTop: '12px',
+          height: '32px',
+          lineHeight: '32px'
+        })
+        a-spin(v-if="loading")
+        a-button(v-else type="link" @click="more") 加载更多
+      a-list-item(slot="renderItem" slot-scope="item, index")
+        a-button(
+          v-if="!openDirectly"
+          slot="actions"
+          class="operation-btn"
+          type="link"
+          @click="detail(item.link)")
+          a-icon(type="file-text")
+          | 详情
+        a-button(
+          slot="actions"
+          class="operation-btn"
+          type="link"
+          @click="openInExternal(item.link)")
+          a-icon(type="eye")
+          | 查看
+        a-button(
+          v-if="item.magnet"
+          slot="actions"
+          class="operation-btn"
+          type="link"
+          @click="openInExternal(item.magnet)")
+          a-icon(type="download")
+          | 下载
+        a-list-item-meta(:description="item.author")
+          span(slot="title") {{ item.title }}
+          a-avatar(v-if="item.avatar && item.avatar !== ''" slot="avatar" :src="item.avatar")
+        .item-description {{ item.description ? item.description : '暂无简介' }}
+        .item-tags
+          a-tag(
+            v-for="tag in generateTagList(item)"
+            :key="tag.name"
+            effect="plain"
+            size="small"
+            type="info")
+            a-icon(type="tag.icon")
+            | {{ tag.content }}
+        img(
+          v-if="item.image && item.image !== ''"
+          slot="extra"
+          :src="item.image"
+          alt="image"
+          class="item-image")
 </template>
 
 <script>
@@ -131,10 +99,10 @@ export default {
     scoped
 >
 .result-list
-  padding 5px 10px 5px 10px
   background-color white
   border-radius 4px
   border 1px solid #d9d9d9
+  padding 5px 10px 5px 10px
 
   .site-list-panel
     height 400px

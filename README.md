@@ -1,11 +1,19 @@
-# SearchX
+<p align="center">
+<img src="https://s3.ax1x.com/2021/02/02/ynh3Ks.png" alt="icon">
+</p>
+<h2 align="center">
+SearchX
+</h2>
+<p align="center">
+<img src="https://img.shields.io/github/package-json/v/LanyuanXiaoyao-Studio/SearchX/dev?label=%E5%BC%80%E5%8F%91%E7%89%88%E6%9C%AC&color=orange" alt="GitHub package.json version (branch)">
+<img src="https://img.shields.io/github/v/release/LanyuanXiaoyao-Studio/SearchX?label=%E5%8F%91%E5%B8%83%E7%89%88%E6%9C%AC&color=blue" alt="GitHub release (latest by date)">
+<img src="https://img.shields.io/github/downloads/LanyuanXiaoyao-Studio/SearchX/total?label=%E4%B8%8B%E8%BD%BD%E6%95%B0" alt="GitHub all releases">
+<img src="https://img.shields.io/github/downloads/LanyuanXiaoyao-Studio/SearchX/latest/total?label=%E4%B8%8B%E8%BD%BD%E6%95%B0%40latest" alt="GitHub release (latest by SemVer)">
+</p>
 
-![GitHub package.json version](https://img.shields.io/github/package-json/v/LanyuanXiaoyao-Studio/SearchX?label=%E4%BB%A3%E7%A0%81%E7%89%88%E6%9C%AC)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/LanyuanXiaoyao-Studio/SearchX?label=%E4%BB%A3%E7%A0%81%E4%BD%93%E7%A7%AF)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/LanyuanXiaoyao-Studio/SearchX?label=%E5%8F%91%E5%B8%83%E7%89%88%E6%9C%AC)
-![uTools version](https://img.shields.io/badge/uTools%20%E7%89%88%E6%9C%AC-%3E%3D1.1.3-green)
+---
 
-基于规则的跨平台一站式聚合搜索工具。
+基于规则的跨平台（Windows | macOS | Linux | uTools | Docker&Web）一站式聚合搜索工具。
 
 通过简单的 JSON 规则定义如何获取一个网站的关键内容，并聚合到一起，方便查询和阅读，这就是这个工具的本意，茫茫网海，不同的 UI 和操作方式挡住了我们畅游的道路，是时候返璞归真了。
 
@@ -17,12 +25,11 @@
 
 项目支持平台为
 
-- Windows(仅在 Windows 10 系统测试, 低版本系统随缘)
-- macOS (仅在 macOS 10.15 系统测试, 其他版本系统随缘)
-- Linux (随缘)
-- uTools (90%)
--
-docker&web ([使用说明](https://github.com/LanyuanXiaoyao-Studio/SearchX/wiki/%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E#%E7%BD%91%E9%A1%B5%E7%89%88-docker--web))
+- Windows （仅在 Windows 10 系统测试, 低版本系统随缘）
+- macOS （仅在 macOS 10.15 系统测试, 其他版本系统随缘）
+- Linux （随缘）
+- uTools
+- Docker&Web ([使用说明](https://github.com/LanyuanXiaoyao-Studio/SearchX/wiki/%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E#%E7%BD%91%E9%A1%B5%E7%89%88-docker--web))
 
 > Linux 理论上没有太大问题，因为项目里并没用到与操作系统强绑定的本地库，但由于开发者接触桌面 Linux 平台几乎为0，所以不主动适配，感兴趣的同学可以自行编译打包，Github Release 中发布的 rpm 和 deb 包为工具自动打包生成，并未测试，已知问题: 图标无法显示。
 
