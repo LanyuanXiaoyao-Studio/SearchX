@@ -3,11 +3,8 @@
     a-space.center(direction='vertical')
       div.content
         p.shields
-          img(alt='GitHub package.json version' src='https://img.shields.io/github/package-json/v/LanyuanXiaoyao-Studio/SearchX?label=%E4%BB%A3%E7%A0%81%E7%89%88%E6%9C%AC')
-          img(alt='GitHub release (latest by date)' src='https://img.shields.io/github/languages/code-size/LanyuanXiaoyao-Studio/SearchX?label=%E4%BB%A3%E7%A0%81%E4%BD%93%E7%A7%AF')
-          img(alt='GitHub code size in bytes' src='https://img.shields.io/github/v/release/LanyuanXiaoyao-Studio/SearchX?label=%E5%8F%91%E5%B8%83%E7%89%88%E6%9C%AC')
-          img(alt='uTools version' src='https://img.shields.io/badge/uTools%20%E7%89%88%E6%9C%AC-%3E%3D1.1.3-green')
-        p.shields
+          img(alt='GitHub package.json version (branch)' src='https://img.shields.io/github/package-json/v/LanyuanXiaoyao-Studio/SearchX/dev?label=%E5%BC%80%E5%8F%91%E7%89%88%E6%9C%AC&color=orange')
+          img(alt='GitHub release (latest by date)' src='https://img.shields.io/github/v/release/LanyuanXiaoyao-Studio/SearchX?label=%E5%8F%91%E5%B8%83%E7%89%88%E6%9C%AC&color=blue')
           img(alt='GitHub all releases' src='https://img.shields.io/github/downloads/LanyuanXiaoyao-Studio/SearchX/total?label=%E4%B8%8B%E8%BD%BD%E6%95%B0')
           img(alt='GitHub release (latest by SemVer)' src='https://img.shields.io/github/downloads/LanyuanXiaoyao-Studio/SearchX/latest/total?label=%E4%B8%8B%E8%BD%BD%E6%95%B0%40latest')
         h2 简介
