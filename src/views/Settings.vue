@@ -1,25 +1,9 @@
-<template>
-  <div class="settings">
-    <a-card
-        size="small"
-        title="代理设置"
-    >
-      <Proxy/>
-    </a-card>
-    <a-card
-        size="small"
-        title="规则订阅"
-    >
-      <Rules/>
-    </a-card>
-    <a-card
-        v-if="mode === 'utools'"
-        size="small"
-        title="其他作品"
-    >
-      <Extra/>
-    </a-card>
-  </div>
+<template lang="pug">
+  .settings
+    a-space(:size="constants.spaceSize" direction="vertical")
+      Proxy
+      Rules
+      Extra(v-if="mode === 'utools'")
 </template>
 
 <script>
@@ -37,7 +21,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'mode'
+      'mode',
+      'constants'
     ])
   },
 }
@@ -45,16 +30,9 @@ export default {
 
 <style lang="stylus">
 .settings
-  .ant-card + .ant-card
-    margin-top 10px
-
   .ant-btn
     margin-top 5px
     font-size 0.9rem
-
-  .ant-btn-success
-    color white
-    background-color #3869cb
 
   .ant-table-small
     border 0

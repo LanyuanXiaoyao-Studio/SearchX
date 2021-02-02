@@ -1,14 +1,7 @@
-<template>
-  <div class="settings-about">
-    <a-skeleton
-        v-show="isLoading"
-        active
-    />
-    <div
-        v-show="!isLoading"
-        v-html="about.disclaimer"
-    />
-  </div>
+<template lang="pug">
+  .settings-about
+    a-skeleton(v-show="isLoading" active)
+    div(v-show="!isLoading" v-html="about.disclaimer")
 </template>
 
 <script>

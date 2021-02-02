@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,11 @@ const routes = [
     component: () => import('@/views/Settings.vue')
   },
   {
+    path: '/subscription',
+    name: 'Subscription',
+    component: () => import('@/views/Subscription')
+  },
+  {
     path: '/merge-search',
     name: 'MergeSearch',
     component: () => import('@/views/MergeSearch.vue')
@@ -33,6 +39,13 @@ const routes = [
   }
 ]
 
-export default new VueRouter({
+const router = new VueRouter({
   routes
 })
+
+router.afterEach((to, from) => {
+  console.log(from, to)
+  store.commit('updateCurrentUrl', to.path)
+})
+
+export default router

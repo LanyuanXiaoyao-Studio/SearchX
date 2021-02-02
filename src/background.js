@@ -23,7 +23,6 @@ async function createWindow() {
     width: 900,
     height: 700,
     center: true,
-    titleBarStyle: 'hidden',
     fullscreenWindowTitle: true,
     alwaysOnTop: false,
     autoHideMenuBar: true,
