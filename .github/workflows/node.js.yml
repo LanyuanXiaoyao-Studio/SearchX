@@ -31,10 +31,10 @@ jobs:
         run: echo ${{ steps.project_version.outputs.project_version}}
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: ${{ steps.project_version.outputs.project_version}}
-          release_name: SearchX ${{ steps.project_version.outputs.project_version}}
+          tag: ${{ steps.project_version.outputs.project_version}}
+          name: SearchX ${{ steps.project_version.outputs.project_version}}
           draft: true
           prerelease: false
-          body_path: .github/workflows/release-note.md
+          bodyFile: .github/workflows/release-note.md
