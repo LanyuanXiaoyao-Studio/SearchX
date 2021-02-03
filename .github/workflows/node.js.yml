@@ -5,9 +5,6 @@ on:
     branches:
       - master
 
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 jobs:
   release:
     strategy:
@@ -28,17 +25,19 @@ jobs:
         run: echo ${{ steps.project_version.outputs.project_version}}
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: ${{ steps.project_version.outputs.project_version}}
-          release_name: SearchX ${{ steps.project_version.outputs.project_version}}
+          tag: ${{ steps.project_version.outputs.project_version}}
+          name: SearchX ${{ steps.project_version.outputs.project_version}}
           draft: true
           prerelease: false
+          bodyFile: .github/workflows/release-note.md
+          token: ${{ secrets.GITHUB_TOKEN }}
   build:
     strategy:
       matrix:
-        os: [macos-10.15, windows-2019, ubuntu-18.04]
-        node-version: [14.x]
+        os: [ macos-10.15, windows-2019, ubuntu-18.04 ]
+        node-version: [ 14.x ]
     runs-on: ${{matrix.os}}
     steps:
       - uses: actions/checkout@v2
