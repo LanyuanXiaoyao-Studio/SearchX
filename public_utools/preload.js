@@ -6,9 +6,11 @@ window.download = async url => {
   return await window.nodeDownload(url, '{}', '', 'utf8')
 }
 utools.onPluginReady(async () => {
+  console.log('onPluginReady')
   let result = await squirrel.fetch()
+  console.log('result', result)
   if (result.code === 0) {
-    // console.log('squirrelInitialReady', result, squirrel)
+    console.log('squirrelInitialReady', result, squirrel)
     await squirrel.imports(result.data.sites)
   }
 })
