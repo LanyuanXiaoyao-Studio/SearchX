@@ -8,9 +8,6 @@ on:
     branches:
       - dev-actions
 
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 jobs:
   release:
     strategy:
@@ -38,3 +35,4 @@ jobs:
           draft: true
           prerelease: false
           bodyFile: .github/workflows/release-note.md
+          token: ${{ secrets.GITHUB_TOKEN }}
