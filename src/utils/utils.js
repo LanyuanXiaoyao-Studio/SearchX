@@ -14,6 +14,7 @@ export default {
     if (item.star) tagList.push(this.generateTagData('赞', 'star', item.star))
     if (item.language) tagList.push(this.generateTagData('语言', 'code', item.language))
     if (item.download) tagList.push(this.generateTagData('下载数', 'download', item.download))
+    if (item.other) tagList.push(this.generateTagData('其他', 'bulb', item.other))
     return tagList
   },
   generateTagData(name, iconName, content) {
