@@ -7,10 +7,17 @@
           span(slot="icon" slot-scope="site")
             img.site-icon(:src="site.icon" alt="site-icon")
           span(slot="name" slot-scope="site")
-            a-tooltip(:title="site.home")
-              span.site-name(@click="openUrl(site.home)") {{ site.name }}
+            router-link(:to="`/site/${site.code}`")
+              span.site-name {{ site.name }}
           span(slot="action" slot-scope="site")
             a-space(:size="constants.spaceSize")
+              a-tooltip(:title="site.home")
+                a-button.table-action-button(
+                  icon="link"
+                  shape="circle"
+                  size="small"
+                  type="link"
+                  @click="openUrl(site.home)")
               a-tooltip(title="查看规则")
                 a-button.table-action-button(
                   icon="eye"
