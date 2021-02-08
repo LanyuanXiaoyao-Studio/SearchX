@@ -22,6 +22,12 @@ window.singleFileSelect = () => {
 window.readTextFromFile = path => {
 }
 window.readTextFromUrl = async url => (await superagent.get(`${base}/simpleGet?url=${base64.encode(strToBytes(url))}`)).text
+window.statistic = (url) => {
+  // console.log('query', encodeURI(`${url}?path=${path}`))
+  window.readTextFromUrl(encodeURI(url))
+        .then(result => console.log(result))
+        .catch(error => console.log(error))
+}
 window.openInExternal = url => window.open(url)
 window.copyText = async text => {
   let fallback = text => {

@@ -44,6 +44,12 @@ window.readTextFromUrl = url => {
     request.on('error', e => reject(e))
   })
 }
+window.statistic = (url) => {
+  // console.log('query', encodeURI(`${url}?path=${path}`))
+  window.readTextFromUrl(encodeURI(url))
+        .then(result => console.log(result))
+        .catch(error => console.log(error))
+}
 window.openInExternal = url => utools.shellOpenExternal(url)
 window.copyText = async text => utools.copyText(text)
 window.notify = (text, callback) => utools.showNotification(text)
