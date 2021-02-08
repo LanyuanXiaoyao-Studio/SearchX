@@ -1,4 +1,4 @@
-import {isEmpty, isFn, isPromise} from 'licia'
+import {isEmpty, isFn, isNil, isPromise} from 'licia'
 import Vue from 'vue'
 import store from '@/store'
 
@@ -107,5 +107,13 @@ export default {
         window.openInExternal(url)
       }
     }
+  },
+  // 统计埋点
+  statistic(path, event) {
+    let url = `${store.getters.statisticUrl}?path=${path}`
+    if (!isNil(event)) {
+      url = `${url}&event=${event}`
+    }
+    window.statistic(url)
   }
 }

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import squirrel from '@/squirrel'
 import {findIdx, isEmpty, isNil} from 'licia'
+import Constants from '@/store/constants'
 import UpdateInfoModule from '@/store/update-info'
 
 Vue.use(Vuex)
@@ -10,7 +11,8 @@ const appMode = process.env.VUE_APP_MODE
 
 const store = new Vuex.Store({
   modules: {
-    UpdateInfoModule
+    Constants,
+    UpdateInfoModule,
   },
   state: {
     currentUrl: '/',

@@ -43,9 +43,9 @@ window.readTextFromUrl = url => {
     request.on('error', e => reject(e))
   })
 }
-window.statistic = (url, path) => {
+window.statistic = (url) => {
   // console.log('query', encodeURI(`${url}?path=${path}`))
-  window.readTextFromUrl(encodeURI(`${url}?path=${path}`))
+  window.readTextFromUrl(encodeURI(url))
       .then(result => console.log(result))
       .catch(error => console.log(error))
 }
