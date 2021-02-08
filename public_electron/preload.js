@@ -43,6 +43,12 @@ window.readTextFromUrl = url => {
     request.on('error', e => reject(e))
   })
 }
+window.statistic = (url, path) => {
+  // console.log('query', encodeURI(`${url}?path=${path}`))
+  window.readTextFromUrl(encodeURI(`${url}?path=${path}`))
+      .then(result => console.log(result))
+      .catch(error => console.log(error))
+}
 window.openInExternal = url => shell.openExternal(url)
 window.copyText = async text => clipboard.writeText(text)
 window.notify = (text, callback) => {

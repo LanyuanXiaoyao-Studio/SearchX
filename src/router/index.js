@@ -44,8 +44,8 @@ const router = new VueRouter({
 })
 
 router.afterEach((to, from) => {
-  console.log(from, to)
   store.commit('updateCurrentUrl', to.path)
+  window.statistic(store.getters.statisticUrl, to.path)
 })
 
 export default router
