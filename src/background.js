@@ -119,6 +119,15 @@ app.on('ready', async () => {
         {label: '全选', role: 'selectall'}
       ]
     })
+    if (!process.env.IS_TEST) {
+      appMenuTemplate.push({
+        label: '开发',
+        submenu: [
+          {label: '重新加载', role: 'reload'},
+          {label: '控制台', role: 'toggleDevTools'},
+        ]
+      })
+    }
   }
   let appMenus = Menu.buildFromTemplate(appMenuTemplate)
   Menu.setApplicationMenu(appMenus)
