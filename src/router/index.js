@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
+import Utils from '@/utils/utils'
 
 Vue.use(VueRouter)
 
@@ -44,8 +45,8 @@ const router = new VueRouter({
 })
 
 router.afterEach((to, from) => {
-  console.log(from, to)
   store.commit('updateCurrentUrl', to.path)
+  Utils.statistic(to.path, store.getters.event.routeTo)
 })
 
 export default router

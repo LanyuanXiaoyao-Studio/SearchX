@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import squirrel from '@/squirrel'
 import {findIdx, isEmpty, isNil} from 'licia'
+import Constants from '@/store/constants'
 import UpdateInfoModule from '@/store/update-info'
 
 Vue.use(Vuex)
@@ -10,10 +11,12 @@ const appMode = process.env.VUE_APP_MODE
 
 const store = new Vuex.Store({
   modules: {
-    UpdateInfoModule
+    Constants,
+    UpdateInfoModule,
   },
   state: {
     currentUrl: '/',
+    statisticUrl: 'http://127.0.0.1:8080/analysis/record',
     version: '1.1.0',
     sites: [],
     categories: {},
@@ -37,6 +40,7 @@ const store = new Vuex.Store({
   },
   getters: {
     currentUrl: state => state.currentUrl,
+    statisticUrl: state => state.statisticUrl,
     mode: state => appMode,
     version: state => state.version,
     sites: state => state.sites,
