@@ -1,6 +1,10 @@
 import {isEmpty, isFn, isNil, isPromise} from 'licia'
 import Vue from 'vue'
 import store from '@/store'
+import CryptoJs from 'crypto-js'
+import queryString from 'query-string'
+
+const env = process.env.NODE_ENV
 
 export default {
   generateTagList(item) {
@@ -110,10 +114,17 @@ export default {
   },
   // 统计埋点
   statistic(path, event) {
-    let url = `${store.getters.statisticUrl}?path=${path}`
+    let query = {}
+    query['path'] = path
     if (!isNil(event)) {
-      url = `${url}&event=${event}`
+      query['event'] = event
     }
-    window.statistic(url)
-  }
+    import('@/private/StatisticsApi')
+        .then(statisticsApi => {
+          let options = statisticsApi.default.tencentApi().options(query)
+          console.log('options', options)
+          window.statistic(options)
+        })
+        .catch(error => console.log(error))
+  },
 }
