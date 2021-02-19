@@ -1,10 +1,6 @@
 import {isEmpty, isFn, isNil, isPromise} from 'licia'
 import Vue from 'vue'
 import store from '@/store'
-import CryptoJs from 'crypto-js'
-import queryString from 'query-string'
-
-const env = process.env.NODE_ENV
 
 export default {
   generateTagList(item) {
@@ -41,8 +37,8 @@ export default {
     let hide = Vue.prototype.$message.loading({content: loadingMessage, key, duration: 0})
     if (isPromise(process)) {
       process
-          .then(result => Vue.prototype.$message.success({content: successMessage, key}))
-          .catch(error => Vue.prototype.$message.error({content: `${errorMessage}: ${error}`, key}))
+        .then(result => Vue.prototype.$message.success({content: successMessage, key}))
+        .catch(error => Vue.prototype.$message.error({content: `${errorMessage}: ${error}`, key}))
     }
     else {
       try {
@@ -109,7 +105,7 @@ export default {
     return {
       openUrl(url) {
         window.openInExternal(url)
-      }
+      },
     }
   },
   // 统计埋点
@@ -120,11 +116,12 @@ export default {
       query['event'] = event
     }
     import('@/private/StatisticsApi')
-        .then(statisticsApi => {
-          let options = statisticsApi.default.tencentApi().options(query)
-          console.log('options', options)
-          window.statistic(options)
-        })
-        .catch(error => console.log(error))
+      .then(statisticsApi => {
+        let options = statisticsApi.default.tencentApi()
+                                   .options(query)
+        console.log('options', options)
+        window.statistic(options)
+      })
+      .catch(error => console.log(error))
   },
 }
