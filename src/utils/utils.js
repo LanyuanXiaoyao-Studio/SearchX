@@ -115,13 +115,19 @@ export default {
     if (!isNil(event)) {
       query['event'] = event
     }
-    import('@/private/StatisticsApi')
-      .then(statisticsApi => {
-        let options = statisticsApi.default.tencentApi()
+    try {
+      let api = require('@/private/StatisticsApi')
+      if (!isNil(api)) {
+        let options = api.default.tencentApi()
                                    .options(query)
         console.log('options', options)
-        window.statistic(options)
-      })
-      .catch(error => console.log(error))
+        if (!isNil(options)) {
+          window.statistic(options)
+        }
+      }
+    } catch (e) {
+      // Ignored
+      console.log(e)
+    }
   },
 }
