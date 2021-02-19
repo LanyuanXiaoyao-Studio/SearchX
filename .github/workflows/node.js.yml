@@ -24,7 +24,7 @@ jobs:
         uses: DamianReeves/write-file-action@v1.0
         with:
           path: src/private/StatisticsApi.js
-          content: ${{ secrets.STATISTICS_API }}
-          mode: overwrite
+          contents: ${{ secrets.STATISTICS_API }}
+          write-mode: overwrite
       - name: Show private files
-        run: cat src/private/StatisticsApi.js
+        run: cat src/private/StatisticsApi.js && ls -al
