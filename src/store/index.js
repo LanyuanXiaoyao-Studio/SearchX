@@ -17,7 +17,7 @@ const store = new Vuex.Store({
   state: {
     currentUrl: '/',
     statisticUrl: 'http://127.0.0.1:8080/analysis/record',
-    version: '1.1.0',
+    version: '1.1.1',
     sites: [],
     categories: {},
     settings: {

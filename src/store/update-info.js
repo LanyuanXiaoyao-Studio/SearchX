@@ -3,7 +3,7 @@ export default {
     updateInfo: [
       [
         '<b>0.2.0</b>',
-        '👏 完成基本功能，包含搜索、设置、订阅等功能。'
+        '👏 完成基本功能，包含搜索、设置、订阅等功能。',
       ],
       [
         '<b>0.2.1</b>',
@@ -31,7 +31,7 @@ export default {
       ],
       [
         '<b>1.0.1</b>',
-        '⚡️ 修复更新提醒点击后跳出 hello 的弹框。 #10'
+        '⚡️ 修复更新提醒点击后跳出 hello 的弹框。 #10',
       ],
       [
         '<b>1.1.0</b>',
@@ -40,10 +40,16 @@ export default {
         '⚡️ Title 增加返回首页链接。',
         '⚡️ 站点详情页信息栏默认展开。',
         '⚡️ 其他代码改进。',
-      ]
-    ]
+      ],
+      [
+        '<b>1.1.1</b>',
+        '👏 新增 score 和 other 标签。',
+        '⚡️ 订阅页面点击标题跳转详情页面。',
+        '⚡️ 简化规则源码显示，不显示 null 值字段。',
+      ],
+    ],
   }),
   getters: {
-    updateInfo: state => state.updateInfo
-  }
+    updateInfo: state => state.updateInfo,
+  },
 }
