@@ -6,9 +6,11 @@ window.download = async url => {
   return await window.nodeDownload(url, '{}', '', 'utf8')
 }
 utools.onPluginReady(async () => {
+  console.log('onPluginReady')
   let result = await squirrel.fetch()
+  console.log('result', result)
   if (result.code === 0) {
-    // console.log('squirrelInitialReady', result, squirrel)
+    console.log('squirrelInitialReady', result, squirrel)
     await squirrel.imports(result.data.sites)
   }
 })
@@ -41,6 +43,24 @@ window.readTextFromUrl = url => {
         })
     request.on('error', e => reject(e))
   })
+}
+window.statistic = (options) => {
+  let request = require('https').request(
+      {
+        host: options.host,
+        method: options.method,
+        timeout: 2000,
+        path: options.path,
+      },
+      response => {
+        let result = ''
+        response.on('data', data => result += data)
+        response.on('end', () => {})
+      }
+  )
+  request.setHeader('mode', 'utools')
+  Object.keys(options.headers).forEach(key => request.setHeader(key, options.headers[key]))
+  request.end()
 }
 window.openInExternal = url => utools.shellOpenExternal(url)
 window.copyText = async text => utools.copyText(text)

@@ -49,7 +49,7 @@
             effect="plain"
             size="small"
             type="info")
-            a-icon(type="tag.icon")
+            a-icon.tag-icon(:type="tag.icon")
             | {{ tag.content }}
         img(
           v-if="item.image && item.image !== ''"
@@ -113,6 +113,9 @@ export default {
 
   .item-tags
     margin-top 10px
+
+  .tag-icon
+    margin-right 3px
 
   .operation-btn
     margin 0

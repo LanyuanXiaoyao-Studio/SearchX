@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     siteSourceJsonText() {
-      return JSON.stringify(this.siteSource, null, 2)
+      return JSON.stringify(this.siteSource, (key, value) => value ? value: undefined, 2)
     },
     editorHeight() {
       return this.clientHeight * 0.85 + 'px'

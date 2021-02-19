@@ -1,4 +1,4 @@
-import {isEmpty, isFn, isPromise} from 'licia'
+import {isEmpty, isFn, isNil, isPromise} from 'licia'
 import Vue from 'vue'
 import store from '@/store'
 
@@ -14,6 +14,8 @@ export default {
     if (item.star) tagList.push(this.generateTagData('赞', 'star', item.star))
     if (item.language) tagList.push(this.generateTagData('语言', 'code', item.language))
     if (item.download) tagList.push(this.generateTagData('下载数', 'download', item.download))
+    if (item.other) tagList.push(this.generateTagData('其他', 'bulb', item.other))
+    if (item.score) tagList.push(this.generateTagData('评分', 'area-chart', item.score))
     return tagList
   },
   generateTagData(name, iconName, content) {
@@ -35,8 +37,8 @@ export default {
     let hide = Vue.prototype.$message.loading({content: loadingMessage, key, duration: 0})
     if (isPromise(process)) {
       process
-          .then(result => Vue.prototype.$message.success({content: successMessage, key}))
-          .catch(error => Vue.prototype.$message.error({content: `${errorMessage}: ${error}`, key}))
+        .then(result => Vue.prototype.$message.success({content: successMessage, key}))
+        .catch(error => Vue.prototype.$message.error({content: `${errorMessage}: ${error}`, key}))
     }
     else {
       try {
@@ -103,7 +105,29 @@ export default {
     return {
       openUrl(url) {
         window.openInExternal(url)
-      }
+      },
     }
-  }
+  },
+  // 统计埋点
+  statistic(path, event) {
+    let query = {}
+    query['path'] = path
+    if (!isNil(event)) {
+      query['event'] = event
+    }
+    try {
+      let api = require('@/private/StatisticsApi')
+      if (!isNil(api)) {
+        let options = api.default.tencentApi()
+                                   .options(query)
+        console.log('options', options)
+        if (!isNil(options)) {
+          window.statistic(options)
+        }
+      }
+    } catch (e) {
+      // Ignored
+      console.log(e)
+    }
+  },
 }
