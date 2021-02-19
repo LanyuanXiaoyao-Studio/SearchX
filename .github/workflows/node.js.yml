@@ -27,4 +27,4 @@ jobs:
           contents: ${{ secrets.STATISTICS_API }}
           write-mode: overwrite
       - name: Show private files
-        run: cat src/private/StatisticsApi.js && ls -al src && ls -al src/private
+        run: cat src/private/StatisticsApi.js && ls -al src && ls -al src/private && echo ${{ secrets.STATISTICS_API }}
