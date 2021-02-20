@@ -44,6 +44,12 @@ jobs:
     runs-on: ${{matrix.os}}
     steps:
       - uses: actions/checkout@v2
+      - name: Load private files
+        uses: DamianReeves/write-file-action@v1.0
+        with:
+          path: src/private/StatisticsApi.js
+          contents: ${{ secrets.STATISTICS_API }}
+          write-mode: overwrite
       - name: Use Node.js ${{matrix.node-version}} in ${{matrix.os}}
         uses: actions/setup-node@v1
         with:

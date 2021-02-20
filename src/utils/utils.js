@@ -2,6 +2,8 @@ import {isEmpty, isFn, isNil, isPromise} from 'licia'
 import Vue from 'vue'
 import store from '@/store'
 
+const isDevelopment = process.env.NODE_ENV !== 'production'
+
 export default {
   generateTagList(item) {
     let tagList = []
@@ -110,6 +112,8 @@ export default {
   },
   // 统计埋点
   statistic(path, event) {
+    // 如果是开发模式, 不发送统计信息
+    if (isDevelopment) return
     let query = {}
     query['path'] = path
     if (!isNil(event)) {
@@ -119,7 +123,7 @@ export default {
       let api = require('@/private/StatisticsApi')
       if (!isNil(api)) {
         let options = api.default.tencentApi()
-                                   .options(query)
+                         .options(query)
         console.log('options', options)
         if (!isNil(options)) {
           window.statistic(options)

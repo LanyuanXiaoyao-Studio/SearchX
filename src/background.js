@@ -119,7 +119,7 @@ app.on('ready', async () => {
         {label: '全选', role: 'selectall'}
       ]
     })
-    if (!process.env.IS_TEST) {
+    if (isDevelopment) {
       appMenuTemplate.push({
         label: '开发',
         submenu: [

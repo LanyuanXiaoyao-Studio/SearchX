@@ -60,6 +60,8 @@ import {mapGetters} from 'vuex'
 import {isEmpty, isNil} from 'licia';
 import DevelopmentTag from '@/components/DevelopmentTag'
 
+const isDevelopment = process.env.NODE_ENV !== 'production'
+
 export default {
   name: 'App',
   components: {
@@ -72,7 +74,7 @@ export default {
     }
   },
   mounted() {
-    if (process.env.NODE_ENV !== 'development') {
+    if (!isDevelopment) {
       squirrel.services.checkUpdate()
               .then(result => {
                 if (result.cmp < 0) {
@@ -166,6 +168,7 @@ export default {
   .sider-menu
     height 100%
     overflow-y auto
+    overflow-x hidden
 
   .site-icon
     margin-right 10px

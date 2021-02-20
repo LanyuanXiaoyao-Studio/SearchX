@@ -47,7 +47,7 @@ else {
 squirrelWrapper.info()
                .then(result => console.log(result))
                .catch(error => console.log(error))
-squirrelWrapper.debug('true')
+squirrelWrapper.debug('false')
 
 window.squirrel = squirrelWrapper
 

@@ -1,11 +1,11 @@
 import superagent from 'superagent'
 import store from '@/store'
 import Vue from 'vue'
-import {isNil, base64, strToBytes} from 'licia'
+import {base64, isNil, strToBytes} from 'licia'
 
-const env = process.env.NODE_ENV
+const isDevelopment = process.env.NODE_ENV !== 'production'
 
-const base = env === 'development' ? 'http://localhost:10086/management' : '/management'
+const base = isDevelopment ? 'http://localhost:10086/management' : '/management'
 
 window.download = async url => (await superagent.get(`${base}/simpleGet?url=${base64.encode(strToBytes(url))}`)).text
 window.squirrelInitialReady = async () => {
@@ -24,10 +24,10 @@ window.readTextFromFile = path => {
 window.readTextFromUrl = async url => (await superagent.get(`${base}/simpleGet?url=${base64.encode(strToBytes(url))}`)).text
 window.statistic = options => {
   superagent.get(options.url)
-      .set(options.headers)
-      .set('mode', 'web')
-      .then(result => console.log(result))
-      .catch(error => console.log(error))
+            .set(options.headers)
+            .set('mode', 'web')
+            .then(result => console.log(result))
+            .catch(error => console.log(error))
 }
 window.openInExternal = url => window.open(url)
 window.copyText = async text => {
@@ -41,14 +41,14 @@ window.copyText = async text => {
     textArea.focus()
     textArea.select()
     try {
-      let successful = document.execCommand('copy');
+      let successful = document.execCommand('copy')
       if (!successful) {
         throw new Error('Copy Failure')
       }
     } catch (err) {
       throw new Error('Copy Failure')
     }
-    document.body.removeChild(textArea);
+    document.body.removeChild(textArea)
   }
   if (!navigator.clipboard) {
     fallback(text)
@@ -60,7 +60,7 @@ window.notify = (text, callback) => {
   let notify = () => {
     let notification = new Notification('SearchX', {
       body: text,
-      requireInteraction: !isNil(callback)
+      requireInteraction: !isNil(callback),
     })
     if (!isNil(callback)) {
       notification.onclick = callback

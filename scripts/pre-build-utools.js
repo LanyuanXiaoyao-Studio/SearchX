@@ -10,7 +10,7 @@ let publicSourcePath = path.join(__dirname, '..', 'public_utools')
 let packageFile = fs.readFileSync(path.join(__dirname, '..', 'package.json'), {encoding: 'utf-8'})
 let version = JSON.parse(packageFile)['version']
 let pluginFile = JSON.stringify({
-  'pluginName': 'SearchX',
+  'pluginName': 'SearchX (资源搜索)',
   'author': 'lanyuanxiaoyao',
   'homepage': 'https://github.com/LanyuanXiaoyao-Studio/SearchX',
   'description': '海纳百川, 搜遍天下',
@@ -20,7 +20,11 @@ let pluginFile = JSON.stringify({
   'preload': 'preload.js',
   'pluginSetting': {
     'single': true,
-    'height': 580
+    'height': 580,
+  },
+  'development': {
+    'main': 'http://127.0.0.1:8080/index.html',
+    'preload': './preload.js',
   },
   'features': [
     {
@@ -31,10 +35,10 @@ let pluginFile = JSON.stringify({
         'BT',
         '资源搜索',
         '种子搜索',
-        'SearchX'
-      ]
-    }
-  ]
+        'SearchX',
+      ],
+    },
+  ],
 })
 fs.writeFileSync(`${publicPath}/plugin.json`, pluginFile)
 
