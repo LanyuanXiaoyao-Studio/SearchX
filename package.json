@@ -12,11 +12,11 @@
     "web:serve": "node scripts/pre-build-web.js && vue-cli-service serve --mode webdev",
     "web:build": "node scripts/pre-build-web.js && vue-cli-service build --mode web",
     "web:image": "node scripts/pre-build-web.js && vue-cli-service build --mode web && /bin/bash scripts/suf-build-web.sh",
-    "electron:serve": "node scripts/pre-build-electron.js && vue-cli-service electron:serve --mode electron",
+    "electron:serve": "node scripts/pre-build-electron.js && vue-cli-service electron:serve --mode electrondev",
     "electron:build": "node scripts/pre-build-electron.js && vue-cli-service electron:build --mode electron",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
-    "utools:serve": "node scripts/pre-build-utools.js && vue-cli-service serve --mode utools",
+    "utools:serve": "node scripts/pre-build-utools.js && vue-cli-service serve --mode utoolsdev",
     "utools:build": "node scripts/pre-build-utools.js && vue-cli-service build --mode utools",
     "clear": "node scripts/clear.js"
   },

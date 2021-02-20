@@ -3,9 +3,9 @@ import store from '@/store'
 import Vue from 'vue'
 import {isNil, base64, strToBytes} from 'licia'
 
-const env = process.env.NODE_ENV
+const isDevelopment = process.env.NODE_ENV !== 'production'
 
-const base = env === 'development' ? 'http://localhost:10086/management' : '/management'
+const base = isDevelopment ? 'http://localhost:10086/management' : '/management'
 
 window.download = async url => (await superagent.get(`${base}/simpleGet?url=${base64.encode(strToBytes(url))}`)).text
 window.squirrelInitialReady = async () => {
