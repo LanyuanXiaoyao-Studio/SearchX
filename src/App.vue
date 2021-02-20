@@ -168,6 +168,7 @@ export default {
   .sider-menu
     height 100%
     overflow-y auto
+    overflow-x hidden
 
   .site-icon
     margin-right 10px
