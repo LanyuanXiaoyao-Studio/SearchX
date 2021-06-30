@@ -74,7 +74,8 @@ module.exports = {
           category: "public.app-category.utilities",
           icon: "icons/icon.icns",
           target: ["dmg", "7z", "zip"],
-          electronLanguages: ["en", "zh_CN", "zh_TW"]
+          // TODO: electron-builder 的 bug 导致该参数会组织构建, 暂时注释, 之后新版本出来后修复
+          // electronLanguages: ["en", "zh_CN", "zh_TW"]
         },
         win: {
           icon: "icons/icon.ico",
