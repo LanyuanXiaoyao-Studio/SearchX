@@ -90,17 +90,6 @@ export default {
               console.log(error)
             })
     }
-    if (mode === 'utools' && isEmpty(store.getters.about.plugins)) {
-      window.download('https://gitee.com/lanyuanxiaoyao/utools-data/raw/master/plugins.json', '{}', '', 'utf8')
-            .then(result => {
-              let data = JSON.parse(result)
-              // console.log(data)
-              store.commit('updatePlugins', data)
-            })
-            .catch(error => {
-              console.log(error)
-            })
-    }
   },
   // 方便在各个地方使用 mixin 混入的方法
   openUrl() {

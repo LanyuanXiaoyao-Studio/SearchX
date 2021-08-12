@@ -7,10 +7,7 @@ const mode = store.getters.mode
 console.log(`Current Mode: ${mode}`)
 
 let squirrel
-if (mode === 'utools') {
-  squirrel = window.squirrelLib.com.lanyuanxiaoyao.squirrel.utools
-}
-else if (mode === 'electron') {
+if (mode === 'electron') {
   squirrel = window.squirrelLib.com.lanyuanxiaoyao.squirrel.electron
 }
 

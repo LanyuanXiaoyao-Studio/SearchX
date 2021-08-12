@@ -10,5 +10,4 @@ batchDeleteFilesSync(listDirExcludeFiles(path.join(root, 'public'), ['index.html
 batchDeleteFilesSync([
   path.join(root, 'dist'),
   path.join(root, 'dist_electron'),
-  path.join(root, 'dist_utools'),
 ])

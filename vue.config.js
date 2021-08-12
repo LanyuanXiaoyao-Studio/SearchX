@@ -9,16 +9,10 @@ console.log(`Current Mode: ${appMode}`);
 const isWeb = appMode === "web";
 
 let distPath = path.join(__dirname, "dist");
-if (appMode === "utools") distPath = path.join(__dirname, "dist_utools");
 let copyPattern = {
   from: path.join(__dirname, "README.md"),
   to: path.join(distPath, "README.md")
 };
-if (appMode === "utools")
-  copyPattern = {
-    from: path.join(__dirname, "README-utools.md"),
-    to: path.join(distPath, "README.md")
-  };
 
 console.log(`Current Node Mode: ${process.env.NODE_ENV}`);
 module.exports = {
